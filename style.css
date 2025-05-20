@@ -1,0 +1,26 @@
+/* Stile globale per il tema scuro e il font */
+body {
+    background-color: #1a1a1a; /* Colore di sfondo molto scuro */
+    color: #f0f0f0; /* Colore del testo chiaro per contrasto */
+    font-family: 'Arial', sans-serif; /* Un font pulito e moderno (puoi cambiarlo) */
+    line-height: 1.6; /* Spaziatura tra le righe per una migliore leggibilità */
+    margin: 0; /* Rimuove i margini predefiniti del browser */
+    padding: 0; /* Rimuove il padding predefinito del browser */
+}
+
+/* Stile per i link */
+a {
+    color: #8be9fd; /* Un colore azzurro brillante per i link */
+    text-decoration: none; /* Rimuove la sottolineatura predefinita */
+}
+
+a:hover {
+    text-decoration: underline; /* Aggiunge la sottolineatura al passaggio del mouse */
+}
+
+/* Stile per le intestazioni */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* Testo delle intestazioni bianco puro */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
