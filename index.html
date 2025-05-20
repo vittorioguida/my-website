@@ -4,45 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vittorio Guida</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
+
 <header>
+    <div id="site-name">
+        <a href="index.html">Vittorio Guida</a>
+    </div>
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="publications.html">Publications</a></li>
             <li><a href="talks.html">Talks</a></li>
-            <li><a href="cv.html">CV</a></li>
-        </ul>
+            </ul>
     </nav>
     <button id="theme-toggle" aria-label="Toggle dark and light theme">
-        <span class="icon">🌙</span> </button>
+        <span class="icon">🌙</span>
+    </button>
 </header>
 
-    <main>
-        <section id="hero" style="margin-bottom: 2%;">
-            <img src="vittorio_guida.jpg" alt="Vittorio Guida Profile Picture">
-            <h1>Vittorio Guida</h1>
-            <div style="font-size: normal; margin-top: 2%;">
+<main>
+    <section id="hero">
+        <div id="image-container">
+            <img src="images/vittorio_guida.jpg" alt="Vittorio Guida Profile Picture">
+
+            <div id="social-links">
+                <a href="https://orcid.org/0000-0002-9717-1441" target="_blank" rel="noopener noreferrer" aria-label="ORCID Profile">
+                    <i class="fab fa-orcid"></i>
+                </a>
+                <a href="https://www.scopus.com/authid/detail.uri?authorId=57211408210" target="_blank" rel="noopener noreferrer" aria-label="Scopus Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32" viewBox="0 0 24 24" data-icon="simple-icons:scopus" data-inline="false" data-width="32" data-height="32" title="Scopus" class="iconify iconify--simple-icons"><path fill="currentColor" d="m24 19.059l-.14-1.777c-1.426.772-2.945 1.076-4.465 1.076c-3.319 0-5.96-2.782-5.96-6.475c0-3.903 2.595-6.31 5.633-6.31c1.917 0 3.39.303 4.792 1.075L24 4.895c-1.286-.608-2.337-.889-4.698-.889c-4.534 0-7.97 3.53-7.97 8.017c0 5.12 4.09 7.924 7.9 7.924c1.916 0 3.506-.257 4.768-.888m-14.954-3.46c0-2.22-1.964-3.225-3.857-4.347C3.716 10.364 2.15 9.756 2.15 8.12c0-1.215.889-2.548 2.642-2.548c1.519 0 2.57.234 3.903 1.029l.117-1.847c-1.239-.514-2.127-.748-4.137-.748C1.8 4.006.047 5.876.047 8.26s2.103 3.413 4.02 4.581c1.426.865 2.922 1.45 2.922 2.992c0 1.496-1.333 2.571-2.922 2.571c-1.566 0-2.594-.35-3.786-1.075L0 19.176c1.215.56 2.454.818 4.16.818c2.385 0 4.885-1.473 4.885-4.395z"></path></svg>
+                </a>
+                <a href="https://scholar.google.it/citations?user=7VoB1LIAAAAJ&hl=it" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar Profile">
+                    <i class="fas fa-graduation-cap"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/vittorio-guida-058437128/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/vittorioguida" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div id="cv-download">
+                <a href="vittorio_guida_cv.pdf" download="Vittorio_Guida_CV.pdf" class="button">Download My CV <i class="fas fa-file-pdf"></i></a>
+            </div>
+        </div>
+
+        <div id="bio-text-container">
+            <h1>About Me</h1>
+            <p>
                 I am a postdoctoral researcher at the University of Trento, specializing in how individuals and organizations make decisions related to environmental sustainability. <br>
                 My research adopts a behavioral approach, focusing on uncovering the cognitive and social mechanisms behind sustainable and unsustainable choices. To achieve this, I primarily employ experimental methods, such as laboratory studies, to gain insights into decision-making processes. <br>
                 Beyond my primary research focus, I also have a keen interest in behavioral strategy, organizational theory, and computational modeling. <br>
-                Moving forward, I aim to integrate these areas into my research, enhancing our understanding of decision-making within complex organizational contexts.</p>
-        </section>
+                Moving forward, I aim to integrate these areas into my research, enhancing our understanding of decision-making within complex organizational contexts.
+            </p>
+        </div>
+    </section>
 
+    <section id="latest-publications">
+        <h2>Latest Publications</h2>
+        <div id="latest-publications-dashboard">
+        </div>
+    </section>
+</main>
 
-        <section id="latest-publications">
-            <h2>Latest Publications</h2>
-            <ul>
-                <li><a href="#">Title of Publication 1</a></li>
-                <li><a href="#">Title of Publication 2</a></li>
-            </ul>
-        </section>
-    </main>
+<footer>
+    <p>© 2025 Vittorio Guida</p>
+</footer>
 
-    <footer>
-        <p>© 2025 Vittorio Guida</p>
-    </footer>
-
-    <script src="script.js"></script> </body>
+<script src="publicationsData.js"></script>
+<script src="script.js"></script>
+</body>
 </html>
