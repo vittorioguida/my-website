@@ -1,26 +1,273 @@
-/* Stile globale per il tema scuro e il font */
+/* --- Global Styles & Base Elements --- */
+
+/* Base styles applied to the entire document (body tag) */
 body {
-    background-color: #1a1a1a; /* Colore di sfondo molto scuro */
-    color: #f0f0f0; /* Colore del testo chiaro per contrasto */
-    font-family: 'Arial', sans-serif; /* Un font pulito e moderno (puoi cambiarlo) */
-    line-height: 1.6; /* Spaziatura tra le righe per una migliore leggibilità */
-    margin: 0; /* Rimuove i margini predefiniti del browser */
-    padding: 0; /* Rimuove il padding predefinito del browser */
+    background-color: #1a1a1a; /* Sets a very dark charcoal background for the default dark theme */
+    color: #f0f0f0; /* Defines a light off-white text color for contrast against the dark background */
+    font-family: 'Arial', sans-serif; /* Specifies a clean, widely available sans-serif font family */
+    line-height: 1.6; /* Enhances readability by adding space between lines of text */
+    margin: 0; /* Resets default browser outer margins to ensure content starts from the edge */
+    padding: 0; /* Resets default browser inner padding to ensure content starts from the edge */
 }
 
-/* Stile per i link */
+/* Default styling for all anchor (link) elements */
 a {
-    color: #8be9fd; /* Un colore azzurro brillante per i link */
-    text-decoration: none; /* Rimuove la sottolineatura predefinita */
+    color: #6699CC; /* Sets the default link color to your chosen blue */
+    text-decoration: none; /* Removes the default underline from links for a cleaner look */
 }
 
+/* Hover state for all links: applies a visual change when the mouse hovers over them */
 a:hover {
-    text-decoration: underline; /* Aggiunge la sottolineatura al passaggio del mouse */
+    text-decoration: underline; /* Adds an underline to links on hover for user feedback */
 }
 
-/* Stile per le intestazioni */
+/* Styling for all heading levels (h1, h2, h3, h4, h5, h6) */
 h1, h2, h3, h4, h5, h6 {
-    color: #ffffff; /* Testo delle intestazioni bianco puro */
-    margin-top: 20px;
-    margin-bottom: 10px;
+    color: #ffffff; /* Sets headings text color to pure white */
+    margin-top: 1.25rem; /* Converted from 20px (20/16 = 1.25) */
+    margin-bottom: 0.625rem; /* Converted from 10px (10/16 = 0.625) */
+}
+
+/* --- Header & Navigation Bar --- */
+
+/* Styles for the main header section, typically at the top of the page */
+header {
+    background-color: #000000; /* Sets a solid black background for the header */
+    padding: 0.9375rem 0; /* Converted from 15px (15/16 = 0.9375) */
+    border-bottom: 1px solid #333; /* Adds a thin, subtle dark gray line at the bottom for separation */
+    position: relative; /* CRITICAL: Allows the theme toggle button to be absolutely positioned relative to the header */
+}
+
+/* Styles for the unordered list (ul) within the navigation (nav) */
+nav ul {
+    list-style: none; /* Removes default bullet points from list items */
+    padding: 0; /* Removes default list padding */
+    margin: 0; /* Removes default list margins */
+    display: flex; /* Activates Flexbox layout to arrange list items horizontally */
+    justify-content: center; /* Horizontally centers the navigation items within the header */
+    gap: 1.875rem; /* Converted from 30px (30/16 = 1.875) */
+}
+
+/* Styles for individual anchor (link) elements within the navigation bar */
+nav a {
+    color: #f0f0f0; /* Sets a light off-white color for navigation link text */
+    font-weight: bold; /* Makes the navigation links bold for emphasis */
+    font-size: 1.1em; /* Increases the font size slightly for better readability */
+    padding: 0.3125rem 0.625rem; /* Converted from 5px 10px */
+    transition: color 0.3s ease; /* Creates a smooth animation for color changes on hover */
+}
+
+/* Hover state for navigation links: changes color and ensures no underline */
+nav a:hover {
+    color: #91aecc; /* Changes the link color to a lighter blue on hover */
+    text-decoration: none; /* Explicitly removes underline on hover for navigation links */
+}
+
+/* --- Theme Toggle Button --- */
+
+/* Styles for the dark/light mode switch button */
+#theme-toggle {
+    background: none; /* Makes the button background transparent */
+    border: none; /* Removes any default button borders */
+    color: #f0f0f0; /* Sets the default icon/text color for the dark theme */
+    font-size: 1.5em; /* Controls the size of the moon/sun icon */
+    cursor: pointer; /* Changes the mouse cursor to a pointer when hovering, indicating it's clickable */
+    padding: 0.5%; /* Uses percentage, making padding relative to its parent's width */
+    position: absolute; /* Positions the button relative to its nearest positioned ancestor (the header) */
+    top: -8%; /* Positions the button 8% above the top edge of the header */
+    right: 1%; /* Positions the button 1% from the right edge of the header */
+    z-index: 100; /* Ensures the button appears above other content elements */
+    transition: color 0.3s ease; /* Provides a smooth color transition effect on hover */
+}
+
+/* Hover state for the theme toggle button */
+#theme-toggle:hover {
+    color: #91aecc; /* Changes the button icon/text color to a lighter blue on hover */
+}
+
+/* --- Main Content Area --- */
+
+/* Styles for the primary content wrapper of the page */
+main {
+    max-width:90%; /* Limits the maximum width of the content area (fixed for desktop screens) */
+    margin: 2.5rem auto; /* Converted from 40px (40/16 = 2.5), centers horizontally */
+    padding: 0 1.25rem; /* Converted from 20px, adds horizontal padding for smaller screens */
+}
+
+/* --- Hero Section: Profile Photo & Bio --- */
+
+/* Styles for the main hero section, which includes the profile photo and personal introduction */
+#hero {
+    display: flex; /* Enables Flexbox for arranging elements within this section */
+    flex-direction: row; /* Stacks items vertically (photo, then name, then bio) by default (mobile-first) */
+    align-items: center; /* Centers flex items horizontally when they are stacked vertically */
+    text-align: center; /* Centers all text content within the hero section */
+    margin-bottom: 2.5rem; /* Converted from 40px */
+}
+
+/* Styles specifically for the profile image within the hero section */
+#hero img {
+    width: 200px; /* Fixed width for the photo (can be '200px' or '12.5rem' depending on preference) */
+    height: 200px; /* Fixed height to make the image square (can be '200px' or '12.5rem') */
+    border-radius: 50%; /* Renders the image as a perfect circle */
+    object-fit: cover; /* Ensures the image fills its container without distortion, cropping if necessary */
+    border: 0.3125rem solid #6699CC; /* Converted from 5px */
+    margin-bottom: 1.25rem; /* Converted from 20px */
+}
+
+/* Styles for the main heading (your name) within the hero section */
+#hero h1 {
+    font-size: 2.8em; /* Sets a large font size to make your name prominent */
+    margin-bottom: 0.25rem; /* Converted from 5px */
+}
+
+/* Styles for the short bio paragraph within the hero section */
+#hero p {
+    font-size: 1.2em; /* Sets a slightly larger font size for the bio text, enhancing readability */
+    max-width: 100%; /* Limits the maximum width of the bio paragraph for optimal line length */
+    margin-bottom: 1.875rem; /* Converted from 30px */
+}
+
+/* Media Query: Adjusts layout for larger screens (e.g., tablets and desktops) */
+/* On larger screens, the photo and text will be displayed side-by-side */
+@media (min-width: 768px) {
+    #hero {
+        flex-direction: row; /* Arranges the profile photo and text content side-by-side horizontally */
+        text-align: left; /* Aligns text to the left within the text content block */
+        gap: 2.5rem; /* Converted from 40px */
+        justify-content: center; /* Centers the entire hero block (photo + text) horizontally on the page */
+    }
+
+    #hero img {
+        margin-bottom: 0; /* Removes the bottom margin from the image when it's aligned horizontally */
+    }
+
+    /* Ensures heading and paragraph text inside #hero align to the left when side-by-side */
+    #hero h1,
+    #hero p {
+        text-align: left;
+    }
+}
+
+/* --- Latest Publications Section --- */
+
+/* Styles for the section dedicated to listing your latest publications */
+#latest-publications {
+    background-color: #2a2a2a; /* Sets a slightly lighter dark gray background for visual differentiation */
+    padding: 1.875rem; /* Converted from 30px */
+    border-radius: 0.5rem; /* Converted from 8px */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* Converted from 0 4px 8px */
+
+    
+}
+
+/* Heading for the Latest Publications section */
+#latest-publications h2 {
+    font-size: 2em; /* Sets the font size for the section title */
+    margin-bottom: 1.5625rem; /* Converted from 25px */
+    text-align: center; /* Centers all text content within this section */
+}
+
+/* Styles for the unordered list within the publications section */
+#latest-publications ul {
+    list-style: none; /* Removes default list bullet points */
+    padding: 0; /* Removes default list padding */
+    margin: 0; /* Removes default list margins */
+    text-align: left; /* Centers all text content within this section */
+}
+
+/* Styles for individual list items (representing single publications) */
+#latest-publications li {
+    margin-bottom: 0.9375rem; /* Converted from 15px */
+    font-size: 1.1em; /* Sets a slightly larger font size for publication text */
+}
+
+/* Styles for links within the publications list */
+#latest-publications li a {
+    color: #6699CC; /* Sets the link color to your chosen blue */
+    font-weight: normal; /* Ensures normal font weight for these links */
+}
+
+/* Hover state for publication links */
+#latest-publications li a:hover {
+    color: #91aecc; /* Changes to a lighter blue on hover */
+    text-decoration: underline; /* Adds an underline on hover */
+}
+
+/* --- Footer --- */
+
+/* Styles for the footer section at the very bottom of the page */
+footer {
+    text-align: center; /* Centers all text content within the footer */
+    padding: 1.25rem; /* Converted from 20px */
+    margin-top: 2.5rem; /* Converted from 40px */
+    color: #999; /* Sets a medium gray text color for the footer */
+    font-size: 0.9em; /* Sets a slightly smaller font size for the footer text */
+    border-top: 1px solid #333; /* Adds a thin, subtle dark gray line at the top for separation */
+}
+
+/* --- Light Theme Styles (Applied when 'light-theme' class is on <body>) --- */
+
+/* General body styles when the 'light-theme' class is active */
+body.light-theme {
+    background-color: #f0f0f0; /* Sets a light gray background for the light theme */
+    color: #333; /* Sets a dark text color for contrast in the light theme */
+}
+
+/* Link colors for the light theme */
+body.light-theme a {
+    color: #6699CC; /* Uses your chosen blue link color in the light theme */
+}
+
+/* Navigation link colors for the light theme */
+body.light-theme nav a {
+    color: #333; /* Sets a dark color for navigation links in the light theme */
+}
+
+/* Navigation link hover state for the light theme */
+body.light-theme nav a:hover {
+    color: #91aecc; /* Changes to a lighter blue on hover in the light theme */
+}
+
+/* Heading colors for the light theme */
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+    color: #222; /* Sets an even darker color for headings in the light theme */
+}
+
+/* Header styles for the light theme */
+body.light-theme header {
+    background-color: #e0e0e0; /* Sets a lighter background for the header in the light theme */
+    border-bottom-color: #bbb; /* Sets a lighter border color for the header */
+}
+
+/* Hero image border for the light theme */
+body.light-theme #hero img {
+    border-color: #6699CC; /* Uses your chosen blue border color for the photo in the light theme */
+}
+
+/* Latest Publications section styles for the light theme */
+body.light-theme #latest-publications {
+    background-color: #ffffff; /* Sets a white background for this section in the light theme */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Converted from 0 4px 8px */
+}
+
+/* Footer styles for the light theme */
+body.light-theme footer {
+    color: #666; /* Sets a medium-dark gray text color for the footer in the light theme */
+    border-top-color: #bbb; /* Sets a lighter border color for the footer */
+}
+
+/* Theme toggle button colors for the light theme */
+body.light-theme #theme-toggle {
+    color: #333; /* Sets a dark color for the icon/text in the light theme */
+}
+
+/* Theme toggle button hover state for the light theme */
+body.light-theme #theme-toggle:hover {
+    color: #91aecc; /* Changes to a lighter blue on hover in the light theme */
 }
