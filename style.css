@@ -566,6 +566,6 @@ body.light-theme .section-divider {
     }
 
     .pub-abstract {
-        max-width: 150ch; /* Limit line length for better readability on wider screens */
+        max-width: 10ch; /* Limit line length for better readability on wider screens */
     }
 }
