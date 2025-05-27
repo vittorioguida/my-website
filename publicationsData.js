@@ -1,18 +1,30 @@
 const publications = [
     {
         id: 'pub1',
-        type: 'Journal Article', 
-        category: 'Journal Article', 
+        type: 'Journal Article',
+        category: 'Journal Article',
+        title: 'Is the appointee procedure a real selection or a mere political exchange? The case of the italian health-care chief executive officers',
+        authors: 'R. Troisi, V. Guida',
+        journal: 'Journal of Entrepreneurial and Organizational Diversity',
+        year: 2018,
+        abstract: 'One of the central aspects of the Italian health-care reform deals with the new position of a chief executive officer (CEO) selected through an appointment procedure. By drawing data from 164 Curriculum Vitae (CVs), a cluster analysis was carried out to investigate the typologies of CEOs that were selected and assess them by comparing their educational and professional characteristics. Three different categories of CEOs are defined and ranked: (i) “experienced CEO”, with the highest inter-organizational mobility and the highest number of triad-assignments; (ii) “experienced local directors”, with a better cultural background, medium mobility and medium number of triad assignments; and (iii) “business like professionals” with the lowest professional and educational profile. How these typologies are distributed over the Italian regions gathered in groups were then verified, considering the kind of organizational arrangements in the local appointment procedures. Finally, the overall results of the CEOs selection system in health-care lead to suboptimal appointments: when the organizational arrangements are better employed, they totally exclude the selection of the lowest category. On the contrary, when organizational arrangements are wrongly employed the first category decreases where the second increases',
+        link: 'https://jeodonline.com/jeod_articles/is-the-appointee-procedure-a-real-selection-or-a-mere-political-exchange-the-case-of-the-italian-health-care-chief-executive-officers/',
+        image: 'images/jeod.jpg'
+    }, // <-- Qui mancava la chiusura dell'oggetto e la virgola
+    {
+        id: 'pub2',
+        type: 'Journal Article',
+        category: 'Journal Article',
         title: 'Innovative search and imitation heuristics: an agent-based simulation study',
         authors: 'V. Guida, L. Mittone, A. Morreale',
         journal: 'Journal of Economic Interaction and Coordination',
         year: 2024,
         abstract: 'Prominent research in strategic imitation, exploration, exploitation, and organizational learning identifies imitation as a less costly alternative to experimentation. Yet, its role in the exploration–exploitation dilemma remains underexplored in the literature. This study employs an agent-based model to examine how two distinct agent types—those who imitate and those who experiment—interact and influence each other. The model incorporates the concept of “satisficing” derived from the behavioral theory of the firm, along with insights from research on imitative heuristics. The findings reveal that overcrowding affects both agent types negatively. Imitators suffer from diminished performance due to intensified competition, which increases as more imitators join the system. Meanwhile, explorers are hindered in their attempts at radical innovation due to the presence of other explorers and clusters of imitators. This paper contributes to the field as the first to model individual agents as ‘satisficers’ within a competitive exploration–exploitation framework. By incorporating imitation, it provides novel insights into the dynamics of organizational learning and strategic decision-making.',
         link: 'https://link.springer.com/article/10.1007/s11403-024-00406-2',
-        image: 'images/jeic.jpg' 
+        image: 'images/jeic.jpg'
     },
     {
-        id: 'pub2',
+        id: 'pub3',
         type: 'Journal Article',
         category: 'Journal Article',
         title: 'Building sustainable futures through soft institutional interventions in the climate change context: An intergenerational experiment',

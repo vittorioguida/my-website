@@ -316,7 +316,8 @@ main {
     color: #f0f0f0;
     margin-top: 1rem;
     text-align: justify;
-    max-width: 75%; /* Limit width for readability */
+    width: 100%; /* Full width on mobile */
+    max-width: 100%; /* Ensures it doesn't exceed container width */
 }
 
 /* --- Abstract Toggle --- */
@@ -565,6 +566,6 @@ body.light-theme .section-divider {
     }
 
     .pub-abstract {
-        max-width: 70ch; /* Limit line length for better readability on wider screens */
+        max-width: 150ch; /* Limit line length for better readability on wider screens */
     }
 }
