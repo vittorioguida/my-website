@@ -1,4 +1,5 @@
 const publications = [
+    // Journal Articles
     {
         id: 'pub1',
         type: 'Journal Article',
@@ -10,7 +11,8 @@ const publications = [
         abstract: 'One of the central aspects of the Italian health-care reform deals with the new position of a chief executive officer (CEO) selected through an appointment procedure. By drawing data from 164 Curriculum Vitae (CVs), a cluster analysis was carried out to investigate the typologies of CEOs that were selected and assess them by comparing their educational and professional characteristics. Three different categories of CEOs are defined and ranked: (i) “experienced CEO”, with the highest inter-organizational mobility and the highest number of triad-assignments; (ii) “experienced local directors”, with a better cultural background, medium mobility and medium number of triad assignments; and (iii) “business like professionals” with the lowest professional and educational profile. How these typologies are distributed over the Italian regions gathered in groups were then verified, considering the kind of organizational arrangements in the local appointment procedures. Finally, the overall results of the CEOs selection system in health-care lead to suboptimal appointments: when the organizational arrangements are better employed, they totally exclude the selection of the lowest category. On the contrary, when organizational arrangements are wrongly employed the first category decreases where the second increases',
         link: 'https://jeodonline.com/jeod_articles/is-the-appointee-procedure-a-real-selection-or-a-mere-political-exchange-the-case-of-the-italian-health-care-chief-executive-officers/',
         image: 'images/Research/jeod.jpg'
-    }, // <-- Qui mancava la chiusura dell'oggetto e la virgola
+    },
+
     {
         id: 'pub2',
         type: 'Journal Article',
@@ -23,6 +25,7 @@ const publications = [
         link: 'https://link.springer.com/article/10.1007/s11403-024-00406-2',
         image: 'images/Research/jeic.jpg'
     },
+
     {
         id: 'pub3',
         type: 'Journal Article',
@@ -35,14 +38,52 @@ const publications = [
         link: 'https://www.sciencedirect.com/science/article/pii/S0016328724002167',
         image: 'images/Research/futures.jpg'
     },
+
+
+
+
+    // Working Papers
     {
         id: 'wp1',
         type: 'Working Paper',
         category: 'Working Paper',
-        title: 'TBD',
+        title: 'Intertemporal Exploitation of Natural Resources: An Experimental Approach',
+        authors: 'Guida, V., Campigotto, N., Casal, S., Mittone, L.',
+        journal: 'TBD',
+        year: -99,
+        abstract: 'This research investigates the intertemporal exploitation of natural resources through an experimental approach. The study employs a dynamic game framework - baased on the IGG framework by Huaser et al. (2014) - to analyze how individuals make decisions regarding resource extraction over time. Different generations of players overlap in this version of the game, allowing for the exploration of intergenerational dynamics in resource management in a controlled environment that simulates societies with different stratifcations in terms of age and experience of citizens.',
+        image: 'images/Research/Mittone_PRIN_overlap.png'
+    },
+
+    {
+        id: 'wp2',
+        type: 'Working Paper',
+        category: 'Working Paper',
+        title: 'Adaptation to climate change ',
+        authors: 'Danese, G., Fulci, A., Guida, V.',
+        journal: 'TBD',
+        year: -99,
+        abstract: 'This paper investigates how firms across multiple sectors adapt to climate change within a simulation-based framework. Drawing on theories of organizational vulnerability, absorptive capacity, and sensemaking, we model a K-sector economy composed of heterogeneous firms exposed to climate-induced shocks. The simulation incorporates two competing hypotheses—the Inverse U-Shaped Hypothesis and the Ontological Shock Hypothesis—to explore under what conditions businesses engage in adaptive behavior. By varying sectoral absorptive capacities and introducing stochastic environmental disruptions, we examine how firms process information, update beliefs, and implement resilience strategies. Our findings suggest that moderate vulnerability and sector-specific cognitive responsiveness are critical for fostering adaptation. The study provides new insights into the dynamic interplay between environmental change and organizational decision-making, offering implications for policymakers and corporate strategists seeking to promote climate resilience in complex economic systems.',
+        image: 'images/Research/guida_danese_fulci.png'
+
+    },
+
+    {
+        id: 'wp3',
+        type: 'Working Paper',
+        category: 'Working Paper',
+        title: 'Can AI Curb the Disposition Effect? An Experimental Study with ChatGPT',
         authors: 'TBD',
         journal: 'TBD',
         year: -99,
-        abstract: 'TBD'
-    }
+        abstract: 'TBD',
+        image: 'images/Research/AI_disposition.png'
+    },
+
+
 ];
+
+
+
+
+
