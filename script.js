@@ -59,15 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
                                    (pub.journal ? `<p class="pub-journal-info">${pub.journal}</p>` :
                                    (pub.year ? `<p class="pub-journal-info"><span>(${pub.year})</span></p>` : ''));
 
+        // Determine if the title should be a link
+        let titleHtml;
+        if (pub.type === 'Working Paper') {
+            titleHtml = `<h3>${pub.title}</h3>`; // No link for Working Papers
+        } else {
+            titleHtml = `<h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>`;
+        }
+
         publicationElement.innerHTML = `
             <div class="pub-image-wrapper">
                 <img src="${imageSrc}" alt="Cover of ${pub.title}">
             </div>
             <div class="pub-details">
                 <span class="pub-type-label">${pub.type}</span>
-                <h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>
-                <p class="pub-authors">${pub.authors}</p>
-                ${journalAndYearInfo} ${!isDashboard ? `
+                ${titleHtml} <p class="pub-authors">${pub.authors}</p>
+                ${journalAndYearInfo}
+                ${!isDashboard ? `
                     <button class="toggle-abstract-btn">Show Abstract</button>
                     <div class="pub-abstract-content">
                         <p class="pub-abstract">${pub.abstract}</p>
