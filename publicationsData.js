@@ -48,7 +48,7 @@ const publications = [
         type: 'Working Paper',
         category: 'Working Paper',
         title: 'Intertemporal Exploitation of Natural Resources: An Experimental Approach',
-        authors: 'Guida, V., Campigotto, N., Casal, S., Mittone, L.',
+        authors: 'Guida, V., Casal, S., Mittone, L.',
         journal: 'TBD',
         year: -99,
         abstract: 'This research investigates the intertemporal exploitation of natural resources through an experimental approach. The study employs a dynamic game framework - baased on the IGG framework by Huaser et al. (2014) - to analyze how individuals make decisions regarding resource extraction over time. Different generations of players overlap in this version of the game, allowing for the exploration of intergenerational dynamics in resource management in a controlled environment that simulates societies with different stratifcations in terms of age and experience of citizens.',
