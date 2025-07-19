@@ -89,7 +89,7 @@ const publications = [
         journal: 'TBD',
         year: -99,
         abstract: 'Real earnings management is a practice that managers use to improve current earnings to meet short-term objectives and drive stock prices up. However, this may be detrimental to value creation in the long run.  We study real earnings management in the NK framework, where agents voluntarily make decisions that deviate from the optimal path to achieve a temporary improvement in performance. We study this phenomenon in environments of varying complexity and find that, while all forms of earnings management lead, on average, to a reduction in long-term performance, they are not all equally harmful. In particular, rejecting a performance-enhancing opportunity and maintaining the status quo is much less harmful than accepting a performance-decreasing opportunity when inaction is the best alternative. Finally, we link the managerial results of the NK model to the returns realized by the investor using a DCF model. This analysis confirms the results and shows that  myopia of investors is detrimental not only to long-term earnings of firms, but also to the financial returns obtained by the investors.',
-        image: 'images/Research/wp_sample2.png'
+        image: 'images/Research/wp_sample2.jpg'
     },
 
 ];
