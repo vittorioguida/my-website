@@ -39,6 +39,19 @@ const publications = [
         image: 'images/Research/futures.jpg'
     },
 
+      {
+        id: 'pub4',
+        type: 'Journal Article',
+        category: 'Journal Article',
+        title: 'Governance e Sostenibilità Ambientale',
+        authors: 'K. Klaser, V. Guida, L. Mittone',
+        journal: 'Economia Trentina',
+        year: 2025,
+        abstract: "Disclaimer: This is a summary of a outreach-oriented article written in Italian.\n\nAbstract (IT): L’articolo descrive un esperimento in Trentino che mostra come semplici raccomandazioni istituzionali possano incentivare scelte sostenibili. Senza obblighi normativi, le istituzioni possono influenzare positivamente imprese e cittadini, favorendo la sostenibilità intergenerazionale.\n\nAbstract (EN): The article presents an experiment in Trentino showing how soft institutional recommendations can promote sustainable choices. Without regulations, institutions can positively influence businesses and citizens, supporting intergenerational sustainability.",
+        link: 'https://www.tn.camcom.it/sites/default/files/uploads/documents/ComunicatiStampa/Anno_2025/Economia%20Trentina%20Web.pdf',
+        image: 'images/Research/economia_trentina_1_2025.jpg'
+    },
+
 
 
 
