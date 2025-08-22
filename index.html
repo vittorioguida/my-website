@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vittorio Guida</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vittorio Guida</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
@@ -64,18 +73,41 @@
         </div>
     </section>
 
+    <section id="talks-carousel-section" class="carousel-section">
+        <h2>Selected Talks</h2>
+        <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Highlighted talks" aria-live="polite">
+            <button class="carousel-control prev" aria-label="Previous slide">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="carousel-viewport">
+            <ul class="carousel-track" id="carousel-track"></ul>
+            </div>
+            <button class="carousel-control next" aria-label="Next slide">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            <div class="carousel-indicators" id="carousel-indicators"></div>
+        </div>
+    </section>
+
     <section id="latest-publications">
         <h2>Latest Publications</h2>
         <div id="latest-publications-dashboard">
         </div>
     </section>
+
+    <br>
+
+
+
+
 </main>
 
 <footer>
     <p>© 2025 Vittorio Guida</p>
 </footer>
-
 <script src="publicationsData.js"></script>
+<script src="talksData.js"></script>
+<script src="talks.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

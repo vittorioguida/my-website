@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vittorio Guida - Talks</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div id="site-name">
+    <a href="index.html">Vittorio Guida</a>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="publications.html">Research</a></li>
+      <li><a href="talks.html" aria-current="page">Talks</a></li>
+    </ul>
+  </nav>
+  <button id="theme-toggle" aria-label="Toggle dark and light theme">
+    <span class="icon">🌙</span>
+  </button>
+</header>
+
+<main>
+  <section id="talks-list" aria-labelledby="talks-list-heading">
+    <h2 id="talks-list-heading">Talks</h2>
+    <ul id="talks-ul">
+      <!-- List items injected by talks.js -->
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Vittorio Guida</p>
+</footer>
+<script src="talksData.js"></script>
+<script src="talks.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
