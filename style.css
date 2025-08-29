@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
    ============================================================ */
 header {
   background-color: #000000;
-  padding: 0.8rem 2%;
+  padding: 0.5rem 2%;
   border-bottom: 1px solid #333;
   display: flex;
   align-items: center;
@@ -86,7 +86,7 @@ header {
 }
 
 #site-name {
-  font-size: 1.6em;
+  font-size: 1.2em;
   font-weight: bold;
   white-space: nowrap;
   flex-shrink: 0;
@@ -112,7 +112,7 @@ nav ul {
 nav a {
   color: #f0f0f0;
   font-weight: bold;
-  font-size: 1.4em;
+  font-size: 1em;
   padding: 0.25rem 0.5rem;
   transition: color 0.3s ease;
 }

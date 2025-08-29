@@ -2,7 +2,7 @@
 window.TALKS = [
 
 {
-    title: "UPCOMING TALK: Can AI Curb the Disposition Effect? An Experimental Study with ChatGPT",
+    title: "Can AI Curb the Disposition Effect? An Experimental Study with ChatGPT",
     event: "Workshop: Advancing Human–AI Synergy in Decision-Making and Management Innovation",
     venue: "LUT Business School",
     date: "2025-08-27",
