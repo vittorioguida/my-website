@@ -76,15 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const btn = el.querySelector('.toggle-abstract-btn');
       const box = el.querySelector('.pub-abstract-content');
       if (btn && box) {
-        btn.addEventListener('click', () => {
-          box.classList.toggle('show-abstract');
-          if (box.classList.contains('show-abstract')) {
-            btn.textContent = 'Hide Abstract';
-            box.style.maxHeight = box.scrollHeight + 'px';
-          } else {
-            btn.textContent = 'Show Abstract';
-            box.style.maxHeight = '0';
-          }
+      // Toggle fixed-height box via CSS class only
+      btn.addEventListener('click', () => {
+        const isOpen = box.classList.toggle('show-abstract');
+        btn.textContent = isOpen ? 'Hide Abstract' : 'Show Abstract';
+        // clean any old inline styles from earlier approach
+        box.style.maxHeight = '';
         });
       }
     }
@@ -123,4 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.warn('Publications data is not defined. Ensure publicationsData.js loads before script.js.');
   }
+});
+
+// Recompute open abstract heights on resize (optional polish)
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.pub-abstract-content.show-abstract').forEach(box => {
+    box.style.maxHeight = box.scrollHeight + 'px';
+  });
 });

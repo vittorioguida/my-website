@@ -738,3 +738,161 @@ body.light-theme .talk-item .talk-desc { color: #333; }
     grid-column: 1 / -1; grid-row: 3;
   }
 }
+
+/* ===============================
+   Research cards: 2-row grid layout
+   Row 1: [ image | details ]
+   Row 2: [ button ] full width
+   Row 3: [ abstract ] full width
+   =============================== */
+
+/* Grid of cards (1 per row on mobile, 2 per row ≥768px) */
+#journal-articles-container,
+#working-papers-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  #journal-articles-container,
+  #working-papers-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Each publication card becomes a 3-row CSS grid */
+#journal-articles-container .publication-item,
+#working-papers-container .publication-item {
+  display: grid;
+  grid-template-columns: 7rem 1fr;       /* left thumb / right details */
+  grid-template-rows: auto auto auto;    /* row1 content + row2 button + row3 abstract */
+  grid-template-areas:
+    "img details"
+    "controls controls"
+    "abstract abstract";
+  gap: 1rem;
+  align-items: start;
+  text-align: left;
+}
+
+/* Image (left, row 1) */
+#journal-articles-container .pub-image-wrapper,
+#working-papers-container .pub-image-wrapper {
+  grid-area: img;
+  width: 7rem;
+  height: 9rem;
+  margin: 0;
+  border-radius: .35rem;
+  overflow: hidden;
+}
+#journal-articles-container .pub-image-wrapper img,
+#working-papers-container .pub-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Details (right, row 1) */
+#journal-articles-container .pub-details,
+#working-papers-container .pub-details {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+/* Smaller titles inside research cards */
+#journal-articles-container .publication-item h3,
+#working-papers-container .publication-item h3 {
+  font-size: 1.05em;
+  line-height: 1.25;
+  margin: 0 0 .3rem;
+}
+
+/* Button (row 2, full width) */
+#journal-articles-container .toggle-abstract-btn,
+#working-papers-container .toggle-abstract-btn {
+  grid-area: controls;
+  align-self: start;
+  margin: .2rem 0 .4rem;
+}
+
+/* Abstract (row 3, full width) */
+#journal-articles-container .pub-abstract-content,
+#working-papers-container .pub-abstract-content {
+  grid-area: abstract;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  padding: .4rem .6rem 0;       /* pushes text slightly lower */
+  border-left: 3px solid #444;
+}
+body.light-theme #journal-articles-container .pub-abstract-content,
+body.light-theme #working-papers-container .pub-abstract-content {
+  border-left-color: #ccc;
+}
+
+/* Mobile: stack nicely (image above details) */
+@media (max-width: 480px) {
+  #journal-articles-container .publication-item,
+  #working-papers-container .publication-item {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "img"
+      "details"
+      "controls"
+      "abstract";
+  }
+  #journal-articles-container .pub-image-wrapper,
+  #working-papers-container .pub-image-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+
+/* Fixed-height abstract + scrollbar (research page only) */
+#journal-articles-container .pub-abstract-content,
+#working-papers-container .pub-abstract-content {
+  max-height: 0;                 /* closed */
+  overflow: hidden;
+  transition: max-height .35s ease;
+  padding: 0 .6rem;              /* horizontal breathing */
+  border-left: 3px solid #444;
+}
+
+#journal-articles-container .pub-abstract-content.show-abstract,
+#working-papers-container .pub-abstract-content.show-abstract {
+  max-height: 12rem;             /* <-- fixed open height */
+  overflow-y: auto;              /* show vertical scrollbar if needed */
+  padding-top: .4rem;            /* push text slightly lower */
+}
+
+/* Light theme border color */
+body.light-theme #journal-articles-container .pub-abstract-content,
+body.light-theme #working-papers-container .pub-abstract-content {
+  border-left-color: #ccc;
+}
+
+/* Nice thin scrollbar */
+#journal-articles-container .pub-abstract-content.show-abstract,
+#working-papers-container .pub-abstract-content.show-abstract {
+  scrollbar-width: thin;                       /* Firefox */
+  scrollbar-color: var(--brand, #6699CC) #2a2a2a;
+}
+#journal-articles-container .pub-abstract-content.show-abstract::-webkit-scrollbar,
+#working-papers-container .pub-abstract-content.show-abstract::-webkit-scrollbar {
+  width: 8px;
+}
+#journal-articles-container .pub-abstract-content.show-abstract::-webkit-scrollbar-track,
+#working-papers-container .pub-abstract-content.show-abstract::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+#journal-articles-container .pub-abstract-content.show-abstract::-webkit-scrollbar-thumb,
+#working-papers-container .pub-abstract-content.show-abstract::-webkit-scrollbar-thumb {
+  background: #6699CC;
+  border-radius: 6px;
+}
