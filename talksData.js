@@ -7,7 +7,7 @@ window.TALKS = [
     venue: "LUT Business School",
     date: "2025-08-27",
     location: "Lappeenranta, Finland",
-    desc: "Upcoming talk with Matteo Benuzzi on how ChatGPT may help investors overcome the disposition effect.",
+    desc: "Together with Matteo Benuzzi, we gave a talk on how ChatGPT may help investors overcome the disposition effect.",
     long_desc: `Matteo Benuzzi and I will present our joint work with Azzurra Morreale and Luigi Mittone exploring whether Large Language Models (LLMs), specifically ChatGPT, can mitigate the disposition effect.`,
     img: "images/Talks/Finland2025.jpg",
     featured: true
