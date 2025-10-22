@@ -63,7 +63,7 @@ const publications = [
         title: 'Intertemporal Exploitation of Natural Resources: An Experimental Approach',
         authors: 'Guida, V., Casal, S., Mittone, L.',
         journal: 'TBD',
-        year: -99,
+        year: 2025,
         abstract: 'This research investigates the intertemporal exploitation of natural resources through an experimental approach. The study employs a dynamic game framework - baased on the IGG framework by Huaser et al. (2014) - to analyze how individuals make decisions regarding resource extraction over time. Different generations of players overlap in this version of the game, allowing for the exploration of intergenerational dynamics in resource management in a controlled environment that simulates societies with different stratifcations in terms of age and experience of citizens.',
         image: 'images/Research/Mittone_PRIN_overlap.png'
     },
@@ -75,7 +75,7 @@ const publications = [
         title: 'Adaptation to climate change ',
         authors: 'Danese, G., Fulci, A., Guida, V.',
         journal: 'TBD',
-        year: -99,
+        year: 2025,
         abstract: 'This paper investigates how firms across multiple sectors adapt to climate change within a simulation-based framework. Drawing on theories of organizational vulnerability, absorptive capacity, and sensemaking, we model a K-sector economy composed of heterogeneous firms exposed to climate-induced shocks. The simulation incorporates two competing hypotheses—the Inverse U-Shaped Hypothesis and the Ontological Shock Hypothesis—to explore under what conditions businesses engage in adaptive behavior. By varying sectoral absorptive capacities and introducing stochastic environmental disruptions, we examine how firms process information, update beliefs, and implement resilience strategies. Our findings suggest that moderate vulnerability and sector-specific cognitive responsiveness are critical for fostering adaptation. The study provides new insights into the dynamic interplay between environmental change and organizational decision-making, offering implications for policymakers and corporate strategists seeking to promote climate resilience in complex economic systems.',
         image: 'images/Research/guida_danese_fulci.png'
 
@@ -86,10 +86,10 @@ const publications = [
         type: 'Working Paper',
         category: 'Working Paper',
         title: 'Can AI Curb the Disposition Effect? An Experimental Study with ChatGPT',
-        authors: 'TBD',
-        journal: 'TBD',
-        year: -99,
-        abstract: 'TBD',
+        authors: 'Benuzzi, M., Morreale, A., Guida, V., Mittone, L.',
+        journal: 'Under Review on the Journal of Banking & Finance',
+        year: 2025,
+        abstract: "Artificial intelligence is increasingly recognized for its ability to enhance task performance across a wide range of fields, including financial decision-making. In this study, we examine whether Large Language Models (LLMs) can help investors mitigate the disposition effect— the tendency to sell winners too early and hold losers too long. Through simulations with artificial agents programmed to follow preset strategies, we find that ChatGPT’s recommendations often promote an anti-disposition effect, advising the sale of losing positions rather than winning ones. Further, we then conduct an experiment involving human participants to assess how ChatGPT’s advice affects trading decisions. Participants are randomly assigned to interact with ChatGPT either through standardized prompts or by creating their own prompts. In both experimental conditions, individuals who received ChatGPT’s guidance exhibited the anti-disposition effect compared to a baseline control group who did not interact with ChatGPT. Our findings suggest that LLMs can enhance financial decisions for most users. However, two limitations emerge. First, highly skilled decision-makers are less likely to benefit from LLM-generated advice and may even experience decreased performance. Second, while LLM-generated strategies avoid the disposition effect, they can sometimes be erratic and overly responsive to short-term market fluctuations.",
         image: 'images/Research/AI_disposition.png'
     },
 
@@ -100,7 +100,7 @@ const publications = [
         title: 'Organizational decisions and financial returns: Real Earnings Management in an NK framework',
         authors: 'Benuzzi, M., Guida, V.',
         journal: 'TBD',
-        year: -99,
+        year: 2025,
         abstract: 'Real earnings management is a practice that managers use to improve current earnings to meet short-term objectives and drive stock prices up. However, this may be detrimental to value creation in the long run.  We study real earnings management in the NK framework, where agents voluntarily make decisions that deviate from the optimal path to achieve a temporary improvement in performance. We study this phenomenon in environments of varying complexity and find that, while all forms of earnings management lead, on average, to a reduction in long-term performance, they are not all equally harmful. In particular, rejecting a performance-enhancing opportunity and maintaining the status quo is much less harmful than accepting a performance-decreasing opportunity when inaction is the best alternative. Finally, we link the managerial results of the NK model to the returns realized by the investor using a DCF model. This analysis confirms the results and shows that  myopia of investors is detrimental not only to long-term earnings of firms, but also to the financial returns obtained by the investors.',
         image: 'images/Research/wp_sample2.jpg'
     },
