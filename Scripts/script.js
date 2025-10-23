@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Homepage dashboard (latest N)
     if (latestPublicationsDashboard) {
-      const latest = sorted.slice(0, config.numberOfLatestPublications);
+      const publishedOnly = sorted.filter(p => p.type !== 'Working Paper');
+      const latest = publishedOnly.slice(0, config.numberOfLatestPublications);
       latest.forEach(p => latestPublicationsDashboard.appendChild(createPublicationElement(p, true)));
     }
   } else {
