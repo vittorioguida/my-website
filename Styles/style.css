@@ -166,9 +166,9 @@ main {
 }
 
 #image-container img {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
+  width: 320px;
+  height: 360px;
+  border-radius: 30%;
   object-fit: cover;
   border: 3px solid #a1a6aa;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
