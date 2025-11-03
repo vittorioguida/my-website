@@ -9,7 +9,7 @@ window.TALKS = [
         location: "Padova, Italy",
         desc: "I will present the work with Sandro Casal and Luigi Mittone concerning an experimental study of common-pool resource management across overlapping generations.",
         long_desc: `I will present the work with Sandro Casal and Luigi Mittone concerning an experimental study of common-pool resource management across overlapping generations.`,
-        img: "images/Talks/padova_2025.png",
+        img: "images/Talks/padova_2025.jpg",
         featured: true
     },
 
@@ -21,7 +21,7 @@ window.TALKS = [
         location: "Trento, Italy",
         desc: "I will give a presentation on experimental methods in Economics research within a broad two-days event on economic analysis of law.",
         long_desc: `I will give a presentation on experimental methods in Economics research within a broad two-days event on economic analysis of law.`,
-        img: "images/Talks/giuri_trento.png",
+        img: "images/Talks/giuri_trento.jpg",
         featured: true
     },
 
