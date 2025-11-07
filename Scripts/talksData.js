@@ -14,7 +14,7 @@ window.TALKS = [
     },
 
     {
-        title: "Metodi Sperimentali negli studi economici",
+        title: "Metodi Sperimentali",
         event: "PhD Workshop: 'Analisi economica del diritto: concetti, teorie e metodi'",
         venue: "Palazzo di Giurisprudenza, University of Trento, Trento, Italy",
         date: "2025-11-07",
