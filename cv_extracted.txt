@@ -1,0 +1,133 @@
+Vittorio Guida
+Curriculum Vitae
+I am a postdoctoral researcher at the University of Trento working in behavioral and experimental economics,
+mainly on sustainability, intergenerational resource management, and organizational and financial decision-
+making. I use laboratory and online experiments, data analysis in R and Python, and, in recent work, AI
+tools within experiments to study how decision support affects investors’ behaviour. I value collaborative,
+interdisciplinary research environments, where the workplace is a community of shared learning.
+Education
+Nov
+2018—Dec
+2022
+Ph.D. in Economics and Management, University of Trento, Trento, Italy
+Thesis: Three Essays on Exploration and Exploitation: Behavioral Insights and Individual
+Decision-Making
+Supervisors: Prof. Luigi Mittone (University of Trento) and Prof. Azzurra Morreale
+(Lappeenranta-Lahti University of Technology)
+Jan
+2015—Jun
+2017
+Master’s Degree in Government and Public Administration (LM-63), Univer-
+sity of Salerno, Fisciano (SA), Italy
+Grade: 110/110 cum laude
+Thesis: Il Conflitto di Interessi: dilemmi etici e dinamiche organizzative
+Supervisor: Prof. Roberta Troisi; Co-supervisor: Prof. Adalgiso Amendola
+Sep
+2011—Dec
+2014
+Bachelor’s Degree in Administration and Organization (L-16), University of
+Salerno, Fisciano (SA), Italy
+Thesis: Le start-up innovative e la crisi. La realt` a e la retorica
+Supervisor: Prof. Roberta Troisi (University of Salerno)
+Professional Experience
+Feb
+2025—Present
+Postdoctoral Research Fellow, University of Trento, Department of Economics and
+Management, Trento, Italy
+In the context of the PRIN 2022 Project “Saving natural resources: an experimental-behavioral
+approach to intertemporal environmental decisions” , focused on the experimental study of
+behavioral factors in intertemporal resource management across generations.
+Scientific Coordinator: Prof. Luigi Mittone.
+○ Designed and programmed intergenerational experiments on resource use.
+○ Managed data collection on Prolific and ensured data quality.
+○ Conducted analysis in R and Python for behavioral and microeconomic models.
+○ Co-authored manuscripts based on project results.
+○ Contributed to workshops and project dissemination.
+Feb
+2023—Feb
+2025
+Postdoctoral Research Fellow, University of Trento, Department of Economics and
+Management, Trento, Italy
+In the context of the CARITRO Project “Governance and Environmental Sustainability: an
+experimental laboratory for organizations in the Province of Trento” , in close collaboration with
+the Trento Chamber of Commerce.
+Scientific Coordinator: Prof. Luigi Mittone.
+○ Designed and ran experiments on organizational sustainability.
+○ Managed data collection in collaboration with the Trento Chamber of Commerce.
+○ Performed data analysis (R, Python); results published in Futures.
+○ Co-authored project-related publications and working papers.
+○ Assisted with workshops and research dissemination.
+Teaching Experience
+1/3Lab 1: Market Analysis (SSD: SECS-P/08 - ECON-07/A), University of Trento,
+Department of Economics and Management, Trento, Italy
+Instructor: Prof. Matteo Ploner
+Ongoing — Sep 2025 — Dec 2024, Duration: 40 hours
+Sep 2024 — Dec 2024, Duration: 32 hours
+Sep 2023 — Dec 2023, Duration: 44 hours
+Laboratorio di Analisi dei Mercati (SSD: SECS-P/08 - ECON-07/A), Univer-
+sity of Trento, Department of Economics and Management, Trento, Italy
+Ongoing — Sep 2025 — Dec 2025, Duration: 40 hours, Instructor: Prof. Lucia Gatti
+Sep 2024 — Dec 2024, Duration: 28 hours, Instructor: Prof. Lucia Gatti
+Sep 2023 — Dec 2023, Duration: 44 hours, Instructor: Prof. Nadia Laura Von Jacobi
+Sep 2020 — Dec 2020, Duration: 48 hours, Instructor: Prof. Matteo Ploner
+Sep 2019 — Dec 2019, Duration: 48 hours, Instructor: Prof. Matteo Ploner
+Introduzione all’Economia (SSD: SECS-P/01 - ECON-01/A) (Esercitazioni),
+University of Trento, Department of Economics and Management, Trento, Italy
+Ongoing — Sep 2025 — Dec 2025, Duration: 13 hours, Instructor: Prof. Marco Faillo
+Ongoing — Sep 2025 — Dec 2025, Duration: 13 hours, Instructor: Prof. Fabio Pieri
+Introduzione all’Economia (SSD: SECS-P/01 - ECON-01/A) (Didattica
+Innovativa), University of Trento, Department of Economics and Management, Trento,
+Italy
+Dec 2024 — Dec 2024, Duration: 9 hours, Instructors: Prof. Sandro Casal and Luigi Mittone
+Dec 2024 — Dec 2024, Duration: 9 hours, Instructor: Prof. Marco Faillo
+Dec 2024 — Dec 2024, Duration: 9 hours, Instructor: Prof. Fabio Pieri
+Published Research Articles
+2025 Klaser, K.,Guida, V., & Mittone, L.,Governance e sostenibilit` a ambientale, Economia
+Trentina, 1/2025, 26–30.
+2025 Guida, V., Klaser, K., & Mittone, L.Building sustainable futures through soft insti-
+tutional interventions in the climate change context: an intergenerational experiment.
+Futures, 103531.
+2024 Guida, V., Mittone, L., & Morreale, A.Innovative search and imitation heuristics: an
+agent-based simulation study. Journal of Economic Interaction and Coordination , 1–52.
+2018 Troisi, R., &Guida, V.Is the appointee procedure a real selection or a mere political
+exchange? The case of the Italian Health-Care Chief Executive Officers. Journal of
+Entrepreneurial and Organizational Diversity , 7(2), 19–38.
+Conferences & Seminars
+Nov 2025 Ph.D. Workshop on Economic Analsisy of Law, Law Faculty, University of Trento
+Jun 2025 Society for the Advancement of Behavioral Economics (SABE) Annual Conference,
+University of Trento
+Dec 2024 Symposium on Advancing Sustainability Research with Experimental Methods, Univer-
+sity of Padova
+Jun 2024 TOM Society Annual Meeting, ESSEC Paris
+Jun 2024 The Discovery of the Future in Social and Human Sciences, University of Trento
+Sep 2023 WINIR Conference, Catania
+Aug 2023 TOM Society Annual Meeting, Harvard Business School, Boston
+Sep 2022 Model Evaluation and Causal Search, Univ. of Pisa & Scuola Superiore Sant’Anna, Pisa
+Oct 2018 ECMLG 2018, HU University of Applied Sciences Utrecht, Utrecht
+2/3Conference/Workshop/Event Organization
+Feb 2026 “Workshop — Acting for Tomorrow: Evidence and Behavioral Insights for Managing
+Shared Resources”, University of Trento
+Member of Organizing Committee — ongoing
+Dec 2025 “II Symposium on Advancing Sustainability Research with Experimental Methods”,
+University of Padova
+Member of Scientific Committee — ongoing
+Dec 2024 “Symposium on Advancing Sustainability Research with Experimental Methods”, Uni-
+versity of Padova
+Member of Scientific Committee
+2021 “CEEL Workshop on Decision-Making”, University of Trento
+Member of the Organizing Committee
+Other Assignments
+2025 Reviewer for ERC Starting Grant application
+— Reviewer for academic journals
+Languages
+Italian Native
+English C2 – Self-assessed
+Digital Skills
+R Advanced – Data wrangling, data analysis, Monte Carlo simulations
+Python Advanced – Data wrangling, data analysis, Monte Carlo simulations,oTree (economic
+experiments), Mesa (agent-based modeling), integration of external API (OpenAI)
+LATEX Advanced
+HTML Intermediate
+CSS Intermediate
+JavaScript Intermediate
+3/3
