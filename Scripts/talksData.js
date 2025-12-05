@@ -2,13 +2,13 @@
 window.TALKS = [
 
     {
-        title: "UPCOMING: Intertemporal Exploitation of Common-Pool Resources: An Experimental Study",
+        title: "Intertemporal Exploitation of Common-Pool Resources: An Experimental Study",
         event: "II Symposium on Advancing Sustainability Research with Experimental Methods",
         venue: "University of Padova",
         date: "December 2025",
         location: "Padova, Italy",
-        desc: "I will present the work with Sandro Casal and Luigi Mittone concerning an experimental study of common-pool resource management across overlapping generations.",
-        long_desc: `I will present the work with Sandro Casal and Luigi Mittone concerning an experimental study of common-pool resource management across overlapping generations.`,
+        desc: "I presented the work with Sandro Casal and Luigi Mittone concerning an experimental study of common-pool resource management across overlapping generations.",
+        long_desc: `I presented the work with Sandro Casal and Luigi Mittone concerning an experimental study of common-pool resource management across overlapping generations.`,
         img: "images/Talks/padova_2025.jpg",
         featured: true
     },
@@ -19,8 +19,8 @@ window.TALKS = [
         venue: "Palazzo di Giurisprudenza, University of Trento, Trento, Italy",
         date: "2025-11-07",
         location: "Trento, Italy",
-        desc: "I will give a presentation on experimental methods in Economics research within a broad two-days event on economic analysis of law.",
-        long_desc: `I will give a presentation on experimental methods in Economics research within a broad two-days event on economic analysis of law.`,
+        desc: "I gave a presentation on experimental methods in Economics research within a broad two-days event on economic analysis of law.",
+        long_desc: `I gave a presentation on experimental methods in Economics research within a broad two-days event on economic analysis of law.`,
         img: "images/Talks/giuri_trento.jpg",
         featured: true
     },
