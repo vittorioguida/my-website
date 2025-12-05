@@ -96,8 +96,21 @@ header {
   color: #f0f0f0;
   text-decoration: none;
   transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
 }
 #site-name a:hover { color: #91aecc; text-decoration: none; }
+
+.site-logo {
+  height: 1.8em;
+  width: auto;
+  display: block;
+}
+
+.logo-text {
+  line-height: 1;
+}
 
 nav ul {
   list-style: none;
