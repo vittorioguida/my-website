@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize theme
   const savedTheme = localStorage.getItem('theme') || 
-    (window.matchMedia?.('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    (window.matchMedia?.('(prefers-color-scheme: light)')?.matches ? 'light' : 'dark');
   setTheme(savedTheme);
 
   // Theme toggle handler
