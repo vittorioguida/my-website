@@ -1,0 +1,1072 @@
+/* ============================================================
+   Global Typographic & Accessibility Enhancements
+   ============================================================ */
+html {
+  font-size: 1em; /* Base font size */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:root {
+  --brand: #6699CC;
+  --brand-hover: #91aecc;
+  --text: #f0f0f0;
+  --bg: #1a1a1a;
+  --bg-alt: #2a2a2a;
+  --muted: #9aa0a6;
+  --border: #333;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+}
+
+/* Media elements responsive by default */
+img, svg, video, canvas, audio, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Focus styles */
+:where(a, button, [role="button"], .button, input, select, textarea):focus-visible {
+  outline: 2px dotted var(--brand);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Selection */
+::selection {
+  background: #2b4d6f;
+  color: #fff;
+}
+
+/* Font smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   Base Elements
+   ============================================================ */
+body {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+a { color: #6699CC; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  font-weight: 600;
+}
+
+/* ============================================================
+   Header & Navigation
+   ============================================================ */
+header {
+  background-color: #000;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+#site-name {
+  font-size: 1.1em;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#site-name a {
+  color: var(--text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: color 0.2s;
+}
+#site-name a:hover { color: var(--brand-hover); }
+
+.site-logo {
+  height: 1.5em;
+  width: auto;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.95em;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+nav a:hover { color: var(--brand-hover); }
+
+#theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  transition: color 0.2s;
+}
+#theme-toggle:hover { color: var(--brand-hover); }
+
+/* ============================================================
+   Main Layout
+   ============================================================ */
+main {
+  max-width: 1200px;
+  width: 90%;
+  margin: var(--spacing-lg) auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+#hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-md);
+  gap: var(--spacing-lg);
+}
+
+#image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+#image-container img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #a1a6aa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+#social-links a {
+  font-size: 1.5em;
+  color: #888;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+#social-links a svg {
+  width: 1.5em;
+  height: 1.5em;
+  color: inherit;
+}
+
+#social-links a:hover { color: var(--brand); }
+
+#bio-text-container { 
+  width: 100%; 
+  text-align: center;
+}
+
+#hero h1 { 
+  font-size: 1.3em; 
+  margin-bottom: var(--spacing-sm);
+}
+
+#hero div { 
+  font-size: 1em; 
+  max-width: 100%; 
+  text-align: left;
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   CV Page Styles
+   ============================================================ */
+#cv-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.cv-header h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background-color: var(--brand);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  font-size: 0.9em;
+}
+
+.cv-download-btn:hover {
+  background-color: var(--brand-hover);
+}
+
+.cv-section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--bg-alt);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 0.9em;
+}
+
+.cv-section h2 {
+  font-size: 1.5em;
+  color: var(--brand);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: var(--spacing-sm);
+}
+
+.cv-item {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.cv-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cv-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.cv-item h3 {
+  font-size: 1.1em;
+  margin: 0;
+  flex: 1;
+}
+
+.cv-date {
+  font-size: 0.9em;
+  color: var(--brand-hover);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cv-institution {
+  font-size: 0.95em;
+  color: #aaa;
+  margin: var(--spacing-xs) 0;
+  font-style: italic;
+}
+
+.cv-details {
+  font-size: 0.9em;
+  color: #ccc;
+  line-height: 1.6;
+  margin: var(--spacing-sm) 0;
+}
+
+.cv-list {
+  margin: var(--spacing-sm) 0 0 var(--spacing-lg);
+  padding: 0;
+}
+
+.cv-list li {
+  font-size: 0.9em;
+  color: #ccc;
+  margin: var(--spacing-xs) 0;
+  line-height: 1.5;
+}
+
+.cv-publication,
+.cv-conference {
+  font-size: 0.9em;
+  color: #ccc;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cv-publication strong,
+.cv-conference strong {
+  color: var(--brand-hover);
+}
+
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.cv-skill-item {
+  padding: var(--spacing-md);
+  background-color: var(--bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--brand);
+}
+
+.cv-skill-item h4 {
+  font-size: 1em;
+  color: var(--brand);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.cv-skill-item p {
+  font-size: 0.9em;
+  color: #ccc;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Publications & Sections
+   ============================================================ */
+/* ============================================================
+   Publications & Sections
+   ============================================================ */
+#latest-publications,
+#selected-talks {
+  background-color: var(--bg-alt);
+  padding: var(--spacing-lg);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: var(--spacing-lg);
+}
+
+#latest-publications h2,
+#selected-talks h2 {
+  font-size: 1.5em;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.publication-item {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "img details"
+    "controls controls"
+    "abstract abstract";
+  gap: var(--spacing-md);
+  background-color: var(--bg-alt);
+  padding: var(--spacing-md);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.pub-image-wrapper {
+  grid-area: img;
+  width: 6em;
+  height: 8em;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.pub-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.pub-details {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.pub-type-label {
+  display: inline-block;
+  background-color: var(--brand);
+  color: #fff;
+  font-size: 0.7em;
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.publication-item h3 {
+  font-size: 1.1em;
+  margin: var(--spacing-xs) 0;
+  line-height: 1.3;
+}
+
+.publication-item h3 a {
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.publication-item h3 a:hover {
+  color: var(--brand-hover);
+}
+
+.pub-authors {
+  font-size: 0.85em;
+  color: #ccc;
+}
+
+.pub-journal-info {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.toggle-abstract-btn {
+  grid-area: controls;
+  background-color: #4f5e6d;
+  color: #fff;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background-color 0.2s;
+  width: fit-content;
+}
+
+.toggle-abstract-btn:hover {
+  background-color: #5588bb;
+}
+
+.pub-abstract-content {
+  grid-area: abstract;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 var(--spacing-sm);
+  border-left: 3px solid var(--border);
+}
+
+.pub-abstract-content.show-abstract {
+  max-height: 12em;
+  overflow-y: auto;
+  padding-top: var(--spacing-sm);
+}
+
+.pub-abstract {
+  font-size: 0.9em;
+  color: var(--text);
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* Scrollbar styling */
+.pub-abstract-content.show-abstract {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand) var(--bg-alt);
+}
+
+.pub-abstract-content.show-abstract::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pub-abstract-content.show-abstract::-webkit-scrollbar-track {
+  background: var(--bg-alt);
+}
+
+.pub-abstract-content.show-abstract::-webkit-scrollbar-thumb {
+  background: var(--brand);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   Divider & Footer
+   ============================================================ */
+.section-divider { border: 0; height: 1px; background-color: #333; margin: 2.5em 0; }
+
+footer {
+  text-align: center;
+  padding: 1em;
+  margin-top: 2em;
+  color: #999;
+  font-size: 0.85em;
+  border-top: 1px solid #333;
+}
+
+/* ============================================================
+   Light Theme
+   ============================================================ */
+body.light-theme { background-color: #f0f0f0; color: #333; }
+body.light-theme a { color: #6699CC; }
+body.light-theme nav a { color: #333; }
+body.light-theme nav a:hover { color: #91aecc; }
+body.light-theme h1, body.light-theme h2, body.light-theme h3,
+body.light-theme h4, body.light-theme h5, body.light-theme h6 { color: #222; }
+
+body.light-theme header { background-color: #e0e0e0; border-bottom-color: #bbb; }
+body.light-theme #site-name a { color: #333; }
+body.light-theme #site-name a:hover { color: #91aecc; }
+
+body.light-theme #image-container img { border-color: #c7c7c7; }
+
+body.light-theme #social-links a,
+body.light-theme #social-links a svg { color: #444; }
+body.light-theme #social-links a:hover { color: #91aecc; }
+
+body.light-theme #latest-publications {
+  background-color: #ffffff;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme footer { color: #666; border-top-color: #bbb; }
+body.light-theme #theme-toggle { color: #333; }
+body.light-theme #theme-toggle:hover { color: #91aecc; }
+
+body.light-theme .publication-item {
+  background-color: #ffffff;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.20);
+}
+body.light-theme .pub-image-wrapper img { border: 1px solid #ddd; }
+body.light-theme .pub-type-label { background-color: #6699CC; color: #fff; }
+body.light-theme .publication-item h3 a { color: #222; }
+body.light-theme .publication-item h3 a:hover { color: #91aecc; }
+body.light-theme .pub-authors, body.light-theme .pub-journal-info { color: #555; }
+body.light-theme .pub-abstract { color: #333; }
+body.light-theme .toggle-abstract-btn { background-color: #eee; color: #333; border: 1px solid #ccc; }
+body.light-theme .toggle-abstract-btn:hover { background-color: #ddd; color: #222; }
+body.light-theme .section-divider { background-color: #bbb; }
+body.light-theme .pub-abstract-content { border-left: 3px solid #ccc; }
+
+/* ============================================================
+   Media Queries (layout)
+   ============================================================ */
+@media (min-width: 768px) {
+  header { justify-content: space-between; padding-left: 2%; padding-right: 2%; }
+  nav { flex-grow: 1; justify-content: center; }
+
+  #hero {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: 4%;
+    justify-content: center;
+    padding: 0.8rem;
+  }
+  #image-container { flex-shrink: 0; margin-bottom: 0; align-items: flex-start; }
+  #image-container img { margin-bottom: 1.2rem; }
+  #social-links { justify-content: flex-start; }
+  #bio-text-container { flex-grow: 1; max-width: 65%; text-align: left; margin-top: 0; padding-right: 1rem; }
+  #hero h1, #hero p { text-align: left; }
+
+  .publication-item {
+    flex-direction: row;       /* image + details side-by-side on desktop */
+    text-align: left;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .pub-image-wrapper { margin-bottom: 0; margin-right: 0; }
+  .pub-details { width: auto; }
+  .pub-abstract { max-width: 120ch; } /* readability on wide screens */
+}
+
+
+
+/* ============================================================
+   Talks Carousel
+   ============================================================ */
+.carousel-section {
+  margin-top: var(--spacing-md);
+}
+
+.carousel {
+  position: relative;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto var(--spacing-lg);
+  background: var(--bg-alt);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  padding: var(--spacing-lg);
+}
+
+.carousel h2 {
+  font-size: 1.5em;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 300ms ease;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: var(--spacing-lg);
+  display: grid;
+  grid-template-columns: 14em 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+.carousel-slide .thumb {
+  width: 14em;
+  height: 10em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-slide h3 {
+  margin: 0 0 var(--spacing-xs);
+  font-size: 1.2em;
+}
+
+.carousel-slide .meta {
+  font-size: 0.9em;
+  color: #ccc;
+  margin: 0 0 var(--spacing-xs);
+}
+
+.carousel-slide .desc {
+  font-size: 0.9em;
+  color: var(--text);
+  margin: var(--spacing-xs) 0;
+}
+
+.carousel a.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 4px;
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.carousel a.cta:hover {
+  background: var(--brand-hover);
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-control.prev {
+  left: var(--spacing-sm);
+}
+
+.carousel-control.next {
+  right: var(--spacing-sm);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) 0 0;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: #555;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.carousel-indicators button[aria-current="true"] {
+  background: var(--brand-hover);
+}
+
+/* ============================================================
+   Talks Page & Homepage Grids
+   ============================================================ */
+#talks-ul,
+#latest-publications-dashboard,
+#selected-talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+}
+
+#talks-ul li.talk-item {
+  background: var(--bg-alt);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#talks-ul li.talk-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.talk-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.talk-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.talk-content {
+  padding: var(--spacing-md);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.talk-content .title {
+  font-size: 1.1em;
+  margin: 0 0 var(--spacing-sm);
+  line-height: 1.3;
+}
+
+.talk-content .whenwhere {
+  color: #ccc;
+  font-size: 0.85em;
+  margin: var(--spacing-xs) 0;
+}
+
+.talk-content .desc,
+.talk-content .long-desc {
+  font-size: 0.9em;
+  margin-top: var(--spacing-sm);
+  color: var(--text);
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+/* Homepage grid cards */
+#latest-publications-dashboard .publication-item,
+#selected-talks-list .publication-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  min-height: 200px;
+  font-size: 0.9em;
+}
+
+#latest-publications-dashboard .pub-image-wrapper,
+#selected-talks-list .pub-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: var(--spacing-sm);
+  overflow: hidden;
+  border-radius: 4px;
+  grid-area: unset;
+}
+
+#latest-publications-dashboard .pub-image-wrapper img,
+#selected-talks-list .pub-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+#latest-publications-dashboard .pub-details,
+#selected-talks-list .pub-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  grid-area: unset;
+}
+
+#latest-publications-dashboard h3,
+#selected-talks-list h3 {
+  font-size: 1em;
+  margin: 0 0 var(--spacing-xs);
+  line-height: 1.3;
+}
+
+/* Research page: 2-column grid on larger screens */
+#journal-articles-container,
+#working-papers-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  #journal-articles-container,
+  #working-papers-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  #hero {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+    gap: var(--spacing-xl);
+  }
+  
+  #image-container {
+    align-items: flex-start;
+    margin-bottom: 0;
+  }
+  
+  #social-links {
+    justify-content: flex-start;
+  }
+  
+  #bio-text-container {
+    flex-grow: 1;
+    max-width: 65%;
+    text-align: left;
+  }
+  
+  .carousel-slide {
+    grid-template-columns: 14em 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  #latest-publications-dashboard,
+  #selected-talks-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .carousel-slide {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-md);
+  }
+  
+  .carousel-slide .thumb {
+    width: 100%;
+    height: 140px;
+  }
+  
+  #image-container img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: var(--spacing-sm);
+  }
+  
+  nav ul {
+    gap: var(--spacing-sm);
+  }
+  
+  nav a {
+    font-size: 0.8em;
+    padding: var(--spacing-xs);
+  }
+  
+  #site-name {
+    font-size: 0.95em;
+  }
+  
+  #theme-toggle {
+    font-size: 1.1em;
+  }
+  
+  .publication-item {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "img"
+      "details"
+      "controls"
+      "abstract";
+  }
+  
+  .pub-image-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Light theme styles for CV page */
+body.light-theme .cv-header h1 {
+  color: #222;
+}
+
+body.light-theme .cv-download-btn {
+  background-color: #6699CC;
+}
+
+body.light-theme .cv-download-btn:hover {
+  background-color: #557aa5;
+}
+
+body.light-theme .cv-section {
+  background-color: #ffffff;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .cv-section h2 {
+  color: #6699CC;
+  border-bottom-color: #ccc;
+}
+
+body.light-theme .cv-item {
+  border-bottom-color: #e0e0e0;
+}
+
+body.light-theme .cv-item h3 {
+  color: #222;
+}
+
+body.light-theme .cv-date {
+  color: #557aa5;
+}
+
+body.light-theme .cv-institution {
+  color: #666;
+}
+
+body.light-theme .cv-details,
+body.light-theme .cv-list li,
+body.light-theme .cv-publication,
+body.light-theme .cv-conference {
+  color: #444;
+}
+
+body.light-theme .cv-publication strong,
+body.light-theme .cv-conference strong {
+  color: #557aa5;
+}
+
+body.light-theme .cv-publication em {
+  color: #666;
+}
+
+body.light-theme .cv-skill-item {
+  background-color: #f8f8f8;
+  border-left-color: #6699CC;
+}
+
+body.light-theme .cv-skill-item h4 {
+  color: #6699CC;
+}
+
+body.light-theme .cv-skill-item p {
+  color: #555;
+}
+
