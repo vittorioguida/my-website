@@ -1,115 +1,110 @@
 /* ============================================================
-   Global Typographic & Accessibility Enhancements
+   CSS Variables & Global Styles
    ============================================================ */
-html {
-  font-size: 1em; /* Base font size */
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
 :root {
   --brand: #6699CC;
   --brand-hover: #91aecc;
   --text: #f0f0f0;
   --bg: #1a1a1a;
-  --muted: #9aa0a6;
+  --bg-alt: #2a2a2a;
+  --border: #333;
+  --sp-xs: 0.25rem;
+  --sp-sm: 0.5rem;
+  --sp-md: 1rem;
+  --sp-lg: 1.5rem;
+  --sp-xl: 2rem;
 }
 
-/* Media elements responsive by default */
-img, svg, video, canvas, audio, iframe {
+html {
+  font-size: 1em;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Roboto Mono', monospace, system-ui;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video {
   max-width: 100%;
   height: auto;
 }
 
-/* Focus styles */
-:where(a, button, [role="button"], .button, input, select, textarea):focus-visible {
+a {
+  color: var(--brand);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #fff;
+  margin-top: var(--sp-md);
+  margin-bottom: var(--sp-sm);
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+:where(a, button):focus-visible {
   outline: 2px dotted var(--brand);
   outline-offset: 2px;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Selection */
 ::selection {
   background: #2b4d6f;
   color: #fff;
 }
 
-/* Font smoothing */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ============================================================
-   Base Elements
-   ============================================================ */
-body {
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 1em;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-}
-
-a { color: #6699CC; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
-  font-weight: 600;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ============================================================
    Header & Navigation
    ============================================================ */
 header {
-  background-color: #000000;
-  padding: 0.5em 2%;
-  border-bottom: 1px solid #333;
+  background-color: #000;
+  padding: var(--sp-sm) var(--sp-lg);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--sp-md);
 }
 
 #site-name {
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: bold;
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 #site-name a {
-  color: #f0f0f0;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  color: var(--text);
   display: inline-flex;
   align-items: center;
-  gap: 0.45em;
+  gap: var(--sp-sm);
 }
-#site-name a:hover { color: #91aecc; text-decoration: none; }
+
+#site-name a:hover {
+  color: var(--brand-hover);
+  text-decoration: none;
+}
 
 .site-logo {
-  height: 1.8em;
-  width: auto;
-  display: block;
-}
-
-.logo-text {
-  line-height: 1;
+  height: 1.5em;
 }
 
 nav ul {
@@ -117,35 +112,34 @@ nav ul {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: 1.2em;
-  flex-grow: 1;
-  justify-content: center;
+  gap: var(--sp-md);
   flex-wrap: wrap;
 }
 
 nav a {
-  color: #f0f0f0;
-  font-weight: bold;
-  font-size: 1em;
-  padding: 0.25em 0.5em;
-  transition: color 0.3s ease;
-  white-space: nowrap;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.95em;
+  padding: var(--sp-xs) var(--sp-sm);
 }
-nav a:hover { color: #91aecc; text-decoration: none; }
 
-/* Theme toggle */
+nav a:hover {
+  color: var(--brand-hover);
+  text-decoration: none;
+}
+
 #theme-toggle {
   background: none;
   border: none;
-  color: #f0f0f0;
-  font-size: 1.4em;
+  color: var(--text);
+  font-size: 1.3em;
   cursor: pointer;
-  padding: 0.5%;
-  z-index: 100;
-  transition: color 0.3s ease;
-  flex-shrink: 0;
+  padding: var(--sp-xs);
 }
-#theme-toggle:hover { color: #91aecc; }
+
+#theme-toggle:hover {
+  color: var(--brand-hover);
+}
 
 /* ============================================================
    Main Layout
@@ -153,73 +147,452 @@ nav a:hover { color: #91aecc; text-decoration: none; }
 main {
   max-width: 1200px;
   width: 90%;
-  margin: 2em auto;
-  padding: 0 1em;
+  margin: var(--sp-lg) auto;
+  padding: 0 var(--sp-md);
 }
 
 /* ============================================================
-   Hero
+   Hero Section
    ============================================================ */
 #hero {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0.8em;
-  margin: 1%;
+  padding: var(--sp-md);
+  gap: var(--sp-lg);
 }
 
 #image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;   /* centra tutto verticalmente */
-  gap: 1em;                 /* spaziatura uniforme */
-  margin-bottom: 1.5em;
+  gap: var(--sp-md);
 }
 
 #image-container img {
-  width: 320px;
-  height: 360px;
-  border-radius: 30%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #a1a6aa;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-  margin: 0;                 /* tolto il margin-bottom */
-  display: block;            /* evita glitch del flex interno */
-  pointer-events: none;      /* disabilita interazioni */
+  border: 2px solid #a1a6aa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Social links */
+#bio-text-container {
+  width: 100%;
+}
+
+#hero h1 {
+  font-size: 1.3em;
+  margin-bottom: var(--sp-sm);
+}
+
+#hero div {
+  font-size: 1em;
+  line-height: 1.6;
+  text-align: left;
+}
+
 #social-links {
   display: flex;
   justify-content: center;
-  gap: 1.5em;
-  margin: 0;                 /* tolto il margin-bottom */
-  align-items: center;
+  gap: var(--sp-md);
 }
+
 #social-links a {
-  font-size: 1.8em;          /* reso più proporzionato */
+  font-size: 1.5em;
   color: #888;
-  transition: color 0.3s ease;
-  line-height: 1;             /* niente extra spazio verticale */
+  display: flex;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+#social-links a svg {
+  width: 100%;
+  height: 100%;
+}
+
+#social-links a:hover {
+  color: var(--brand);
+}
+
+/* ============================================================
+   Sections (Publications, Talks, Carousel)
+   ============================================================ */
+#latest-publications,
+#selected-talks,
+.carousel {
+  background-color: var(--bg-alt);
+  padding: var(--sp-lg);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: var(--sp-lg);
+}
+
+#latest-publications h2,
+#selected-talks h2,
+.carousel h2 {
+  font-size: 1.5em;
+  margin-bottom: var(--sp-md);
+  text-align: center;
+}
+
+/* ============================================================
+   Publication Cards
+   ============================================================ */
+.publication-item {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas:
+    "img details"
+    "controls controls"
+    "abstract abstract";
+  gap: var(--sp-md);
+  background-color: var(--bg-alt);
+  padding: var(--sp-md);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.pub-image-wrapper {
+  grid-area: img;
+  width: 6em;
+  height: 8em;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.pub-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.pub-details {
+  grid-area: details;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+
+.pub-type-label {
+  background-color: var(--brand);
+  color: #fff;
+  font-size: 0.7em;
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.publication-item h3 {
+  font-size: 1.1em;
+  margin: var(--sp-xs) 0;
+  line-height: 1.3;
+}
+
+.publication-item h3 a {
+  color: #fff;
+}
+
+.publication-item h3 a:hover {
+  color: var(--brand-hover);
+}
+
+.pub-authors {
+  font-size: 0.85em;
+  color: #ccc;
+}
+
+.pub-journal-info {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.toggle-abstract-btn {
+  grid-area: controls;
+  background-color: #4f5e6d;
+  color: #fff;
+  border: none;
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  width: fit-content;
+}
+
+.toggle-abstract-btn:hover {
+  background-color: #5588bb;
+}
+
+.pub-abstract-content {
+  grid-area: abstract;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 var(--sp-sm);
+  border-left: 3px solid var(--border);
+}
+
+.pub-abstract-content.show-abstract {
+  max-height: 12em;
+  overflow-y: auto;
+  padding-top: var(--sp-sm);
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand) var(--bg-alt);
+}
+
+.pub-abstract-content.show-abstract::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pub-abstract-content.show-abstract::-webkit-scrollbar-thumb {
+  background: var(--brand);
+  border-radius: 3px;
+}
+
+.pub-abstract {
+  font-size: 0.9em;
+  color: var(--text);
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* ============================================================
+   Carousel
+   ============================================================ */
+.carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 300ms ease;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: var(--sp-lg);
+  display: grid;
+  grid-template-columns: 14em 1fr;
+  gap: var(--sp-lg);
+  align-items: start;
+}
+
+.carousel-slide .thumb {
+  width: 14em;
+  height: 10em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.carousel-slide .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-slide h3 {
+  margin: 0 0 var(--sp-xs);
+  font-size: 1.2em;
+}
+
+.carousel-slide .meta {
+  font-size: 0.9em;
+  color: #ccc;
+  margin: 0 0 var(--sp-xs);
+}
+
+.carousel-slide .desc {
+  font-size: 0.9em;
+  margin: var(--sp-xs) 0;
+}
+
+.carousel a.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-sm);
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: 4px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+}
+
+.carousel a.cta:hover {
+  background: var(--brand-hover);
+  text-decoration: none;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.8em;
-  height: 1.8em;
 }
-#social-links a svg {
-  width: 1.8em;              /* uniformato alla grandezza font */
-  height: 1.8em;
-  color: #888;
-  transition: color 0.3s ease;
-  display: block;
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.6);
 }
-#social-links a:hover { color: #6699CC; }
+
+.carousel-control.prev {
+  left: var(--sp-sm);
+}
+
+.carousel-control.next {
+  right: var(--sp-sm);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-sm);
+  padding: var(--sp-md) 0 0;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: #555;
+  cursor: pointer;
+}
+
+.carousel-indicators button[aria-current="true"] {
+  background: var(--brand-hover);
+}
 
 /* ============================================================
-   CV Page Styles
+   Grids (Homepage & Talks Page)
+   ============================================================ */
+#talks-ul,
+#latest-publications-dashboard,
+#selected-talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sp-md);
+}
+
+#talks-ul li.talk-item {
+  background: var(--bg-alt);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+#talks-ul li.talk-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.talk-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.talk-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.talk-content {
+  padding: var(--sp-md);
+  flex-grow: 1;
+}
+
+.talk-content .title {
+  font-size: 1.1em;
+  margin: 0 0 var(--sp-sm);
+  line-height: 1.3;
+}
+
+.talk-content .whenwhere {
+  color: #ccc;
+  font-size: 0.85em;
+  margin: var(--sp-xs) 0;
+}
+
+.talk-content .desc,
+.talk-content .long-desc {
+  font-size: 0.9em;
+  margin-top: var(--sp-sm);
+  line-height: 1.5;
+}
+
+/* Homepage grid cards */
+#latest-publications-dashboard .publication-item,
+#selected-talks-list .publication-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-md);
+  min-height: 200px;
+  font-size: 0.9em;
+}
+
+#latest-publications-dashboard .pub-image-wrapper,
+#selected-talks-list .pub-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: var(--sp-sm);
+  grid-area: unset;
+}
+
+#latest-publications-dashboard .pub-details,
+#selected-talks-list .pub-details {
+  grid-area: unset;
+}
+
+#latest-publications-dashboard h3,
+#selected-talks-list h3 {
+  font-size: 1em;
+  margin: 0 0 var(--sp-xs);
+  line-height: 1.3;
+}
+
+/* Research page: 2-column grid */
+#journal-articles-container,
+#working-papers-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-md);
+}
+
+/* ============================================================
+   CV Page
    ============================================================ */
 #cv-content {
   max-width: 900px;
@@ -230,63 +603,57 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2em;
+  margin-bottom: var(--sp-lg);
   flex-wrap: wrap;
-  gap: 1em;
+  gap: var(--sp-md);
 }
 
 .cv-header h1 {
-  font-size: 2.5em;
+  font-size: 2em;
   margin: 0;
-  color: #f0f0f0;
 }
 
 .cv-download-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
-  background-color: #486f96;
+  gap: var(--sp-sm);
+  background-color: var(--brand);
   color: white;
-  padding: 0.7em 1.3em;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  padding: var(--sp-sm) var(--sp-md);
+  border-radius: 4px;
+  font-weight: 600;
   font-size: 0.9em;
 }
 
 .cv-download-btn:hover {
-  background-color: #2a6fb4;
+  background-color: var(--brand-hover);
+  text-decoration: none;
 }
 
 .cv-section {
-  margin-bottom: 2.5em;
-  padding: 1.5em;
-  background-color: #2a2a2a;
-  border-radius: 0.5em;
-  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
-  font-size: 0.8em;
-}
-
-.cv-section h2 {
-  font-size: 1.8em;
-  color: #6699CC;
-  margin-bottom: 1.5em;
-  display: flex;
-  align-items: center;
-  gap: 0.75em;
-  border-bottom: 2px solid #444;
-  padding-bottom: 0.5em;
-}
-
-.cv-section h2 i {
+  margin-bottom: var(--sp-xl);
+  padding: var(--sp-lg);
+  background-color: var(--bg-alt);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-size: 0.9em;
 }
 
+.cv-section h2 {
+  font-size: 1.5em;
+  color: var(--brand);
+  margin-bottom: var(--sp-md);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: var(--sp-sm);
+}
+
 .cv-item {
-  margin-bottom: 1.5em;
-  padding-bottom: 1.5em;
-  border-bottom: 1px solid #333;
+  margin-bottom: var(--sp-md);
+  padding-bottom: var(--sp-md);
+  border-bottom: 1px solid var(--border);
 }
 
 .cv-item:last-child {
@@ -299,85 +666,60 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.5em;
-  gap: 1em;
+  margin-bottom: var(--sp-sm);
+  gap: var(--sp-md);
   flex-wrap: wrap;
 }
 
 .cv-item h3 {
-  font-size: 1.2em;
-  color: #f0f0f0;
+  font-size: 1.1em;
   margin: 0;
   flex: 1;
 }
 
 .cv-date {
   font-size: 0.9em;
-  color: #91aecc;
+  color: var(--brand-hover);
   font-weight: 600;
   white-space: nowrap;
 }
 
 .cv-institution {
-  font-size: 1em;
+  font-size: 0.95em;
   color: #aaa;
-  margin: 0.3em 0;
+  margin: var(--sp-xs) 0;
   font-style: italic;
 }
 
-.cv-details {
-  font-size: 0.95em;
+.cv-details,
+.cv-list li {
+  font-size: 0.9em;
   color: #ccc;
   line-height: 1.6;
-  margin: 0.5em 0;
 }
 
 .cv-list {
-  margin: 0.5em 0 0 1.5em;
+  margin: var(--sp-sm) 0 0 var(--sp-lg);
   padding: 0;
-}
-
-.cv-list li {
-  font-size: 0.95em;
-  color: #ccc;
-  margin: 0.3em 0;
-  line-height: 1.5;
-}
-
-.cv-publication,
-.cv-conference {
-  font-size: 0.95em;
-  color: #ccc;
-  line-height: 1.7;
-  margin: 0;
-}
-
-.cv-publication strong,
-.cv-conference strong {
-  color: #91aecc;
-}
-
-.cv-publication em {
-  color: #aaa;
 }
 
 .cv-skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
+  gap: var(--sp-md);
 }
 
 .cv-skill-item {
-  padding: 1em;
-  background-color: #1a1a1a;
-  border-radius: 0.3em;
-  border-left: 3px solid #6699CC;
+  padding: var(--sp-md);
+  background-color: var(--bg);
+  border-radius: 4px;
+  border-left: 3px solid var(--brand);
 }
 
 .cv-skill-item h4 {
-  font-size: 1.1em;
-  color: #6699CC;
-  margin: 0 0 0.5em 0;
+  font-size: 1em;
+  color: var(--brand);
+  margin: 0 0 var(--sp-sm) 0;
 }
 
 .cv-skill-item p {
@@ -387,840 +729,236 @@ main {
   line-height: 1.5;
 }
 
-#bio-text-container { width: 100%; text-align: center; }
-#hero h1 { font-size: 1em; margin-bottom: 0.5em; }
-#hero div { font-size: 1.02em; max-width: 105%; margin-bottom: 0.5em; text-align: left; }
-
-
 /* ============================================================
-   Latest Publications (container section)
+   Footer
    ============================================================ */
-#latest-publications {
-  background-color: #2a2a2a;
-  padding: 1.5em;
-  border-radius: 0.5em;
-  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.2);
+.section-divider {
+  border: 0;
+  height: 1px;
+  background-color: var(--border);
+  margin: var(--sp-xl) 0;
 }
-#latest-publications h2 {
-  font-size: 1.8em;
-  margin-bottom: 1.25em;
-  text-align: center;
-}
-#latest-publications ul { list-style: none; padding: 0; margin: 0; text-align: left; }
-#latest-publications li { margin-bottom: 0.8em; font-size: 1em; }
-#latest-publications li a { color: #6699CC; font-weight: normal; }
-#latest-publications li a:hover { color: #91aecc; text-decoration: underline; }
-
-/* ============================================================
-   Publication Cards (general list pages)
-   ============================================================ */
-#journal-articles-container,
-#working-papers-container,
-#latest-publications-dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2em;
-}
-
-.publication-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: #2a2a2a;
-  padding: 1.2em;
-  border-radius: 0.5em;
-  box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.30);
-  text-align: left;
-}
-
-/* Book-cover style for generic lists */
-.pub-image-wrapper {
-  flex-shrink: 0;
-  width: 7em;
-  height: 9em;
-  margin-bottom: 0.8em;
-  overflow: hidden;
-  border-radius: 0.25em;
-}
-.pub-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border: 1px solid #444;
-}
-
-.pub-details { flex-grow: 1; width: 100%; }
-
-.pub-type-label {
-  display: inline-block;
-  background-color: #6699CC;
-  color: #fff;
-  font-size: 0.75em;
-  padding: 0.15em 0.4em;
-  border-radius: 0.2em;
-  margin-bottom: 0.4em;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.publication-item h3 { font-size: 1.4em; margin-top: 0.4em; margin-bottom: 0.4em; }
-.publication-item h3 a { color: #ffffff; }
-.publication-item h3 a:hover { color: #91aecc; text-decoration: underline; }
-
-.pub-authors { font-size: 0.9em; color: #ccc; margin-bottom: 0.2em; }
-.pub-journal-info { font-size: 0.85em; color: #999; margin-bottom: 0.4em; }
-
-.pub-abstract {
-  font-size: 0.95em;
-  color: #f0f0f0;
-  margin-top: 0.8em;
-  text-align: justify;
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Abstract toggle */
-.toggle-abstract-btn {
-  background-color: #4f5e6d;
-  color: #fff;
-  border: none;
-  padding: 0.4em 0.8em;
-  border-radius: 0.3em;
-  cursor: pointer;
-  font-size: 0.85em;
-  margin-top: 0.8em;
-  transition: background-color 0.3s ease;
-}
-.toggle-abstract-btn:hover { background-color: #5588bb; }
-
-.pub-abstract-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-out;
-  padding: 0 0.6em;     /* inner padding for breathing room */
-  margin-top: 0.5em;
-  border-left: 3px solid #444; /* visual separator */
-}
-
-.pub-abstract { font-size: 0.95em; color: #f0f0f0; text-align: justify; line-height: 1.5; }
-
-/* ============================================================
-   Divider & Footer
-   ============================================================ */
-.section-divider { border: 0; height: 1px; background-color: #333; margin: 2.5em 0; }
 
 footer {
   text-align: center;
-  padding: 1em;
-  margin-top: 2em;
+  padding: var(--sp-md);
+  margin-top: var(--sp-xl);
   color: #999;
   font-size: 0.85em;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--border);
 }
 
 /* ============================================================
    Light Theme
    ============================================================ */
-body.light-theme { background-color: #f0f0f0; color: #333; }
-body.light-theme a { color: #6699CC; }
-body.light-theme nav a { color: #333; }
-body.light-theme nav a:hover { color: #91aecc; }
-body.light-theme h1, body.light-theme h2, body.light-theme h3,
-body.light-theme h4, body.light-theme h5, body.light-theme h6 { color: #222; }
+body.light-theme {
+  background-color: #f0f0f0;
+  color: #333;
+  --text: #333;
+  --bg: #f0f0f0;
+  --bg-alt: #ffffff;
+  --border: #ddd;
+}
 
-body.light-theme header { background-color: #e0e0e0; border-bottom-color: #bbb; }
-body.light-theme #site-name a { color: #333; }
-body.light-theme #site-name a:hover { color: #91aecc; }
+body.light-theme a {
+  color: var(--brand);
+}
 
-body.light-theme #image-container img { border-color: #c7c7c7; }
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+  color: #222;
+}
+
+body.light-theme header {
+  background-color: #e0e0e0;
+  border-bottom-color: #ccc;
+}
+
+body.light-theme nav a,
+body.light-theme #site-name a,
+body.light-theme #theme-toggle {
+  color: #333;
+}
+
+body.light-theme #image-container img {
+  border-color: #c7c7c7;
+}
 
 body.light-theme #social-links a,
-body.light-theme #social-links a svg { color: #444; }
-body.light-theme #social-links a:hover { color: #91aecc; }
-
-body.light-theme #latest-publications {
-  background-color: #ffffff;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
+body.light-theme #social-links a svg {
+  color: #444;
 }
 
-body.light-theme footer { color: #666; border-top-color: #bbb; }
-body.light-theme #theme-toggle { color: #333; }
-body.light-theme #theme-toggle:hover { color: #91aecc; }
-
-body.light-theme .publication-item {
+body.light-theme #latest-publications,
+body.light-theme #selected-talks,
+body.light-theme .publication-item,
+body.light-theme .cv-section,
+body.light-theme .carousel,
+body.light-theme #talks-ul li.talk-item {
   background-color: #ffffff;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.20);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-body.light-theme .pub-image-wrapper img { border: 1px solid #ddd; }
-body.light-theme .pub-type-label { background-color: #6699CC; color: #fff; }
-body.light-theme .publication-item h3 a { color: #222; }
-body.light-theme .publication-item h3 a:hover { color: #91aecc; }
-body.light-theme .pub-authors, body.light-theme .pub-journal-info { color: #555; }
-body.light-theme .pub-abstract { color: #333; }
-body.light-theme .toggle-abstract-btn { background-color: #eee; color: #333; border: 1px solid #ccc; }
-body.light-theme .toggle-abstract-btn:hover { background-color: #ddd; color: #222; }
-body.light-theme .section-divider { background-color: #bbb; }
-body.light-theme .pub-abstract-content { border-left: 3px solid #ccc; }
+
+body.light-theme .pub-image-wrapper img,
+body.light-theme .carousel-slide .thumb {
+  border-color: #ddd;
+}
+
+body.light-theme .publication-item h3 a {
+  color: #222;
+}
+
+body.light-theme .pub-authors,
+body.light-theme .pub-journal-info,
+body.light-theme .talk-content .whenwhere,
+body.light-theme .carousel-slide .meta {
+  color: #555;
+}
+
+body.light-theme .pub-abstract,
+body.light-theme .talk-content .desc,
+body.light-theme .talk-content .long-desc {
+  color: #333;
+}
+
+body.light-theme .toggle-abstract-btn {
+  background-color: #e8e8e8;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+body.light-theme .toggle-abstract-btn:hover {
+  background-color: #d8d8d8;
+}
+
+body.light-theme .pub-abstract-content,
+body.light-theme .section-divider {
+  border-color: #ccc;
+}
+
+body.light-theme .carousel-control {
+  background: rgba(0, 0, 0, 0.15);
+  color: #222;
+}
+
+body.light-theme .carousel-control:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+body.light-theme .cv-skill-item {
+  background-color: #f8f8f8;
+}
+
+body.light-theme footer {
+  border-top-color: #ccc;
+}
 
 /* ============================================================
-   Media Queries (layout)
+   Responsive Design
    ============================================================ */
 @media (min-width: 768px) {
-  header { justify-content: space-between; padding-left: 2%; padding-right: 2%; }
-  nav { flex-grow: 1; justify-content: center; }
-
   #hero {
     flex-direction: row;
     text-align: left;
     align-items: flex-start;
-    gap: 4%;
-    justify-content: center;
-    padding: 0.8rem;
+    gap: var(--sp-xl);
   }
-  #image-container { flex-shrink: 0; margin-bottom: 0; align-items: flex-start; }
-  #image-container img { margin-bottom: 1.2rem; }
-  #social-links { justify-content: flex-start; }
-  #bio-text-container { flex-grow: 1; max-width: 65%; text-align: left; margin-top: 0; padding-right: 1rem; }
-  #hero h1, #hero p { text-align: left; }
-
-  .publication-item {
-    flex-direction: row;       /* image + details side-by-side on desktop */
-    text-align: left;
+  
+  #image-container {
     align-items: flex-start;
-    gap: 1.5rem;
   }
-  .pub-image-wrapper { margin-bottom: 0; margin-right: 0; }
-  .pub-details { width: auto; }
-  .pub-abstract { max-width: 120ch; } /* readability on wide screens */
-}
-
-
-
-/* ============================================================
-   Talks Carousel
-   ============================================================ */
-.carousel-section { margin-top: 1em; }
-.carousel {
-  position: relative;
-  max-width: 1200px;       /* same as main sections */
-  width: 100%;
-  height: 150%;
-  margin: 0 auto 2em;
-  background: #2a2a2a;
-  border-radius: 0.5em;
-  box-shadow: 0 0.25em 0.5em rgba(0,0,0,.2);
-  overflow: hidden;
-  padding: 1.5em;         /* added padding like publications box */
-  box-sizing: border-box;
-}
-
-.carousel-viewport {
-  overflow: hidden;
-  border-radius: 0.3rem; /* optional: keep rounded corners */
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 400ms ease;
-  will-change: transform;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.carousel-slide {
-  min-width: 95%;
-  padding: 2em 1.8em;
-  display: grid;
-  grid-template-columns: 16em 1fr;
-  gap: 2em;
-  align-items: center;
-}
-.carousel-slide .thumb {
-  width: 17em; height: 12em; border: 1px solid #444; border-radius: 6px;
-  background: #1f1f1f; display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-}
-.carousel-slide .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.carousel-slide h3 { margin: 0 0 .25em; font-size: 1.25em; }
-.carousel-slide .meta { font-size: .95em; color: #ccc; margin: 0 0 .25em; }
-.carousel-slide .desc { font-size: .95em; color: #f0f0f0; margin: .25em 0 0; }
-
-.carousel a.cta {
-  display: inline-flex; align-items: center; gap: .4em;
-  margin-top: .6em; padding: .35em .7em; border-radius: .35em;
-  background: #486f96; color: #fff; text-decoration: none; font-weight: 600;
-}
-.carousel a.cta:hover { background: #2a6fb4; }
-
-.carousel-control {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: rgba(0,0,0,.4); color: #fff; border: none; width: 42px; height: 42px;
-  border-radius: 50%; cursor: pointer;
-  display: grid; place-items: center;
-}
-.carousel-control:hover { background: rgba(0,0,0,.6); }
-.carousel-control.prev { left: .5rem; }
-.carousel-control.next { right: .5rem; }
-
-.carousel-indicators {
-  display: flex; justify-content: center; gap: .5em; padding: .75em 0;
-}
-.carousel-indicators button {
-  width: 12px; height: 12px; border-radius: 50%; border: 0;
-  background: #555; cursor: pointer;
-}
-.carousel-indicators button[aria-current="true"] { background: #91aecc; }
-
-/* Talks Page Grid */
-#talks-ul {
-  list-style: none;
-  padding: 0;
-  margin: 2rem auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* responsive grid */
-  gap: 1.5rem;
-  max-width: 1200px; /* same width as main */
-}
-
-#talks-ul li.talk-item {
-  background: #2a2a2a;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.2rem 0.4rem rgba(0,0,0,.3);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#talks-ul li.talk-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0.4em 0.8em rgba(0,0,0,.35);
-}
-
-.talk-thumb {
-  width: 100%;
-  aspect-ratio: 16 / 9;     /* larger image, consistent ratio */
-  background: #1f1f1f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.talk-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.talk-content {
-  padding: 1em 1.2em;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.talk-content .title {
-  font-size: 1.25em;
-  margin: 0 0 0.5em;
-}
-
-.talk-content .whenwhere {
-  color: #ccc;
-  font-size: 0.9em;
-  margin: 0.15em 0;
-}
-
-.talk-content .desc,
-.talk-content .long-desc {
-  font-size: 0.95em;
-  margin-top: 0.6em;
-  color: #f0f0f0;
-  flex-grow: 1;
-}
-
-/* Light theme overrides */
-body.light-theme #talks-ul li.talk-item {
-  background: #ffffff;
-  box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,.15);
-}
-body.light-theme .talk-content .whenwhere { color: #555; }
-body.light-theme .talk-content .desc,
-body.light-theme .talk-content .long-desc { color: #333; }
-
-
-
-/* Carousel light-theme overrides */
-body.light-theme .carousel,
-body.light-theme #talks-ul li { background: #ffffff; box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,.15); }
-body.light-theme .carousel-slide .meta { color: #555; }
-body.light-theme #talks-ul .whenwhere { color: #555; }
-body.light-theme .carousel-control { background: rgba(0,0,0,.15); color: #222; }
-body.light-theme .carousel-control:hover { background: rgba(0,0,0,.25); }
-
-/* Small screens for carousel */
-@media (max-width: 640px) {
-  .carousel-slide { 
-    grid-template-columns: 1fr; 
-    min-width: 100%; 
-    padding: 1.5rem 1rem;
+  
+  #social-links {
+    justify-content: flex-start;
   }
-  .carousel-slide .thumb { width: 100%; height: 160px; }
-}
-
-/* ============================================================
-   Selected Talks section (container on homepage)
-   ============================================================ */
-#selected-talks {
-  background-color: #2a2a2a;
-  padding: 1.5em;
-  border-radius: 0.5em;
-  box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.2);
-  margin-top: 1.5em;
-}
-#selected-talks h2 {
-  font-size: 1.8em;
-  margin-bottom: 1.25em;
-  text-align: center;
-}
-#selected-talks-list { display: flex; flex-direction: column; gap: 1.2em; }
-.talk-item .talk-meta { color: #ccc; font-size: 0.95em; }
-.talk-item .talk-desc { font-size: 0.95em; color: #f0f0f0; margin-top: 0.4em; }
-body.light-theme #selected-talks { background-color: #ffffff; box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,0.15); }
-body.light-theme .talk-item .talk-meta { color: #555; }
-body.light-theme .talk-item .talk-desc { color: #333; }
-
-/* ============================================================
-   Homepage Grids: Latest Publications & Selected Talks
-   ============================================================ */
-#latest-publications-dashboard,
-#selected-talks-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5em;
-}
-
-/* Cards inside the grids */
-#latest-publications-dashboard .publication-item,
-#selected-talks-list .publication-item {
-  display: flex;
-  flex-direction: column;
-  padding: 0.8em;
-  min-height: 250px;
-  font-size: clamp(0.82em, 0.9vw, 0.9em);
-}
-
-/* Thumbnail: consistent ratio + top-crop */
-#latest-publications-dashboard .pub-image-wrapper,
-#selected-talks-list .pub-image-wrapper {
-  width: 100%;
-  aspect-ratio: 16 / 9;         /* adjust to 4/3 or 1/1 if you prefer */
-  margin-bottom: 0.6em;
-  overflow: hidden;
-  border-radius: 0.25em;
-}
-#latest-publications-dashboard .pub-image-wrapper img,
-#selected-talks-list .pub-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;          /* crop from top */
-  display: block;
-}
-
-/* Details layout */
-#latest-publications-dashboard .pub-details,
-#selected-talks-list .pub-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35em;
-}
-
-/* Show full titles (no truncation) */
-#latest-publications-dashboard h3,
-#selected-talks-list h3 {
-  display: block;
-  -webkit-line-clamp: unset;
-  -webkit-box-orient: unset;
-  overflow: visible;
-  white-space: normal;
-  margin: 0 0 .25em;
-  line-height: 1.25;
-  hyphens: auto;
-  overflow-wrap: anywhere;
-}
-
-/* Grid responsiveness */
-@media (min-width: 1024px) {
-  /* Force clean 3-up on desktop widths */
-  #latest-publications-dashboard,
-  #selected-talks-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  /* Slightly squarer thumbs & comfy text on tiny phones */
-  #latest-publications-dashboard .pub-image-wrapper,
-  #selected-talks-list .pub-image-wrapper { aspect-ratio: 4 / 3; }
-  #latest-publications-dashboard .publication-item,
-  #selected-talks-list .publication-item { font-size: 0.95em; padding: 0.7em; }
-}
-
-
-/* Publications page: put Show Abstract under the image, abstract expands from there */
-@media (min-width: 800px) {
-  #journal-articles-container .publication-item,
-  #working-papers-container .publication-item {
-    display: grid; /* override the flex-row desktop rule */
-    grid-template-columns: 8em 1fr;
-    grid-auto-rows: min-content;
-    gap: 1.5em;
-    align-items: start;
+  
+  #bio-text-container {
+    flex-grow: 1;
+    max-width: 65%;
     text-align: left;
   }
-
-  #journal-articles-container .pub-image-wrapper,
-  #working-papers-container .pub-image-wrapper {
-    grid-column: 1; grid-row: 1;
-    margin: 0; /* no bottom/right margins in grid */
-    width: 7em; height: 9em;
+  
+  .carousel-slide {
+    grid-template-columns: 14em 1fr;
   }
-
-  #journal-articles-container .toggle-abstract-btn,
-  #working-papers-container .toggle-abstract-btn {
-    grid-column: 1; grid-row: 2;
-    justify-self: start;
-    margin-top: .5em;
-  }
-
-  #journal-articles-container .pub-details,
-  #working-papers-container .pub-details {
-    grid-column: 2; grid-row: 1;
-  }
-
-  /* abstract spans full width below both columns */
-  #journal-articles-container .pub-abstract-content,
-  #working-papers-container .pub-abstract-content {
-    grid-column: 1 / -1; grid-row: 3;
-  }
-}
-
-/* ===============================
-   Research cards: 2-row grid layout
-   Row 1: [ image | details ]
-   Row 2: [ button ] full width
-   Row 3: [ abstract ] full width
-   =============================== */
-
-/* Grid of cards (1 per row on mobile, 2 per row ≥768px) */
-#journal-articles-container,
-#working-papers-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-@media (min-width: 768px) {
+  
   #journal-articles-container,
   #working-papers-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Each publication card becomes a 3-row CSS grid */
-#journal-articles-container .publication-item,
-#working-papers-container .publication-item {
-  display: grid;
-  grid-template-columns: 7em 1fr;       /* left thumb / right details */
-  grid-template-rows: auto auto auto;    /* row1 content + row2 button + row3 abstract */
-  grid-template-areas:
-    "img details"
-    "controls controls"
-    "abstract abstract";
-  gap: 1em;
-  align-items: start;
-  text-align: left;
+@media (min-width: 1024px) {
+  #latest-publications-dashboard,
+  #selected-talks-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-/* Image (left, row 1) */
-#journal-articles-container .pub-image-wrapper,
-#working-papers-container .pub-image-wrapper {
-  grid-area: img;
-  width: 7em;
-  height: 9em;
-  margin: 0;
-  border-radius: .35em;
-  overflow: hidden;
-}
-#journal-articles-container .pub-image-wrapper img,
-#working-papers-container .pub-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
-
-/* Details (right, row 1) */
-#journal-articles-container .pub-details,
-#working-papers-container .pub-details {
-  grid-area: details;
-  display: flex;
-  flex-direction: column;
-  gap: .3em;
-}
-
-/* Smaller titles inside research cards */
-#journal-articles-container .publication-item h3,
-#working-papers-container .publication-item h3 {
-  font-size: 1.05em;
-  line-height: 1.25;
-  margin: 0 0 .3em;
-}
-
-/* Button (row 2, full width) */
-#journal-articles-container .toggle-abstract-btn,
-#working-papers-container .toggle-abstract-btn {
-  grid-area: controls;
-  align-self: start;
-  margin: .2em 0 .4em;
-}
-
-/* Abstract (row 3, full width) */
-#journal-articles-container .pub-abstract-content,
-#working-papers-container .pub-abstract-content {
-  grid-area: abstract;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s ease;
-  padding: .4em .6em 0;       /* pushes text slightly lower */
-  border-left: 3px solid #444;
-}
-body.light-theme #journal-articles-container .pub-abstract-content,
-body.light-theme #working-papers-container .pub-abstract-content {
-  border-left-color: #ccc;
-}
-
-/* Mobile: stack nicely (image above details) */
-@media (max-width: 480px) {
-  #journal-articles-container .publication-item,
-  #working-papers-container .publication-item {
+@media (max-width: 640px) {
+  .carousel-slide {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    padding: var(--sp-md);
+  }
+  
+  .carousel-slide .thumb {
+    width: 100%;
+    height: 140px;
+  }
+  
+  #image-container img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: var(--sp-sm);
+  }
+  
+  nav ul {
+    gap: var(--sp-sm);
+  }
+  
+  nav a {
+    font-size: 0.8em;
+    padding: var(--sp-xs);
+  }
+  
+  #site-name {
+    font-size: 0.95em;
+  }
+  
+  #theme-toggle {
+    font-size: 1.1em;
+  }
+  
+  .publication-item {
+    grid-template-columns: 1fr;
     grid-template-areas:
       "img"
       "details"
       "controls"
       "abstract";
   }
-  #journal-articles-container .pub-image-wrapper,
-  #working-papers-container .pub-image-wrapper {
+  
+  .pub-image-wrapper {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
   }
-}
-
-
-/* Fixed-height abstract + scrollbar (research page only) */
-#journal-articles-container .pub-abstract-content,
-#working-papers-container .pub-abstract-content {
-  max-height: 0;                 /* closed */
-  overflow: hidden;
-  transition: max-height .35s ease;
-  padding: 0 .6em;              /* horizontal breathing */
-  border-left: 3px solid #444;
-}
-
-#journal-articles-container .pub-abstract-content.show-abstract,
-#working-papers-container .pub-abstract-content.show-abstract {
-  max-height: 12em;             /* <-- fixed open height */
-  overflow-y: auto;              /* show vertical scrollbar if needed */
-  padding-top: .4em;            /* push text slightly lower */
-}
-
-/* Light theme border color */
-body.light-theme #journal-articles-container .pub-abstract-content,
-body.light-theme #working-papers-container .pub-abstract-content {
-  border-left-color: #ccc;
-}
-
-/* Nice thin scrollbar */
-#journal-articles-container .pub-abstract-content.show-abstract,
-#working-papers-container .pub-abstract-content.show-abstract {
-  scrollbar-width: thin;                       /* Firefox */
-  scrollbar-color: var(--brand, #6699CC) #2a2a2a;
-}
-#journal-articles-container .pub-abstract-content.show-abstract::-webkit-scrollbar,
-#working-papers-container .pub-abstract-content.show-abstract::-webkit-scrollbar {
-  width: 8px;
-}
-#journal-articles-container .pub-abstract-content.show-abstract::-webkit-scrollbar-track,
-#working-papers-container .pub-abstract-content.show-abstract::-webkit-scrollbar-track {
-  background: #2a2a2a;
-}
-#journal-articles-container .pub-abstract-content.show-abstract::-webkit-scrollbar-thumb,
-#working-papers-container .pub-abstract-content.show-abstract::-webkit-scrollbar-thumb {
-  background: #6699CC;
-  border-radius: 6px;
-}
-
-/* ============================================================
-   Mobile-specific Navigation & CV Page Styles
-   ============================================================ */
-@media (max-width: 768px) {
-  header {
-    padding: 0.5em 1%;
-  }
-
-  nav ul {
-    gap: 0.6em;
-  }
-
-  nav a {
-    font-size: 0.75em;
-    padding: 0.2em 0.4em;
-  }
-
-  #site-name {
-    font-size: 1em;
-  }
-
-  #theme-toggle {
-    font-size: 1.2em;
-  }
-
+  
   .cv-header {
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .cv-header h1 {
-    font-size: 2em;
-  }
-
+  
   .cv-section {
-    padding: 1em;
-  }
-
-  .cv-section h2 {
-    font-size: 1.5em;
-  }
-
-  .cv-item-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .cv-date {
-    white-space: normal;
-  }
-
-  .cv-skills-grid {
-    grid-template-columns: 1fr;
+    padding: var(--sp-md);
   }
 }
-
-@media (max-width: 480px) {
-  nav ul {
-    gap: 0.4em;
-  }
-
-  nav a {
-    font-size: 0.7em;
-    padding: 0.15em 0.3em;
-  }
-
-  #site-name {
-    font-size: 0.9em;
-  }
-
-  .cv-header h1 {
-    font-size: 1.6em;
-  }
-
-  .cv-download-btn {
-    font-size: 0.8em;
-    padding: 0.6em 1em;
-  }
-
-  .cv-section {
-    padding: 0.8em;
-  }
-
-  .cv-section h2 {
-    font-size: 1.3em;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5em;
-  }
-}
-
-/* Light theme styles for CV page */
-body.light-theme .cv-header h1 {
-  color: #222;
-}
-
-body.light-theme .cv-download-btn {
-  background-color: #6699CC;
-}
-
-body.light-theme .cv-download-btn:hover {
-  background-color: #557aa5;
-}
-
-body.light-theme .cv-section {
-  background-color: #ffffff;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
-}
-
-body.light-theme .cv-section h2 {
-  color: #6699CC;
-  border-bottom-color: #ccc;
-}
-
-body.light-theme .cv-item {
-  border-bottom-color: #e0e0e0;
-}
-
-body.light-theme .cv-item h3 {
-  color: #222;
-}
-
-body.light-theme .cv-date {
-  color: #557aa5;
-}
-
-body.light-theme .cv-institution {
-  color: #666;
-}
-
-body.light-theme .cv-details,
-body.light-theme .cv-list li,
-body.light-theme .cv-publication,
-body.light-theme .cv-conference {
-  color: #444;
-}
-
-body.light-theme .cv-publication strong,
-body.light-theme .cv-conference strong {
-  color: #557aa5;
-}
-
-body.light-theme .cv-publication em {
-  color: #666;
-}
-
-body.light-theme .cv-skill-item {
-  background-color: #f8f8f8;
-  border-left-color: #6699CC;
-}
-
-body.light-theme .cv-skill-item h4 {
-  color: #6699CC;
-}
-
-body.light-theme .cv-skill-item p {
-  color: #555;
-}
-
