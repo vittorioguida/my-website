@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${img}" alt="Cover of ${pub.title}">
       </div>
       ${!isDashboard ? `
-        <button class="toggle-abstract-btn">Show Abstract</button>
-        <div class="pub-abstract-content">
+        <div class="pub-abstract-content show-abstract">
+          <div class="pub-abstract-title">Abstract</div>
           <p class="pub-abstract">${pub.abstract}</p>
         </div>
       ` : ''}
@@ -58,15 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    if (!isDashboard) {
-      const btn = el.querySelector('.toggle-abstract-btn');
-      const box = el.querySelector('.pub-abstract-content');
-      if (btn && box) {
-        btn.addEventListener('click', () => {
-          const isOpen = box.classList.toggle('show-abstract');
-          btn.textContent = isOpen ? 'Hide Abstract' : 'Show Abstract';
-        });
-      }
+    const titleEl = el.querySelector('h3');
+    if (titleEl && titleEl.textContent.trim().length > 90) {
+      titleEl.classList.add('title-tight');
     }
     return el;
   }
@@ -104,4 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .forEach(p => containers.dashboard.appendChild(createPublicationElement(p, true)));
     }
   }
+
+  const cvSections = document.querySelectorAll('.cv-section');
+  cvSections.forEach((section) => {
+    const toggle = section.querySelector('.cv-section-toggle');
+    const body = section.querySelector('.cv-section-body');
+    if (!toggle || !body) return;
+
+    toggle.addEventListener('click', () => {
+      const isCollapsed = section.classList.toggle('collapsed');
+      toggle.setAttribute('aria-expanded', String(!isCollapsed));
+    });
+  });
 });

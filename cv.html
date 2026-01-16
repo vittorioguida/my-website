@@ -38,15 +38,39 @@
 </header>
 
 <main>
+    <div class="cv-layout">
+    <aside class="cv-index" aria-label="CV index">
+        <h2 class="cv-index-title">Index</h2>
+        <nav>
+            <ul>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Professional Experience</a></li>
+                <li><a href="#teaching">Teaching Experience</a></li>
+                <li><a href="#publications">Published Research</a></li>
+                <li><a href="#conferences">Conferences & Seminars</a></li>
+                <li><a href="#organization">Conference Organization</a></li>
+                <li><a href="#assignments">Other Assignments</a></li>
+                <li><a href="#languages">Languages</a></li>
+                <li><a href="#skills">Digital Skills</a></li>
+            </ul>
+        </nav>
+    </aside>
+
     <section id="cv-content">
         <div class="cv-header">
             <h1>Curriculum Vitae</h1>
         </div>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+        <section class="cv-section cv-education" id="education">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-graduation-cap"></i> Education
+                </button>
+            </h2>
             
-            <div class="cv-item">
+            <div class="cv-section-body">
+            <div class="cv-items-grid">
+            <div class="cv-item verbose">
                 <div class="cv-item-header">
                     <h3>Ph.D. in Economics and Management</h3>
                     <span class="cv-date">Nov 2018 – Dec 2022</span>
@@ -56,7 +80,7 @@
                 <p class="cv-details"><strong>Supervisors:</strong> Prof. Luigi Mittone (University of Trento) and Prof. Azzurra Morreale (Lappeenranta-Lahti University of Technology)</p>
             </div>
 
-            <div class="cv-item">
+            <div class="cv-item verbose">
                 <div class="cv-item-header">
                     <h3>Master's Degree in Government and Public Administration (LM-63)</h3>
                     <span class="cv-date">Jan 2015 – Jun 2017</span>
@@ -67,7 +91,7 @@
                 <p class="cv-details"><strong>Supervisor:</strong> Prof. Roberta Troisi; <strong>Co-supervisor:</strong> Prof. Adalgiso Amendola</p>
             </div>
 
-            <div class="cv-item">
+            <div class="cv-item verbose">
                 <div class="cv-item-header">
                     <h3>Bachelor's Degree in Administration and Organization (L-16)</h3>
                     <span class="cv-date">Sep 2011 – Dec 2014</span>
@@ -76,12 +100,19 @@
                 <p class="cv-details"><strong>Thesis:</strong> Le start-up innovative e la crisi. La realtà e la retorica</p>
                 <p class="cv-details"><strong>Supervisor:</strong> Prof. Roberta Troisi (University of Salerno)</p>
             </div>
+            </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+        <section class="cv-section" id="experience">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-briefcase"></i> Professional Experience
+                </button>
+            </h2>
             
-            <div class="cv-item">
+            <div class="cv-section-body">
+            <div class="cv-item verbose">
                 <div class="cv-item-header">
                     <h3>Postdoctoral Research Fellow</h3>
                     <span class="cv-date">Feb 2025 – Present</span>
@@ -98,7 +129,7 @@
                 </ul>
             </div>
 
-            <div class="cv-item">
+            <div class="cv-item verbose">
                 <div class="cv-item-header">
                     <h3>Postdoctoral Research Fellow</h3>
                     <span class="cv-date">Feb 2023 – Feb 2025</span>
@@ -114,12 +145,18 @@
                     <li>Assisted with workshops and research dissemination.</li>
                 </ul>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-chalkboard-teacher"></i> Teaching Experience</h2>
+        <section class="cv-section" id="teaching">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-chalkboard-teacher"></i> Teaching Experience
+                </button>
+            </h2>
             
-            <div class="cv-item">
+            <div class="cv-section-body">
+            <div class="cv-item verbose">
                 <div class="cv-item-header">
                     <h3>Lab 1: Market Analysis (SSD: SECS-P/08 - ECON-07/A)</h3>
                 </div>
@@ -168,11 +205,17 @@
                     <li>Dec 2024, Duration: 9 hours, Instructor: Prof. Fabio Pieri</li>
                 </ul>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-book"></i> Published Research Articles</h2>
+        <section class="cv-section" id="publications">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-book"></i> Published Research Articles
+                </button>
+            </h2>
             
+            <div class="cv-section-body">
             <div class="cv-item">
                 <p class="cv-details"><strong>2025</strong> Klaser, K., Guida, V., & Mittone, L., Governance e sostenibilità ambientale, <em>Economia Trentina</em>, 1/2025, 26–30.</p>
             </div>
@@ -188,11 +231,17 @@
             <div class="cv-item">
                 <p class="cv-details"><strong>2018</strong> Troisi, R., & Guida, V., Is the appointee procedure a real selection or a mere political exchange? The case of the Italian Health-Care Chief Executive Officers. <em>Journal of Entrepreneurial and Organizational Diversity</em>, 7(2), 19–38.</p>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-users"></i> Conferences & Seminars</h2>
+        <section class="cv-section" id="conferences">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-users"></i> Conferences & Seminars
+                </button>
+            </h2>
             
+            <div class="cv-section-body">
             <div class="cv-item">
                 <p class="cv-conference"><strong>Dec 2025</strong> - II Symposium on Advancing Sustainability Research with Experimental Methods, University of Padova</p>
             </div>
@@ -232,11 +281,17 @@
             <div class="cv-item">
                 <p class="cv-conference"><strong>Oct 2018</strong> - ECMLG 2018, HU University of Applied Sciences Utrecht, Utrecht</p>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-tasks"></i> Conference Organization</h2>
+        <section class="cv-section" id="organization">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-tasks"></i> Conference Organization
+                </button>
+            </h2>
             
+            <div class="cv-section-body">
             <div class="cv-item">
                 <p class="cv-conference"><strong>Feb 2026</strong> - "Workshop — Acting for Tomorrow: Evidence and Behavioral Insights for Managing Shared Resources", University of Trento - Member of Organizing Committee</p>
             </div>
@@ -252,11 +307,17 @@
             <div class="cv-item">
                 <p class="cv-conference"><strong>2021</strong> - "CEEL Workshop on Decision-Making", University of Trento - Member of the Organizing Committee</p>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-star"></i> Other Assignments</h2>
+        <section class="cv-section" id="assignments">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-star"></i> Other Assignments
+                </button>
+            </h2>
             
+            <div class="cv-section-body">
             <div class="cv-item">
                 <p class="cv-details"><strong>2025</strong> - Reviewer for ERC Starting Grant application</p>
             </div>
@@ -264,11 +325,17 @@
             <div class="cv-item">
                 <p class="cv-details"><strong>2025</strong> - Reviewer for academic journals</p>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-language"></i> Languages</h2>
+        <section class="cv-section" id="languages">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-language"></i> Languages
+                </button>
+            </h2>
             
+            <div class="cv-section-body">
             <div class="cv-skills-grid">
                 <div class="cv-skill-item">
                     <h4>Italian</h4>
@@ -279,17 +346,23 @@
                     <p>C2 – Self-assessed</p>
                 </div>
             </div>
+            </div>
         </section>
 
-        <section class="cv-section">
-            <h2><i class="fas fa-laptop-code"></i> Digital Skills</h2>
+        <section class="cv-section" id="skills">
+            <h2 class="cv-section-title">
+                <button class="cv-section-toggle" type="button" aria-expanded="true">
+                    <i class="fas fa-laptop-code"></i> Digital Skills
+                </button>
+            </h2>
             
+            <div class="cv-section-body">
             <div class="cv-skills-grid">
                 <div class="cv-skill-item">
                     <h4>R</h4>
                     <p>Advanced – Data wrangling, data analysis, Monte Carlo simulations</p>
                 </div>
-                <div class="cv-skill-item">
+                <div class="cv-skill-item span-2">
                     <h4>Python</h4>
                     <p>Advanced – Data wrangling, data analysis, Monte Carlo simulations, oTree (economic experiments), Mesa (agent-based modeling), integration of external API (OpenAI)</p>
                 </div>
@@ -310,8 +383,10 @@
                     <p>Intermediate</p>
                 </div>
             </div>
+            </div>
         </section>
     </section>
+    </div>
 </main>
 
 <footer>
