@@ -40,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ? `<h3>${pub.title}</h3>`
       : `<h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>`;
 
+    const typeClass = pub.type
+      ? pub.type.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+      : 'unknown';
+
     el.innerHTML = `
       <div class="pub-image-wrapper">
         <img src="${img}" alt="Cover of ${pub.title}">
@@ -51,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       ` : ''}
       <div class="pub-details">
-        <span class="pub-type-label">${pub.type}</span>
+        <span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>
         ${title}
         <p class="pub-authors">${pub.authors}</p>
         ${journal}

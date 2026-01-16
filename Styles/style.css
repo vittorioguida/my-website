@@ -304,6 +304,10 @@ main {
   width: fit-content;
 }
 
+.pub-type-label.pub-type-journal-article {
+  background-color: #2b6cb0;
+}
+
 .publication-item h3 {
   font-size: 1.1em;
   margin: var(--sp-xs) 0;
@@ -877,6 +881,24 @@ main {
   white-space: normal;
 }
 
+#skills .cv-skills-grid {
+  grid-template-columns: 1fr;
+}
+
+#skills .cv-skill-item {
+  padding: var(--sp-xs) var(--sp-md);
+}
+
+.cv-section.cv-tight-list .cv-item {
+  padding: var(--sp-xs) var(--sp-md);
+  margin-bottom: var(--sp-xs);
+}
+
+.cv-section.cv-tight-list .cv-conference {
+  font-size: 0.85em;
+}
+
+
 /* ============================================================
    Footer
    ============================================================ */
@@ -1005,6 +1027,10 @@ body.light-theme .carousel-control:hover {
 
 body.light-theme .cv-skill-item {
   background-color: #f8f8f8;
+}
+
+body.light-theme .cv-skill-item p {
+  color: #2f3742;
 }
 
 body.light-theme footer {
