@@ -65,6 +65,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-family: 'Roboto Mono', monospace, system-ui;
   letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 :where(a, button):focus-visible {
