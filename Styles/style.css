@@ -2,8 +2,9 @@
    CSS Variables & Global Styles
    ============================================================ */
 :root {
-  --brand: #c50000;
-  --brand-hover: #ff4d4d;
+  --brand: #2b6cb0;
+  --brand-hover: #3c7cc2;
+  --brand-working-paper: #c50000;
   --text: #e9edf2;
   --muted: #a7b0ba;
   --bg: #0f1115;
@@ -106,6 +107,19 @@ header {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-sm);
+}
+
+#site-name .logo-text {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#site-name .logo-text .logo-first {
+  color: var(--brand);
+}
+
+#site-name .logo-text .logo-last {
+  color: var(--text);
 }
 
 #site-name a:hover {
@@ -305,7 +319,11 @@ main {
 }
 
 .pub-type-label.pub-type-journal-article {
-  background-color: #2b6cb0;
+  background-color: var(--brand);
+}
+
+.pub-type-label.pub-type-working-paper {
+  background-color: var(--brand-working-paper);
 }
 
 .publication-item h3 {
@@ -656,7 +674,7 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin: 0 0 var(--sp-sm);
-  color: var(--muted);
+  color: var(--brand-hover);
 }
 
 .cv-index ul {
@@ -668,7 +686,7 @@ main {
 }
 
 .cv-index a {
-  color: var(--text);
+  color: var(--brand-hover);
   font-size: 0.85em;
   display: inline-flex;
   padding: 0.2em 0.4em;
@@ -676,9 +694,9 @@ main {
 }
 
 .cv-index a:hover {
-  color: var(--brand);
+  color: #5a95d6;
   text-decoration: none;
-  background-color: rgba(197, 0, 0, 0.08);
+  background-color: rgba(60, 124, 194, 0.12);
 }
 
 .cv-header {
