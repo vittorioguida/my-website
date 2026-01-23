@@ -45,8 +45,18 @@ document.addEventListener('DOMContentLoaded', () => {
       : 'unknown';
 
     el.innerHTML = `
-      <div class="pub-image-wrapper">
-        <img src="${img}" alt="Cover of ${pub.title}">
+      <div class="pub-header">
+        <div class="pub-image-wrapper">
+          <img src="${img}" alt="Cover of ${pub.title}">
+        </div>
+        <div class="pub-details">
+          <span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>
+          ${title}
+        </div>
+      </div>
+      <div class="pub-meta">
+        <p class="pub-authors">${pub.authors}</p>
+        ${journal}
       </div>
       ${!isDashboard ? `
         <div class="pub-abstract-content show-abstract">
@@ -54,12 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="pub-abstract">${pub.abstract}</p>
         </div>
       ` : ''}
-      <div class="pub-details">
-        <span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>
-        ${title}
-        <p class="pub-authors">${pub.authors}</p>
-        ${journal}
-      </div>
     `;
 
     const titleEl = el.querySelector('h3');
@@ -103,15 +107,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  const cvSections = document.querySelectorAll('.cv-section');
-  cvSections.forEach((section) => {
-    const toggle = section.querySelector('.cv-section-toggle');
-    const body = section.querySelector('.cv-section-body');
-    if (!toggle || !body) return;
-
-    toggle.addEventListener('click', () => {
-      const isCollapsed = section.classList.toggle('collapsed');
-      toggle.setAttribute('aria-expanded', String(!isCollapsed));
-    });
-  });
+  // CV sections are static; no toggle behavior.
 });

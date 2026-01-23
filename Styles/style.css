@@ -270,13 +270,8 @@ main {
    Publication Cards
    ============================================================ */
 .publication-item {
-  display: grid;
-  grid-template-columns: 6em 1fr;
-  grid-template-rows: auto auto auto;
-  grid-template-areas:
-    "img details"
-    "controls controls"
-    "abstract abstract";
+  display: flex;
+  flex-direction: column;
   gap: var(--sp-md);
   background-color: var(--bg-alt);
   padding: var(--sp-md);
@@ -285,8 +280,14 @@ main {
   box-shadow: var(--shadow);
 }
 
+.pub-header {
+  display: grid;
+  grid-template-columns: 6em 1fr;
+  gap: var(--sp-md);
+  align-items: start;
+}
+
 .pub-image-wrapper {
-  grid-area: img;
   width: 6em;
   height: 8em;
   overflow: hidden;
@@ -301,11 +302,15 @@ main {
 }
 
 .pub-details {
-  grid-area: details;
   display: flex;
   flex-direction: column;
   gap: var(--sp-xs);
-  min-height: 7.5em;
+}
+
+.pub-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
 }
 
 .pub-type-label {
@@ -349,11 +354,13 @@ main {
 .pub-authors {
   font-size: 0.85em;
   color: var(--muted);
+  margin: 0;
 }
 
 .pub-journal-info {
   font-size: 0.8em;
   color: var(--muted);
+  margin: 0;
 }
 
 .toggle-abstract-btn {
@@ -375,7 +382,6 @@ main {
 }
 
 .pub-abstract-content {
-  grid-area: abstract;
   max-height: 12em;
   height: 12em;
   overflow-y: auto;
@@ -616,17 +622,18 @@ main {
   font-size: 0.9em;
 }
 
+#latest-publications-dashboard .pub-header,
+#selected-talks-list .pub-header {
+  display: flex;
+  flex-direction: column;
+}
+
 #latest-publications-dashboard .pub-image-wrapper,
 #selected-talks-list .pub-image-wrapper {
   width: 100%;
+  height: auto;
   aspect-ratio: 16 / 9;
   margin-bottom: var(--sp-sm);
-  grid-area: unset;
-}
-
-#latest-publications-dashboard .pub-details,
-#selected-talks-list .pub-details {
-  grid-area: unset;
 }
 
 #latest-publications-dashboard h3,
@@ -754,6 +761,7 @@ main {
 
 .cv-section-title {
   margin: 0 0 var(--sp-sm);
+  text-transform: uppercase;
 }
 
 .cv-section-toggle {
@@ -768,6 +776,7 @@ main {
   gap: var(--sp-sm);
   padding: 0;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .cv-section-toggle::after {
@@ -902,10 +911,15 @@ main {
 
 #skills .cv-skills-grid {
   grid-template-columns: 1fr;
+  grid-auto-flow: row;
 }
 
 #skills .cv-skill-item {
   padding: var(--sp-xs) var(--sp-md);
+}
+
+#skills .cv-skill-item.span-2 {
+  grid-column: span 1;
 }
 
 .cv-section.cv-tight-list .cv-item {
@@ -1156,14 +1170,13 @@ body.light-theme footer {
   }
   
   .publication-item {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "img"
-      "details"
-      "controls"
-      "abstract";
+    gap: var(--sp-sm);
   }
   
+  .pub-header {
+    grid-template-columns: 1fr;
+  }
+
   .pub-image-wrapper {
     width: 100%;
     height: auto;
