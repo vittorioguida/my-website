@@ -68,6 +68,18 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+h1 {
+  font-size: 1.9em;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+h3 {
+  font-size: 1.1em;
+}
+
 :where(a, button):focus-visible {
   outline: 2px dotted var(--brand);
   outline-offset: 2px;
@@ -178,6 +190,14 @@ main {
   padding: 0 var(--sp-md);
 }
 
+main > section {
+  margin-bottom: var(--sp-xl);
+}
+
+main > section:last-of-type {
+  margin-bottom: 0;
+}
+
 /* ============================================================
    Hero Section
    ============================================================ */
@@ -211,8 +231,8 @@ main {
 }
 
 #hero h1 {
-  font-size: 1.6em;
-  margin-bottom: var(--sp-sm);
+  font-size: 1.8em;
+  margin-bottom: var(--sp-xs);
 }
 
 #hero div {
@@ -221,10 +241,83 @@ main {
   text-align: left;
 }
 
+.research-identity {
+  color: var(--brand-hover);
+  font-size: 0.95em;
+  margin: 0 0 var(--sp-md);
+}
+
+.hero-cta {
+  margin-bottom: var(--sp-md);
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-xs);
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cta-button:hover {
+  background: var(--brand-hover);
+  text-decoration: none;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+}
+
+.view-all-link {
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--brand-hover);
+}
+
+.view-all-link:hover {
+  color: var(--brand);
+  text-decoration: none;
+}
+
+#research-themes {
+  background: var(--bg-alt);
+  padding: var(--sp-lg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.themes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-md);
+}
+
+.theme-card {
+  padding: var(--sp-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(21, 26, 34, 0.6);
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
 #social-links {
   display: flex;
   justify-content: center;
   gap: var(--sp-md);
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 #social-links a {
@@ -233,6 +326,14 @@ main {
   display: flex;
   width: 1.5em;
   height: 1.5em;
+}
+
+#social-links .cta-button {
+  font-size: 0.85em;
+  width: auto;
+  height: auto;
+  padding: 0.4rem 0.9rem;
+  color: #fff;
 }
 
 #social-links a svg {
@@ -262,8 +363,8 @@ main {
 #selected-talks h2,
 .carousel h2 {
   font-size: 1.5em;
-  margin-bottom: var(--sp-md);
-  text-align: center;
+  margin-bottom: 0;
+  text-align: left;
 }
 
 /* ============================================================
@@ -278,6 +379,10 @@ main {
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+}
+
+.publication-item--full {
+  width: 100%;
 }
 
 .pub-header {
@@ -305,6 +410,14 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--sp-xs);
+}
+
+.pub-status {
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-hover);
+  margin: 0;
 }
 
 .pub-meta {
@@ -363,6 +476,29 @@ main {
   margin: 0;
 }
 
+.pub-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+}
+
+.pub-abstract-toggle {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pub-abstract-toggle:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
 .toggle-abstract-btn {
   grid-area: controls;
   background-color: transparent;
@@ -385,9 +521,23 @@ main {
   max-height: 12em;
   height: 12em;
   overflow-y: auto;
-  transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
   padding: var(--sp-sm);
   border-left: 3px solid var(--border);
+}
+
+.pub-abstract-content.is-collapsed {
+  max-height: 0;
+  height: auto;
+  padding: 0;
+  border-left: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.pub-abstract-content.is-open {
+  max-height: 14em;
+  opacity: 1;
 }
 
 .pub-abstract-content {
@@ -559,13 +709,18 @@ main {
   gap: var(--sp-md);
 }
 
+#talks-ul {
+  grid-template-columns: 1fr;
+}
+
 #talks-ul li.talk-item {
   background: var(--bg-alt);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--sp-md);
   overflow: hidden;
   transition: transform 0.2s;
 }
@@ -576,7 +731,7 @@ main {
 }
 
 .talk-thumb {
-  width: 100%;
+  width: 220px;
   aspect-ratio: 16 / 9;
   background: var(--bg);
   overflow: hidden;
@@ -594,7 +749,7 @@ main {
 }
 
 .talk-content .title {
-  font-size: 1.1em;
+  font-size: 1.05em;
   margin: 0 0 var(--sp-sm);
   line-height: 1.3;
 }
@@ -610,6 +765,43 @@ main {
   font-size: 0.9em;
   margin-top: var(--sp-sm);
   line-height: 1.5;
+}
+
+.talk-summary {
+  font-size: 0.9em;
+  margin: var(--sp-sm) 0;
+  line-height: 1.5;
+}
+
+.talk-more {
+  display: none;
+  margin-top: var(--sp-sm);
+  color: var(--text);
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.talk-more.is-open {
+  display: block;
+}
+
+.talk-more-btn {
+  margin-top: var(--sp-sm);
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.talk-more-btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
 }
 
 /* Homepage grid cards */
@@ -951,6 +1143,40 @@ footer {
   border-top: 1px solid var(--border);
 }
 
+.footer-contacts {
+  display: grid;
+  gap: var(--sp-md);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  text-align: left;
+  margin-bottom: var(--sp-md);
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+  font-size: 0.85em;
+}
+
+.footer-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75em;
+  color: var(--brand-hover);
+}
+
+.footer-links a {
+  display: inline-flex;
+  margin-right: var(--sp-sm);
+}
+
+.footer-copy {
+  margin: 0;
+}
+
 /* ============================================================
    Light Theme
    ============================================================ */
@@ -1011,6 +1237,10 @@ body.light-theme #talks-ul li.talk-item {
   box-shadow: var(--shadow);
 }
 
+body.light-theme #social-links .cta-button {
+  color: #ffffff;
+}
+
 body.light-theme .pub-image-wrapper img,
 body.light-theme .carousel-slide .thumb {
   border-color: #ddd;
@@ -1047,6 +1277,14 @@ body.light-theme .toggle-abstract-btn:hover {
 body.light-theme .pub-abstract-content,
 body.light-theme .section-divider {
   border-color: #d5dae0;
+}
+
+body.light-theme .theme-card {
+  background: #f3f5f9;
+}
+
+body.light-theme .footer-label {
+  color: #4d77b3;
 }
 
 body.light-theme .carousel-control {
@@ -1101,7 +1339,7 @@ body.light-theme footer {
   
   #journal-articles-container,
   #working-papers-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1132,12 +1370,20 @@ body.light-theme footer {
     height: 160px;
   }
 
+  #talks-ul li.talk-item {
+    grid-template-columns: 1fr;
+  }
+
+  .talk-thumb {
+    width: 100%;
+  }
+
   .cv-skill-item.span-2 {
     grid-column: span 1;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .cv-layout {
     grid-template-columns: 1fr;
   }
@@ -1181,6 +1427,11 @@ body.light-theme footer {
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .cv-header {

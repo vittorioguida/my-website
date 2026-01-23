@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================= */
   const list = document.getElementById('talks-ul');
   if (list && TALKS_DATA.length) {
-    TALKS_DATA.forEach(t => {
+    TALKS_DATA.forEach((t, i) => {
       const li = document.createElement('li');
       li.classList.add('talk-item');
 
@@ -104,16 +104,38 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `<a href="${t.link}" target="_blank" rel="noopener noreferrer">More info</a>`
         : '';
 
+      const summary = t.long_desc ? '' : (t.desc || '');
+
+      const hasLong = Boolean(t.long_desc);
+      const moreId = `talk-more-${i}`;
+      const moreButton = hasLong
+        ? `<button class="talk-more-btn" type="button" aria-expanded="false" aria-controls="${moreId}">Read more</button>`
+        : '';
+
       li.innerHTML = `
         ${imgHtml}
         <div class="talk-content">
           <h3 class="title">${t.title}</h3>
-          <p class="whenwhere">${[t.event, t.venue].filter(Boolean).join(" · ")}</p>
-          <p class="whenwhere">${t.date || ""}${t.location ? " · " + t.location : ""}</p>
-          ${t.long_desc ? `<p class="long-desc">${t.long_desc}</p>` : (t.desc ? `<p class="desc">${t.desc}</p>` : "")}
+          <p class="whenwhere">${[t.event, t.venue].filter(Boolean).join(" &middot; ")}</p>
+          <p class="whenwhere">${t.date || ""}${t.location ? " &middot; " + t.location : ""}</p>
+          ${summary ? `<p class="talk-summary">${summary}</p>` : ""}
+          ${hasLong ? `<div class="talk-more" id="${moreId}">${t.long_desc}</div>` : ""}
+          ${moreButton}
           ${linkHtml}
         </div>
       `;
+
+      if (hasLong) {
+        const btn = li.querySelector('.talk-more-btn');
+        const more = li.querySelector('.talk-more');
+        if (btn && more) {
+          btn.addEventListener('click', () => {
+            const isOpen = more.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', String(isOpen));
+            btn.textContent = isOpen ? 'Hide' : 'Read more';
+          });
+        }
+      }
       list.appendChild(li);
     });
   }

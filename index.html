@@ -48,6 +48,7 @@
 
         <div id="bio-text-container">
             <h1>About Me</h1>
+            <p class="research-identity">Behavioral & experimental economics researcher | experiments, agent-based modeling | sustainability, common-pool resources, organizational learning.</p>
             <div>
                 I am a postdoctoral researcher in behavioural and experimental economics at the University of Trento (Italy). <br>
                 My research focuses on understanding human behavior in the context of environmental sustainability and common-pool resource management. <br> 
@@ -55,6 +56,7 @@
             </div>
             <br>
             <div id="social-links">
+                <a class="cta-button" href="mailto:vittorioguidaphd@gmail.com">✉ Contact</a>
                 <a href="https://orcid.org/0000-0002-9717-1441" target="_blank" rel="noopener noreferrer" aria-label="ORCID Profile">
                     <i class="fab fa-orcid"></i>
                 </a>
@@ -74,10 +76,23 @@
         </div>
     </section>
 
+    <section id="research-themes">
+        <h2>Research Themes</h2>
+        <div class="themes-grid">
+            <div class="theme-card">Intergenerational sustainability and common-pool resource governance.</div>
+            <div class="theme-card">Behavioral foundations of organizational search, imitation, and learning.</div>
+            <div class="theme-card">Institutional design and soft policy interventions for environmental decisions.</div>
+            <div class="theme-card">Simulation-based and experimental methods for complex economic systems.</div>
+        </div>
+    </section>
+
     <section id="talks-carousel-section" class="carousel-section">
 
         <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Highlighted talks" aria-live="polite">
-                    <h2>Selected Talks</h2>
+                    <div class="section-header">
+                        <h2>Selected Talks</h2>
+                        <a class="view-all-link" href="talks.html">View all</a>
+                    </div>
             <button class="carousel-control prev" aria-label="Previous slide">
             <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
             </button>
@@ -92,20 +107,34 @@
     </section>
 
     <section id="latest-publications">
-        <h2>Latest Publications</h2>
+        <div class="section-header">
+            <h2>Latest Publications</h2>
+            <a class="view-all-link" href="research.html">View all</a>
+        </div>
         <div id="latest-publications-dashboard">
         </div>
     </section>
 
-    <br>
-
-
-
-
 </main>
 
 <footer>
-    <p>© 2025 Vittorio Guida</p>
+    <div class="footer-contacts">
+        <div class="footer-contact-item">
+            <span class="footer-label">Email</span>
+            <a href="mailto:vittorioguidaphd@gmail.com">vittorioguidaphd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+            <span class="footer-label">Affiliation</span>
+            <span>University of Trento, Department of Economics and Management</span>
+        </div>
+        <div class="footer-contact-item footer-links">
+            <span class="footer-label">Profiles</span>
+            <a href="https://scholar.google.it/citations?user=7VoB1LIAAAAJ&hl=it" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+            <a href="https://orcid.org/0000-0002-9717-1441" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://github.com/vittorioguida" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; <span id="current-year">2025</span> Vittorio Guida</p>
 </footer>
 <script src="Scripts/publicationsData.js"></script>
 <script src="Scripts/talksData.js"></script>
@@ -113,3 +142,4 @@
 <script src="Scripts/script.js"></script>
 </body>
 </html>
+

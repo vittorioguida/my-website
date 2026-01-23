@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function createPublicationElement(pub, isDashboard = false) {
     const el = document.createElement('div');
     el.classList.add('publication-item');
+    if (!isDashboard) {
+      el.classList.add('publication-item--full');
+    }
 
     const img = pub.image || 'images/placeholder_cover.jpg';
     const journal = pub.journal && pub.year
@@ -36,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       : pub.journal ? `<p class="pub-journal-info">${pub.journal}</p>`
       : pub.year ? `<p class="pub-journal-info">(${pub.year})</p>` : '';
 
+    const status = !isDashboard && pub.type ? `<p class="pub-status">${pub.type}</p>` : '';
     const title = pub.type === 'Working Paper'
       ? `<h3>${pub.title}</h3>`
       : `<h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>`;
@@ -43,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeClass = pub.type
       ? pub.type.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
       : 'unknown';
+    const typeLabel = isDashboard && pub.type
+      ? `<span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>`
+      : '';
 
     el.innerHTML = `
       <div class="pub-header">
@@ -50,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="${img}" alt="Cover of ${pub.title}">
         </div>
         <div class="pub-details">
-          <span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>
+          ${typeLabel}
+          ${status}
           ${title}
         </div>
       </div>
@@ -59,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ${journal}
       </div>
       ${!isDashboard ? `
+        <div class="pub-actions">
+          <button class="pub-abstract-toggle" type="button" aria-expanded="false">Read abstract</button>
+        </div>
         <div class="pub-abstract-content show-abstract">
           <div class="pub-abstract-title">Abstract</div>
           <p class="pub-abstract">${pub.abstract}</p>
@@ -69,6 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleEl = el.querySelector('h3');
     if (titleEl && titleEl.textContent.trim().length > 90) {
       titleEl.classList.add('title-tight');
+    }
+
+    if (!isDashboard) {
+      const toggle = el.querySelector('.pub-abstract-toggle');
+      const abstract = el.querySelector('.pub-abstract-content');
+      if (toggle && abstract) {
+        abstract.classList.add('is-collapsed');
+        toggle.addEventListener('click', () => {
+          const isOpen = abstract.classList.toggle('is-open');
+          abstract.classList.toggle('is-collapsed', !isOpen);
+          toggle.setAttribute('aria-expanded', String(isOpen));
+          toggle.textContent = isOpen ? 'Hide abstract' : 'Read abstract';
+        });
+      }
     }
     return el;
   }
@@ -108,4 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // CV sections are static; no toggle behavior.
+
+  const yearNodes = document.querySelectorAll('#current-year');
+  const year = new Date().getFullYear();
+  yearNodes.forEach((node) => {
+    node.textContent = String(year);
+  });
 });
