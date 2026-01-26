@@ -484,6 +484,10 @@ main > section:last-of-type {
   text-align: right;
 }
 
+.interest-section:nth-of-type(even) .interest-links {
+  justify-content: flex-end;
+}
+
 .interest-image-wrap {
   display: flex;
   justify-content: flex-start;
