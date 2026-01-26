@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
+  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
+  const dropdownItem = document.querySelector('.nav-dropdown');
 
   function setTheme(theme) {
     const isLight = theme === 'light';
@@ -22,13 +24,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Research dropdown menu handler
+  if (dropdownToggle && dropdownItem) {
+    dropdownToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const isOpen = dropdownItem.classList.toggle('is-open');
+      dropdownToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!dropdownItem.contains(event.target)) {
+        dropdownItem.classList.remove('is-open');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Publications configuration
   const config = { numberOfLatestPublications: 3 };
+
+  function setAbstractState(item, open) {
+    const abstract = item.querySelector('.pub-abstract-content');
+    const toggle = item.querySelector('.pub-abstract-toggle');
+    if (!abstract || !toggle) return;
+    abstract.classList.toggle('is-open', open);
+    abstract.classList.toggle('is-collapsed', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? 'Hide abstract' : 'Read abstract';
+    item.classList.toggle('is-highlighted', open);
+  }
+
+  function closeAllAbstracts(except = null) {
+    document.querySelectorAll('.publication-item').forEach((item) => {
+      if (item === except) return;
+      setAbstractState(item, false);
+    });
+  }
 
   // Create publication card element
   function createPublicationElement(pub, isDashboard = false) {
     const el = document.createElement('div');
     el.classList.add('publication-item');
+    if (pub.id) {
+      el.id = pub.id;
+    }
     if (!isDashboard) {
       el.classList.add('publication-item--full');
     }
@@ -88,10 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (toggle && abstract) {
         abstract.classList.add('is-collapsed');
         toggle.addEventListener('click', () => {
-          const isOpen = abstract.classList.toggle('is-open');
-          abstract.classList.toggle('is-collapsed', !isOpen);
-          toggle.setAttribute('aria-expanded', String(isOpen));
-          toggle.textContent = isOpen ? 'Hide abstract' : 'Read abstract';
+          const isOpen = abstract.classList.contains('is-open');
+          if (isOpen) {
+            setAbstractState(el, false);
+          } else {
+            closeAllAbstracts(el);
+            setAbstractState(el, true);
+          }
         });
       }
     }
@@ -129,6 +171,15 @@ document.addEventListener('DOMContentLoaded', () => {
       sorted.filter(p => p.type !== 'Working Paper')
         .slice(0, config.numberOfLatestPublications)
         .forEach(p => containers.dashboard.appendChild(createPublicationElement(p, true)));
+    }
+
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target && target.classList.contains('publication-item')) {
+        closeAllAbstracts(target);
+        setAbstractState(target, true);
+      }
     }
   }
 
