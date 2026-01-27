@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    CSS Variables & Global Styles
    ============================================================ */
 :root {
@@ -435,6 +435,7 @@ main > section:last-of-type {
 
 .interest-footer {
   margin-top: var(--sp-md);
+  padding-top: var(--sp-sm);
 }
 
 .interest-divider {
@@ -467,25 +468,31 @@ main > section:last-of-type {
 .interest-item {
   display: grid;
   grid-template-columns: minmax(220px, 360px) 1fr;
-  gap: var(--sp-lg);
+  gap: var(--sp-md);
   align-items: start;
 }
 
-.interest-section:nth-of-type(even) .interest-item {
-  grid-template-columns: 1fr minmax(220px, 360px);
+.interest-text {
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
 }
 
-.interest-section:nth-of-type(even) .interest-image-wrap {
-  order: 2;
+.interest-body {
+  flex: 1;
+}
+
+
+.interest-section:nth-of-type(even) .interest-item {
+  grid-template-columns: minmax(220px, 360px) 1fr;
 }
 
 .interest-section:nth-of-type(even) .interest-text {
-  order: 1;
-  text-align: right;
+  text-align: left;
 }
 
 .interest-section:nth-of-type(even) .interest-links {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .interest-image-wrap {
@@ -576,7 +583,7 @@ main > section:last-of-type {
   flex-direction: column;
   gap: var(--sp-md);
   background-color: var(--bg-alt);
-  padding: var(--sp-md);
+  padding: var(--sp-lg);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
@@ -723,12 +730,14 @@ main > section:last-of-type {
 }
 
 .pub-abstract-content {
-  max-height: 12em;
-  height: 12em;
-  overflow-y: auto;
+  max-height: none;
+  height: auto;
+  overflow: visible;
   transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
-  padding: var(--sp-sm);
-  border-left: 3px solid var(--border);
+  padding: var(--sp-sm) 0 0;
+  border-left: 0;
+  border-top: 1px solid var(--border);
+  margin-top: var(--sp-sm);
 }
 
 .pub-abstract-content.is-collapsed {
@@ -741,7 +750,7 @@ main > section:last-of-type {
 }
 
 .pub-abstract-content.is-open {
-  max-height: 14em;
+  max-height: none;
   opacity: 1;
 }
 
@@ -1428,7 +1437,8 @@ body.light-theme #image-container img {
 }
 
 body.light-theme #hero {
-  border-color: #ffffff;
+  background-color: #ffffff;
+  border-color: var(--brand);
 }
 
 body.light-theme #social-links a,
@@ -1678,3 +1688,4 @@ body.light-theme footer {
     padding: var(--sp-md);
   }
 }
+
