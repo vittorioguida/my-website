@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setTheme(theme) {
     const isLight = theme === 'light';
     body.classList.toggle('light-theme', isLight);
-    themeToggle.innerHTML = `<span class="icon">${isLight ? '☀️' : '🌙'}</span>`;
+    themeToggle.innerHTML = `<span class="icon">${isLight ? '🌙' : '☀️'}</span>`;
     themeToggle.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} theme`);
     localStorage.setItem('theme', theme);
   }
