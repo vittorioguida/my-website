@@ -933,7 +933,7 @@ main > section:last-of-type {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 400px 1.5fr;
   gap: var(--sp-md);
   overflow: hidden;
   transition: transform 0.2s;
@@ -945,8 +945,8 @@ main > section:last-of-type {
 }
 
 .talk-thumb {
-  width: 220px;
-  aspect-ratio: 16 / 9;
+  width: 400px;
+  aspect-ratio: 4 / 3;
   background: var(--bg);
   overflow: hidden;
 }

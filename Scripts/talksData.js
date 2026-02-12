@@ -2,6 +2,20 @@
 window.TALKS = [
 
     {
+        title: "Overlapping Generations and Common-Pool Resources",
+        event: "Acting for Tomorrow: Evidence and Behavioral Insights for Managing Shared Resources",
+        venue: "School of Innovation - University of Trento",
+        date: "February 2026",
+        location: "Trento, Italy",
+        desc: "We held the final workshop of the PRIN project “Saving natural resources: an experimental-behavioral approach to intertemporal environmental decisions” at the School of Innovation.",
+        long_desc: `During the event I had the pleasure of presenting the results produced by our research unit."`,
+        img: "images/Talks/act42.jpeg",
+        featured: true
+    },
+
+
+
+    {
         title: "Intertemporal Exploitation of Common-Pool Resources: An Experimental Study",
         event: "II Symposium on Advancing Sustainability Research with Experimental Methods",
         venue: "University of Padova",
