@@ -2,6 +2,7 @@
    CSS Variables & Global Styles
    ============================================================ */
 :root {
+  --font-main: 'Roboto Mono';
   --brand: #2b6cb0;
   --brand-hover: #3c7cc2;
   --brand-working-paper: #c50000;
@@ -21,6 +22,7 @@
 }
 
 html {
+  font-family: var(--font-main);
   font-size: 1em;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -32,7 +34,7 @@ body {
     radial-gradient(900px 460px at 90% 0%, rgba(120, 160, 255, 0.1), transparent 55%),
     var(--bg);
   color: var(--text);
-  font-family: 'Roboto Mono', monospace, system-ui;
+  font-family: inherit;
   font-size: 1em;
   line-height: 1.6;
   margin: 0;
@@ -63,9 +65,17 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--sp-sm);
   line-height: 1.3;
   font-weight: 600;
-  font-family: 'Roboto Mono', monospace, system-ui;
+  font-family: inherit;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+
+input,
+button,
+select,
+textarea,
+option {
+  font-family: inherit;
 }
 
 h1 {
