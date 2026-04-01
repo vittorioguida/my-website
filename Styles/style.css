@@ -23,7 +23,7 @@
 
 html {
   font-family: var(--font-main);
-  font-size: 1em;
+  font-size: 0.875em;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -252,8 +252,8 @@ nav a:hover {
    Main Layout
    ============================================================ */
 main {
-  max-width: 1360px;
-  width: 90%;
+  max-width: 860px;
+  width: 92%;
   margin: var(--sp-lg) auto;
   padding: 0 var(--sp-md);
 }
@@ -271,12 +271,12 @@ main > section:last-of-type {
    ============================================================ */
 #hero {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: var(--sp-md);
-  gap: var(--sp-lg);
-  border: 1px solid var(--brand);
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  padding: var(--sp-xl);
+  gap: var(--sp-xl);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 
@@ -284,12 +284,13 @@ main > section:last-of-type {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
   gap: var(--sp-md);
 }
 
 #image-container img {
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border);
@@ -301,20 +302,29 @@ main > section:last-of-type {
 }
 
 #hero h1 {
-  font-size: 1.8em;
+  font-size: 1.5em;
+  margin-top: 0;
   margin-bottom: var(--sp-xs);
+}
+
+.hero-role {
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin: 0 0 var(--sp-md);
+}
+
+.hero-bio {
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin: 0 0 0;
 }
 
 #hero div {
   font-size: 1em;
   line-height: 1.6;
   text-align: left;
-}
-
-.research-identity {
-  color: var(--brand-hover);
-  font-size: 0.95em;
-  margin: 0 0 var(--sp-md);
 }
 
 .hero-cta {
@@ -532,35 +542,32 @@ main > section:last-of-type {
 
 #social-links {
   display: flex;
-  justify-content: center;
-  gap: var(--sp-md);
+  justify-content: flex-start;
+  gap: var(--sp-xs);
   flex-wrap: wrap;
   align-items: center;
+  margin-top: var(--sp-md);
 }
 
 #social-links a {
-  font-size: 1.5em;
+  font-size: 0.8em;
   color: var(--muted);
-  display: flex;
-  width: 1.5em;
-  height: 1.5em;
 }
 
-#social-links .cta-button {
-  font-size: 0.85em;
-  width: auto;
-  height: auto;
-  padding: 0.4rem 0.9rem;
-  color: #fff;
+#social-links .social-email {
+  font-size: 0.8em;
+  color: var(--muted);
 }
 
-#social-links a svg {
-  width: 100%;
-  height: 100%;
+.link-sep {
+  color: var(--muted);
+  font-size: 0.8em;
+  user-select: none;
 }
 
 #social-links a:hover {
   color: var(--brand);
+  text-decoration: underline;
 }
 
 /* ============================================================
@@ -1452,7 +1459,7 @@ body.light-theme #hero {
 }
 
 body.light-theme #social-links a,
-body.light-theme #social-links a svg {
+body.light-theme .link-sep {
   color: #5b6673;
 }
 
@@ -1473,10 +1480,6 @@ body.light-theme .publication-item.is-highlighted {
 body.light-theme .interest-link {
   background: #ffffff;
   color: #1f2a44;
-}
-
-body.light-theme #social-links .cta-button {
-  color: #ffffff;
 }
 
 body.light-theme .pub-image-wrapper img,
@@ -1550,27 +1553,6 @@ body.light-theme footer {
    Responsive Design
    ============================================================ */
 @media (min-width: 768px) {
-  #hero {
-    flex-direction: row;
-    text-align: left;
-    align-items: flex-start;
-    gap: var(--sp-xl);
-  }
-  
-  #image-container {
-    align-items: flex-start;
-  }
-  
-  #social-links {
-    justify-content: flex-start;
-  }
-  
-  #bio-text-container {
-    flex-grow: 1;
-    max-width: 75%;
-    text-align: left;
-  }
-  
   .carousel-slide {
     grid-template-columns: 14em 1fr;
   }
@@ -1593,6 +1575,18 @@ body.light-theme footer {
 }
 
 @media (max-width: 640px) {
+  #hero {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: var(--sp-md);
+    gap: var(--sp-lg);
+  }
+
+  #social-links {
+    justify-content: center;
+  }
+
   .interest-item {
     grid-template-columns: 1fr;
   }
