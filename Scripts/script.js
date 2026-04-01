@@ -72,6 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.add('publication-item--full');
     }
 
+    if (pub.type === 'Work in Progress') {
+      el.classList.add('publication-item--simple');
+      el.innerHTML = `
+        <div class="pub-details">
+          <p class="pub-status">${pub.type}</p>
+          <h3>${pub.title}</h3>
+        </div>
+      `;
+      return el;
+    }
+
     const img = pub.image || 'images/placeholder_cover.jpg';
     const journal = pub.journal && pub.year
       ? `<p class="pub-journal-info">${pub.journal} (${pub.year})</p>`
@@ -79,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       : pub.year ? `<p class="pub-journal-info">(${pub.year})</p>` : '';
 
     const status = !isDashboard && pub.type ? `<p class="pub-status">${pub.type}</p>` : '';
-    const title = pub.type === 'Working Paper'
+    const title = pub.type === 'Working Paper' || !pub.link
       ? `<h3>${pub.title}</h3>`
       : `<h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>`;
 
@@ -144,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const containers = {
     journal: document.getElementById('journal-articles-container'),
     working: document.getElementById('working-papers-container'),
+    progress: document.getElementById('work-in-progress-container'),
     dashboard: document.getElementById('latest-publications-dashboard')
   };
 
@@ -166,9 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .forEach(p => containers.working.appendChild(createPublicationElement(p)));
     }
 
+    if (containers.progress) {
+      publications.filter(p => p.type === 'Work in Progress')
+        .forEach(p => containers.progress.appendChild(createPublicationElement(p)));
+    }
+
     // Render homepage dashboard
     if (containers.dashboard) {
-      sorted.filter(p => p.type !== 'Working Paper')
+      sorted.filter(p => p.type !== 'Working Paper' && p.type !== 'Work in Progress')
         .slice(0, config.numberOfLatestPublications)
         .forEach(p => containers.dashboard.appendChild(createPublicationElement(p, true)));
     }

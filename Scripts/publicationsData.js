@@ -105,6 +105,34 @@ const publications = [
         image: 'images/Research/wp_sample4.jpg'
     },
 
+    {
+        id: 'wip1',
+        type: 'Work in Progress',
+        category: 'Work in Progress',
+        title: 'ITEM 1'
+    },
+
+    {
+        id: 'wip2',
+        type: 'Work in Progress',
+        category: 'Work in Progress',
+        title: 'ITEM 2'
+    },
+
+    {
+        id: 'wip3',
+        type: 'Work in Progress',
+        category: 'Work in Progress',
+        title: 'ITEM 3'
+    },
+
+    {
+        id: 'wip4',
+        type: 'Work in Progress',
+        category: 'Work in Progress',
+        title: 'ITEM 4'
+    },
+
 ];
 
 
