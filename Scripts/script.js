@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
-  const dropdownToggle = document.querySelector('.nav-dropdown-toggle');
-  const dropdownItem = document.querySelector('.nav-dropdown');
 
   function setTheme(theme) {
     const isLight = theme === 'light';
@@ -21,22 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       setTheme(body.classList.contains('light-theme') ? 'dark' : 'light');
-    });
-  }
-
-  // Research dropdown menu handler
-  if (dropdownToggle && dropdownItem) {
-    dropdownToggle.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const isOpen = dropdownItem.classList.toggle('is-open');
-      dropdownToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    document.addEventListener('click', (event) => {
-      if (!dropdownItem.contains(event.target)) {
-        dropdownItem.classList.remove('is-open');
-        dropdownToggle.setAttribute('aria-expanded', 'false');
-      }
     });
   }
 
@@ -100,6 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeLabel = isDashboard && pub.type
       ? `<span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>`
       : '';
+    const metaBlock = `
+      <div class="pub-meta">
+        <p class="pub-authors">${pub.authors}</p>
+        ${journal}
+      </div>
+    `;
 
     el.innerHTML = `
       <div class="pub-header">
@@ -110,11 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ${typeLabel}
           ${status}
           ${title}
+          ${metaBlock}
         </div>
-      </div>
-      <div class="pub-meta">
-        <p class="pub-authors">${pub.authors}</p>
-        ${journal}
       </div>
       ${!isDashboard ? `
         <div class="pub-actions">
