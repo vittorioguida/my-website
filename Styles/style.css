@@ -386,7 +386,6 @@ main > section:last-of-type { margin-bottom: 0; }
 
 #research-themes,
 #research-interests,
-#projects-content,
 #teaching-content,
 #affiliations-content {
   background: var(--bg-alt);
@@ -395,14 +394,12 @@ main > section:last-of-type { margin-bottom: 0; }
   border: 1px solid var(--border);
 }
 
-#projects-content,
 #teaching-content,
 #affiliations-content {
   max-width: 860px;
   margin: 0 auto;
 }
 
-#projects-content h2,
 #teaching-content h2,
 #affiliations-content h2 {
   margin-top: 0;
