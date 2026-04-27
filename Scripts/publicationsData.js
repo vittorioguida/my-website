@@ -109,28 +109,32 @@ const publications = [
         id: 'wip1',
         type: 'Work in Progress',
         category: 'Work in Progress',
-        title: 'ITEM 1'
+        title: 'A study on optimal search policies and incentives',
+        authors: 'with Kariyushi Rao (Frankfurt School of Finance & Management)'
     },
 
     {
         id: 'wip2',
         type: 'Work in Progress',
         category: 'Work in Progress',
-        title: 'ITEM 2'
+        title: 'The intergenerational burden game',
+        authors: 'with Klaudijo Klaser (University of Trento) and Gabriele Ballicu (University of Cagliari)'
     },
 
     {
         id: 'wip3',
         type: 'Work in Progress',
         category: 'Work in Progress',
-        title: 'ITEM 3'
+        title: 'A study on collective risk dilemmas',
+        authors: 'with Laura Marcon (Centro Nazionale Ricerche) and Giulia Andrighetto (Centro Nazionale Ricerche)'
     },
 
     {
         id: 'wip4',
         type: 'Work in Progress',
         category: 'Work in Progress',
-        title: 'ITEM 4'
+        title: 'A DCE on perceived residual value of mobile phones',
+        authors: 'with Marco Compagnoni (JRC Ispra), Austeja Kazemekaityte (University of Trento), Klaudijo Klaser (University of Trento), and Erica Santini (University of Trento)'
     },
 
 ];

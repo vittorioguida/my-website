@@ -55,11 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (pub.type === 'Work in Progress') {
+      const wipAuthors = pub.authors ? `<p class="pub-authors">${pub.authors}</p>` : '';
       el.classList.add('publication-item--simple');
       el.innerHTML = `
         <div class="pub-details">
           <p class="pub-status">${pub.type}</p>
           <h3>${pub.title}</h3>
+          ${wipAuthors}
         </div>
       `;
       return el;
