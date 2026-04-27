@@ -1091,9 +1091,28 @@ main > section:last-of-type { margin-bottom: 0; }
   gap: var(--sp-sm);
 }
 
+#journal-articles-container .pub-details,
+#working-papers-container .pub-details,
+#work-in-progress-container .pub-details {
+  gap: 0.2rem;
+}
+
+#journal-articles-container .pub-meta,
+#working-papers-container .pub-meta,
+#work-in-progress-container .pub-meta {
+  gap: 0.2rem;
+}
+
+#journal-articles-container .publication-item h3,
+#working-papers-container .publication-item h3,
+#work-in-progress-container .publication-item h3 {
+  font-size: 1em;
+  margin: 0 0 var(--sp-xs);
+}
+
 .publication-item--simple { padding: var(--sp-sm) var(--sp-md); min-height: 0; font-size: 0.86em; }
 .publication-item--simple .pub-details { gap: 0.2rem; }
-.publication-item--simple h3 { margin: 0; font-size: 1em; }
+.publication-item--simple h3 { margin: 0 0 var(--sp-xs); font-size: 1em; }
 
 #work-in-progress-container .publication-item--simple {
   font-size: 0.78em;

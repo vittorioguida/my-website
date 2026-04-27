@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.add('publication-item--simple');
       el.innerHTML = `
         <div class="pub-details">
-          <p class="pub-status">${pub.type}</p>
           <h3>${pub.title}</h3>
           ${wipAuthors}
         </div>
