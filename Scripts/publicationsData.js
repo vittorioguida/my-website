@@ -73,7 +73,7 @@ const publications = [
         type: 'Working Paper',
         category: 'Working Paper',
         title: 'Adaptation to climate change ',
-        authors: 'Danese, G., Fulci, A., Guida, V.',
+        authors: 'Guida, V., Fulci, A., Danese, G.',
         journal: 'TBD',
         year: 2025,
         abstract: 'This paper investigates how firms across multiple sectors adapt to climate change within a simulation-based framework. Drawing on theories of organizational vulnerability, absorptive capacity, and sensemaking, we model a K-sector economy composed of heterogeneous firms exposed to climate-induced shocks. The simulation incorporates two competing hypotheses—the Inverse U-Shaped Hypothesis and the Ontological Shock Hypothesis—to explore under what conditions businesses engage in adaptive behavior. By varying sectoral absorptive capacities and introducing stochastic environmental disruptions, we examine how firms process information, update beliefs, and implement resilience strategies. Our findings suggest that moderate vulnerability and sector-specific cognitive responsiveness are critical for fostering adaptation. The study provides new insights into the dynamic interplay between environmental change and organizational decision-making, offering implications for policymakers and corporate strategists seeking to promote climate resilience in complex economic systems.',
