@@ -917,7 +917,8 @@ main > section:last-of-type { margin-bottom: 0; }
    Grids (Homepage & Talks Page)
    ============================================================ */
 #talks-ul,
-#selected-talks-list {
+#selected-talks-list,
+.affiliations-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -935,7 +936,13 @@ main > section:last-of-type { margin-bottom: 0; }
   gap: var(--sp-sm);
 }
 
-#talks-ul { grid-template-columns: 1fr; }
+#talks-ul,
+.affiliations-list { grid-template-columns: 1fr; }
+
+#affiliations-content {
+  display: grid;
+  gap: var(--sp-lg);
+}
 
 #talks-list {
   background: var(--bg-alt);
@@ -944,6 +951,23 @@ main > section:last-of-type { margin-bottom: 0; }
   border: 1px solid var(--border);
   max-width: 860px;
   margin: 0 auto;
+}
+
+.affiliations-talks-list,
+.affiliations-group {
+  background: var(--bg-alt);
+  padding: var(--sp-lg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.affiliations-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-lg);
 }
 
 #talks-list h3 {
@@ -963,7 +987,48 @@ main > section:last-of-type { margin-bottom: 0; }
   transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base);
 }
 
+.affiliations-list li.talk-item,
+.affiliations-group .talk-item {
+  background: var(--bg-alt);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  overflow: hidden;
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base), border-color var(--duration-base);
+}
+
+.affiliations-list .talk-thumb,
+.affiliations-group .talk-thumb {
+  width: 100%;
+  aspect-ratio: auto;
+  height: auto;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.affiliations-list .talk-thumb img,
+.affiliations-group .talk-thumb img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 #talks-ul li.talk-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.affiliations-list li.talk-item:hover,
+.affiliations-group .talk-item:hover {
   transform: translateY(-2px);
   border-color: var(--border-strong);
   box-shadow: var(--shadow-md);
@@ -981,6 +1046,20 @@ main > section:last-of-type { margin-bottom: 0; }
 .talk-summary { font-size: 0.86em; margin: var(--sp-sm) 0; line-height: 1.5; }
 .talk-more    { display: none; margin-top: var(--sp-sm); color: var(--text); font-size: 0.86em; line-height: 1.5; }
 .talk-more.is-open { display: block; }
+
+.affiliation-extra-image {
+  margin-top: var(--sp-sm);
+  display: flex;
+  justify-content: center;
+}
+
+.affiliation-extra-image img {
+  width: 100%;
+  max-width: 368px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: block;
+}
 
 .talk-more-btn {
   margin-top: var(--sp-sm);
@@ -1493,7 +1572,8 @@ body.light-theme #selected-talks,
 body.light-theme .publication-item,
 body.light-theme .cv-section,
 body.light-theme .carousel,
-body.light-theme #talks-ul li.talk-item { background-color: var(--bg-alt); }
+body.light-theme #talks-ul li.talk-item,
+body.light-theme .affiliations-list li.talk-item { background-color: var(--bg-alt); }
 
 body.light-theme .publication-item.is-highlighted { border-color: var(--brand); }
 
@@ -1581,8 +1661,10 @@ body.light-theme footer { border-top-color: var(--border); color: var(--subtle);
   .carousel-slide { grid-template-columns: 1fr; padding: var(--sp-md); }
   .carousel-slide .thumb { width: 100%; height: 140px; }
   #image-container img { width: 150px; height: 150px; }
-  #talks-ul li.talk-item { grid-template-columns: 1fr; }
+  #talks-ul li.talk-item,
+  .affiliations-list li.talk-item { grid-template-columns: 1fr; }
   .talk-thumb { width: 100%; }
+  .affiliations-list .talk-thumb { width: 100%; }
   .cv-skill-item.span-2 { grid-column: span 1; }
 }
 
