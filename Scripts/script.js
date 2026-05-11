@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function setTheme(theme) {
     const isLight = theme === 'light';
     body.classList.toggle('light-theme', isLight);
-    themeToggle.innerHTML = `<span class="icon">${isLight ? '🌙' : '☀️'}</span>`;
+    themeToggle.innerHTML = isLight
+      ? '<span class="theme-dot theme-dot--dark"></span>Dark'
+      : '<span class="theme-dot theme-dot--light"></span>Light';
     themeToggle.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} theme`);
     localStorage.setItem('theme', theme);
   }
@@ -71,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
       : pub.journal ? `<p class="pub-journal-info">${pub.journal}</p>`
       : pub.year ? `<p class="pub-journal-info">(${pub.year})</p>` : '';
 
-    const status = !isDashboard && pub.type ? `<p class="pub-status">${pub.type}</p>` : '';
     const title = pub.type === 'Working Paper' || !pub.link
       ? `<h3>${pub.title}</h3>`
       : `<h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>`;
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeClass = pub.type
       ? pub.type.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
       : 'unknown';
-    const typeLabel = isDashboard && pub.type
+    const typeLabel = pub.type
       ? `<span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>`
       : '';
     const metaBlock = `
@@ -96,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="pub-details">
           ${typeLabel}
-          ${status}
           ${title}
           ${metaBlock}
         </div>
@@ -168,9 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .forEach(p => containers.progress.appendChild(createPublicationElement(p)));
     }
 
-    // Render homepage dashboard
+    // Render homepage dashboard — published journal articles only, no abstract/PDF.
     if (containers.dashboard) {
-      sorted.filter(p => p.type !== 'Working Paper' && p.type !== 'Work in Progress')
+      sorted.filter(p => p.type === 'Journal Article')
         .slice(0, config.numberOfLatestPublications)
         .forEach(p => containers.dashboard.appendChild(createPublicationElement(p, true)));
     }

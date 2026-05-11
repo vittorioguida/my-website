@@ -1,142 +1,148 @@
 // talks.js (unified: builds home carousel and talks list)
 document.addEventListener('DOMContentLoaded', () => {
-  const TALKS_DATA = (window.TALKS || []).slice();
+  const TALKS_DATA = Array.isArray(window.TALKS) ? [...window.TALKS] : [];
 
-  // sort by date desc (string ISO yyyy-mm-dd works with localeCompare)
-  TALKS_DATA.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const MONTHS = {
+    january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+    july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+  };
 
-  /* =========================
-     HOME PAGE: CAROUSEL
-     ========================= */
-  const track = document.getElementById('carousel-track');
-  const dotsWrap = document.getElementById('carousel-indicators');
+  function parseTalkDate(value) {
+    if (!value) return 0;
+    const parsed = Date.parse(value);
+    if (!Number.isNaN(parsed)) return parsed;
 
-  if (track && dotsWrap && TALKS_DATA.length) {
-    // prefer featured, else latest 6
-    const featured = TALKS_DATA.filter(t => t.featured);
+    const text = String(value).trim().toLowerCase();
+    const monthMatch = text.match(/(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{4})/);
+    if (monthMatch) {
+      const month = MONTHS[monthMatch[1]];
+      const year = Number(monthMatch[2]);
+      return new Date(year, month, 1).getTime();
+    }
+
+    const yearMatch = text.match(/(\d{4})/);
+    if (yearMatch) {
+      return new Date(Number(yearMatch[1]), 0, 1).getTime();
+    }
+
+    return 0;
+  }
+
+  TALKS_DATA.sort((a, b) => parseTalkDate(b.date) - parseTalkDate(a.date));
+
+  function initHomeCarousel() {
+    const track = document.getElementById('carousel-track');
+    const dotsWrap = document.getElementById('carousel-indicators');
+    const section = document.getElementById('talks-carousel-section');
+
+    if (!track || !dotsWrap || !section || !TALKS_DATA.length) return;
+
+    const prevBtn = section.querySelector('.carousel-control.prev');
+    const nextBtn = section.querySelector('.carousel-control.next');
+
+    const featured = TALKS_DATA.filter((talk) => talk.featured);
     const slides = (featured.length ? featured : TALKS_DATA).slice(0, 6);
+    let current = 0;
 
-    slides.forEach((t, i) => {
+    track.innerHTML = '';
+    dotsWrap.innerHTML = '';
+
+    slides.forEach((talk, i) => {
       const li = document.createElement('li');
       li.className = 'carousel-slide';
       li.setAttribute('role', 'group');
       li.setAttribute('aria-roledescription', 'slide');
       li.setAttribute('aria-label', `${i + 1} of ${slides.length}`);
 
-      const thumb = t.img
-        ? `<div class="thumb"><img src="${t.img}" alt=""></div>`
-        : `<div class="thumb" aria-hidden="true"><i class="fa-regular fa-image"></i></div>`;
+      const thumb = talk.img
+        ? `<div class="thumb"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></div>`
+        : '<div class="thumb" aria-hidden="true"><i class="fa-regular fa-image"></i></div>';
 
-      const link = t.link
-        ? `<a class="cta" href="${t.link}" target="_blank" rel="noopener noreferrer">Details <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
-        : '';
+      const metaTop = [talk.event, talk.venue].filter(Boolean).join(' - ');
+      const metaBottom = [talk.date, talk.location].filter(Boolean).join(' - ');
 
       li.innerHTML = `
         ${thumb}
         <div class="content">
-          <h3>${t.title}</h3>
-          <p class="meta">${[t.event, t.venue].filter(Boolean).join(" · ")}</p>
-          <p class="meta">${t.date || ""}${t.location ? " · " + t.location : ""}</p>
-          ${t.desc ? `<p class="desc">${t.desc}</p>` : ""}
-          ${link}
+          <h3>${talk.title || ''}</h3>
+          ${metaTop ? `<p class="meta">${metaTop}</p>` : ''}
+          ${metaBottom ? `<p class="meta">${metaBottom}</p>` : ''}
+          ${talk.desc ? `<p class="desc">${talk.desc}</p>` : ''}
         </div>
       `;
+
       track.appendChild(li);
 
       const dot = document.createElement('button');
       dot.type = 'button';
       dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        current = i;
+        update();
+      });
       dotsWrap.appendChild(dot);
     });
 
-    const prevBtn = document.querySelector('.carousel-control.prev');
-    const nextBtn = document.querySelector('.carousel-control.next');
-    const dots = Array.from(dotsWrap.children);
-    let index = 0;
+    function update() {
+      track.style.transform = `translateX(-${current * 100}%)`;
+      Array.from(dotsWrap.children).forEach((dot, i) => {
+        dot.setAttribute('aria-current', String(i === current));
+      });
+    }
 
-    const update = () => {
-      track.style.transform = `translateX(${-index * 100}%)`;
-      dots.forEach((d, i) => d.setAttribute('aria-current', i === index ? 'true' : 'false'));
-    };
-    const goTo = (i) => { index = (i + dots.length) % dots.length; update(); };
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        current = (current - 1 + slides.length) % slides.length;
+        update();
+      });
+    }
 
-    prevBtn?.addEventListener('click', () => goTo(index - 1));
-    nextBtn?.addEventListener('click', () => goTo(index + 1));
-    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        current = (current + 1) % slides.length;
+        update();
+      });
+    }
 
-    // Keyboard arrows
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') goTo(index - 1);
-      if (e.key === 'ArrowRight') goTo(index + 1);
-    });
-
-    // Touch swipe
-    let startX = 0, deltaX = 0, touching = false;
-    track.addEventListener('touchstart', (e) => {
-      touching = true; startX = e.touches[0].clientX; deltaX = 0;
-    }, {passive: true});
-    track.addEventListener('touchmove', (e) => {
-      if (!touching) return;
-      deltaX = e.touches[0].clientX - startX;
-    }, {passive: true});
-    track.addEventListener('touchend', () => {
-      touching = false;
-      if (Math.abs(deltaX) > 40) goTo(index + (deltaX < 0 ? 1 : -1));
-    });
+    if (slides.length <= 1) {
+      if (prevBtn) prevBtn.hidden = true;
+      if (nextBtn) nextBtn.hidden = true;
+      dotsWrap.hidden = true;
+    }
 
     update();
   }
 
-  /* =========================
-     TALKS PAGE: LIST
-     ========================= */
-  const list = document.getElementById('talks-ul');
-  if (list && TALKS_DATA.length) {
-    TALKS_DATA.forEach((t, i) => {
+  function initTalksList() {
+    const list = document.getElementById('talks-ul');
+    if (!list || !TALKS_DATA.length) return;
+
+    list.innerHTML = '';
+
+    TALKS_DATA.forEach((talk) => {
       const li = document.createElement('li');
-      li.classList.add('talk-item');
+      li.className = 'talk-item';
 
-      const imgHtml = t.img
-        ? `<div class="talk-thumb"><img src="${t.img}" alt="${t.title}"></div>`
-        : `<div class="talk-thumb placeholder"><i class="fa-regular fa-image"></i></div>`;
+      const thumb = talk.img
+        ? `<div class="talk-thumb"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></div>`
+        : '<div class="talk-thumb" aria-hidden="true"></div>';
 
-      const linkHtml = t.link
-        ? `<a href="${t.link}" target="_blank" rel="noopener noreferrer">More info</a>`
-        : '';
-
-      const summary = t.long_desc ? '' : (t.desc || '');
-
-      const hasLong = Boolean(t.long_desc);
-      const moreId = `talk-more-${i}`;
-      const moreButton = hasLong
-        ? `<button class="talk-more-btn" type="button" aria-expanded="false" aria-controls="${moreId}">Read more</button>`
-        : '';
+      const whenWhere = [talk.date, talk.location].filter(Boolean).join(' - ');
 
       li.innerHTML = `
-        ${imgHtml}
+        ${thumb}
         <div class="talk-content">
-          <h3 class="title">${t.title}</h3>
-          <p class="whenwhere">${[t.event, t.venue].filter(Boolean).join(" &middot; ")}</p>
-          <p class="whenwhere">${t.date || ""}${t.location ? " &middot; " + t.location : ""}</p>
-          ${summary ? `<p class="talk-summary">${summary}</p>` : ""}
-          ${hasLong ? `<div class="talk-more" id="${moreId}">${t.long_desc}</div>` : ""}
-          ${moreButton}
-          ${linkHtml}
+          <h3 class="title">${talk.title || ''}</h3>
+          ${(talk.event || talk.venue) ? `<p class="whenwhere">${[talk.event, talk.venue].filter(Boolean).join(' - ')}</p>` : ''}
+          ${whenWhere ? `<p class="whenwhere">${whenWhere}</p>` : ''}
+          ${talk.desc ? `<p class="talk-summary">${talk.desc}</p>` : ''}
         </div>
       `;
 
-      if (hasLong) {
-        const btn = li.querySelector('.talk-more-btn');
-        const more = li.querySelector('.talk-more');
-        if (btn && more) {
-          btn.addEventListener('click', () => {
-            const isOpen = more.classList.toggle('is-open');
-            btn.setAttribute('aria-expanded', String(isOpen));
-            btn.textContent = isOpen ? 'Hide' : 'Read more';
-          });
-        }
-      }
       list.appendChild(li);
     });
   }
+
+  initHomeCarousel();
+  initTalksList();
 });
