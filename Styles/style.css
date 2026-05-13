@@ -328,7 +328,21 @@ header {
   border-radius: 50%;
   vertical-align: 0.18em;
 }
-#site-name .logo-text .logo-last { color: var(--fg-muted); }
+#site-name .logo-text .logo-last { color: var(--fg-strong); }
+
+#site-name .logo-text .logo-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin: 0 0.18em 0 0.32em;
+  background: var(--accent);
+  border-radius: 50%;
+  vertical-align: 0.18em;
+}
+
+#site-name .logo-text .logo-degree {
+  color: var(--fg-muted);
+}
 
 .site-logo { height: 1.4em; width: auto; }
 
@@ -1809,13 +1823,21 @@ footer {
   #talks-ul li.talk-item,
   .affiliations-list li.talk-item { grid-template-columns: 1fr; }
   .talk-thumb { width: 100%; }
-  .affiliation-card .pub-header { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .affiliation-card .pub-header {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+    height: auto;
+  }
   .affiliation-card .pub-image-wrapper {
     width: 100%;
+    height: clamp(110px, 34vw, 190px);
     border-right: 0;
     border-bottom: 1px solid var(--line);
+    padding: var(--sp-3);
     padding-bottom: var(--sp-3);
   }
+  .affiliation-card .pub-details { padding: 0 var(--sp-4) var(--sp-4); }
+  .affiliation-card .affiliation-body { padding: var(--sp-4); }
   .footer-copy { flex-direction: column; }
 }
 
@@ -1833,6 +1855,14 @@ footer {
   .publication-item { gap: var(--sp-3); padding: var(--sp-4); }
   .pub-header { grid-template-columns: 1fr; }
   .pub-image-wrapper { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .affiliation-card .pub-image-wrapper {
+    height: clamp(105px, 32vw, 150px);
+    aspect-ratio: auto;
+  }
+  .affiliation-card .pub-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+  }
   #latest-publications-dashboard .pub-header { grid-template-columns: 4em 1fr; }
   #latest-publications-dashboard .pub-image-wrapper { width: 4em; height: 5.4em; aspect-ratio: auto; }
   #journal-articles-container .pub-header,
