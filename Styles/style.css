@@ -1280,7 +1280,11 @@ main > section:last-of-type { margin-bottom: 0; }
 .affiliation-card-ceel .pub-image-wrapper img,
 .affiliation-card-viipuri .pub-image-wrapper img,
 .affiliation-card-tom .pub-image-wrapper img {
-  transform: scale(1.26);
+  transform: scale(1.0);
+}
+
+.affiliation-card-unitn .pub-image-wrapper img {
+  transform: scale(1.08);
 }
 
 .affiliation-card .pub-details {
@@ -1342,6 +1346,17 @@ main > section:last-of-type { margin-bottom: 0; }
   font-size: var(--text-xs);
   color: var(--fg-muted);
   letter-spacing: var(--track-mono);
+}
+
+.affiliation-card-cnr .affiliation-body > a {
+  display: block;
+  width: 22%;
+  margin-left: auto;
+}
+
+.affiliation-card-cnr .affiliation-body > a img {
+  width: 100%;
+  height: auto;
 }
 
 .affiliation-extra-image {
