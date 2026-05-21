@@ -319,26 +319,7 @@ header {
   color: var(--fg-strong);
   position: relative;
 }
-#site-name .logo-text .logo-first::after {
-  content: "";
-  display: inline-block;
-  width: 5px; height: 5px;
-  margin: 0 0.18em 0 0.32em;
-  background: var(--accent);
-  border-radius: 50%;
-  vertical-align: 0.18em;
-}
 #site-name .logo-text .logo-last { color: var(--fg-strong); }
-
-#site-name .logo-text .logo-dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  margin: 0 0.18em 0 0.32em;
-  background: var(--accent);
-  border-radius: 50%;
-  vertical-align: 0.18em;
-}
 
 #site-name .logo-text .logo-degree {
   color: var(--fg-muted);
