@@ -3,7 +3,7 @@
    Dark + Light themes, mixed serif/mono typography
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&family=Roboto+Mono:wght@400;500;600&display=swap');
 
 /* ── Tokens ─────────────────────────────────────────────────
    The body carries a `.dark` or `.light` class; defaults to .light
@@ -13,6 +13,7 @@
   /* Type families */
   --font-serif:   'EB Garamond', 'Spectral', Georgia, 'Times New Roman', serif;
   --font-mono:    'JetBrains Mono', 'IBM Plex Mono', 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-italic-replacement: 'Roboto Mono', 'JetBrains Mono', 'IBM Plex Mono', 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Type scale (rem-based — html font-size below) */
   --text-xs:      0.72rem;
@@ -238,7 +239,7 @@ h4 { font-size: var(--text-md); font-weight: 600; }
 
 p { margin: 0 0 var(--sp-4); max-width: var(--measure); }
 
-em, i { font-style: italic; }
+em, i { font-family: var(--font-italic-replacement); font-style: normal; }
 strong, b { font-weight: 600; color: var(--fg-strong); }
 
 /* Eyebrow / mono label utility */
@@ -683,7 +684,7 @@ main > section:last-of-type { margin-bottom: 0; }
 .construction-note {
   margin: 0;
   color: var(--fg-muted);
-  font-style: italic;
+  font-family: var(--font-italic-replacement);
 }
 
 .themes-grid {
@@ -708,7 +709,7 @@ main > section:last-of-type { margin-bottom: 0; }
 }
 .theme-card p { margin: 0; max-width: none; }
 
-.interest-example { color: var(--fg-muted); font-size: var(--text-sm); font-style: italic; }
+.interest-example { color: var(--fg-muted); font-size: var(--text-sm); font-family: var(--font-italic-replacement); }
 .interest-intro   { margin: 0 0 var(--sp-5); color: var(--fg-muted); max-width: var(--measure); }
 
 .interest-work {
@@ -749,7 +750,7 @@ main > section:last-of-type { margin-bottom: 0; }
   margin-top: var(--sp-5);
   font-size: var(--text-sm);
   color: var(--fg-muted);
-  font-style: italic;
+  font-family: var(--font-italic-replacement);
 }
 
 .interest-footer  { margin-top: var(--sp-4); padding-top: var(--sp-2); }
@@ -920,11 +921,10 @@ main > section:last-of-type { margin-bottom: 0; }
 }
 
 .pub-authors {
-  font-family: var(--font-serif);
+  font-family: var(--font-italic-replacement);
   font-size: var(--text-sm);
   color: var(--fg-muted);
   margin: 0;
-  font-style: italic;
 }
 .pub-journal-info {
   font-family: var(--font-mono);
@@ -1483,7 +1483,7 @@ main > section:last-of-type { margin-bottom: 0; }
 
 #work-in-progress-container .publication-item--simple { font-size: var(--text-sm); opacity: 0.92; }
 #work-in-progress-container .publication-item--simple .pub-status { color: var(--fg-subtle); }
-#work-in-progress-container .publication-item--simple h3 { color: var(--fg-muted); font-style: italic; }
+#work-in-progress-container .publication-item--simple h3 { color: var(--fg-muted); font-family: var(--font-italic-replacement); font-size: var(--text-sm); }
 #work-in-progress-container .publication-item--simple .pub-authors { color: var(--fg-subtle); }
 
 #journal-articles-container .publication-item,
@@ -1492,6 +1492,10 @@ main > section:last-of-type { margin-bottom: 0; }
   padding: var(--sp-4) var(--sp-5);
   min-height: 0;
   gap: var(--sp-3);
+}
+
+#working-papers-container .publication-item {
+  font-size: var(--text-sm);
 }
 
 #journal-articles-container .pub-header,
@@ -1510,6 +1514,26 @@ main > section:last-of-type { margin-bottom: 0; }
 #work-in-progress-container .publication-item h3 {
   font-size: var(--text-md);
   margin: 0 0 var(--sp-1);
+}
+
+#working-papers-container .publication-item h3 {
+  font-size: var(--text-base);
+}
+
+#work-in-progress-container .publication-item h3 {
+  font-size: var(--text-base);
+}
+
+#working-papers-container .pub-authors {
+  font-size: var(--text-sm);
+}
+
+#working-papers-container .pub-journal-info {
+  font-size: var(--text-sm);
+}
+
+#working-papers-container .pub-abstract {
+  font-size: var(--text-sm);
 }
 
 /* ============================================================
@@ -1663,7 +1687,7 @@ main > section:last-of-type { margin-bottom: 0; }
   font-size: var(--text-base);
   color: var(--fg-muted);
   margin: var(--sp-1) 0;
-  font-style: italic;
+  font-family: var(--font-italic-replacement);
 }
 
 .cv-details, .cv-list li { font-size: var(--text-sm); color: var(--fg); line-height: var(--leading-body); }
