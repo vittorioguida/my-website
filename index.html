@@ -77,33 +77,33 @@
         </div>
     </section>
 
-    <section id="talks-carousel-section" class="carousel-section">
-
-        <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Highlighted talks" aria-live="polite">
-                    <div class="section-header">
-                        <h3>Selected Talks</h3>
-                        <a class="view-all-link" href="talks.html">View all</a>
-                    </div>
-            <button class="carousel-control prev" aria-label="Previous slide">
-            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <div class="carousel-viewport">
-            <ul class="carousel-track" id="carousel-track"></ul>
+    <section id="home-updates" aria-label="Latest talks and publications">
+        <section id="home-talks" aria-labelledby="home-talks-heading">
+            <div class="section-header">
+                <h3 id="home-talks-heading">Latest Talks</h3>
+                <a class="view-all-link" href="talks.html">View all</a>
             </div>
-            <button class="carousel-control next" aria-label="Next slide">
-            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </button>
-            <div class="carousel-indicators" id="carousel-indicators"></div>
-        </div>
-    </section>
+            <div class="home-talks-carousel" role="region" aria-label="Latest talks carousel">
+                <button class="home-talks-arrow home-talks-arrow--prev" type="button" aria-label="Previous talk">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <div class="home-talks-viewport">
+                    <ul id="home-talks-list" aria-label="Selected talks"></ul>
+                </div>
+                <button class="home-talks-arrow home-talks-arrow--next" type="button" aria-label="Next talk">
+                    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </section>
 
-    <section id="latest-publications">
-        <div class="section-header">
-            <h3>Latest Publications</h3>
-            <a class="view-all-link" href="research.html">View all</a>
-        </div>
-        <div id="latest-publications-dashboard">
-        </div>
+        <section id="latest-publications" aria-labelledby="latest-publications-heading">
+            <div class="section-header">
+                <h3 id="latest-publications-heading">Latest Publications</h3>
+                <a class="view-all-link" href="research.html">View all</a>
+            </div>
+            <div id="latest-publications-dashboard">
+            </div>
+        </section>
     </section>
 
 </main>

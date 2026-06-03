@@ -1,4 +1,4 @@
-// talks.js (unified: builds home carousel and talks list)
+// talks.js (unified: builds home talks preview and talks list)
 document.addEventListener('DOMContentLoaded', () => {
   const TALKS_DATA = Array.isArray(window.TALKS) ? [...window.TALKS] : [];
 
@@ -30,87 +30,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
   TALKS_DATA.sort((a, b) => parseTalkDate(b.date) - parseTalkDate(a.date));
 
-  function initHomeCarousel() {
-    const track = document.getElementById('carousel-track');
-    const dotsWrap = document.getElementById('carousel-indicators');
-    const section = document.getElementById('talks-carousel-section');
-
-    if (!track || !dotsWrap || !section || !TALKS_DATA.length) return;
-
-    const prevBtn = section.querySelector('.carousel-control.prev');
-    const nextBtn = section.querySelector('.carousel-control.next');
+  function initHomeTalksPreview() {
+    const list = document.getElementById('home-talks-list');
+    if (!list || !TALKS_DATA.length) return;
+    const carousel = list.closest('.home-talks-carousel');
+    const prevBtn = carousel ? carousel.querySelector('.home-talks-arrow--prev') : null;
+    const nextBtn = carousel ? carousel.querySelector('.home-talks-arrow--next') : null;
 
     const featured = TALKS_DATA.filter((talk) => talk.featured);
-    const slides = (featured.length ? featured : TALKS_DATA).slice(0, 6);
+    const talks = (featured.length ? featured : TALKS_DATA).slice(0, 3);
     let current = 0;
 
-    track.innerHTML = '';
-    dotsWrap.innerHTML = '';
+    list.innerHTML = '';
 
-    slides.forEach((talk, i) => {
+    talks.forEach((talk) => {
       const li = document.createElement('li');
-      li.className = 'carousel-slide';
-      li.setAttribute('role', 'group');
-      li.setAttribute('aria-roledescription', 'slide');
-      li.setAttribute('aria-label', `${i + 1} of ${slides.length}`);
+      li.className = 'home-talk-polaroid';
 
       const thumb = talk.img
-        ? `<div class="thumb"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></div>`
-        : '<div class="thumb" aria-hidden="true"><i class="fa-regular fa-image"></i></div>';
-
-      const metaTop = [talk.event, talk.venue].filter(Boolean).join(' - ');
-      const metaBottom = [talk.date, talk.location].filter(Boolean).join(' - ');
+        ? `<figure class="home-talk-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></figure>`
+        : '<figure class="home-talk-photo home-talk-photo--empty" aria-hidden="true"></figure>';
 
       li.innerHTML = `
         ${thumb}
-        <div class="content">
-          <h3>${talk.title || ''}</h3>
-          ${metaTop ? `<p class="meta">${metaTop}</p>` : ''}
-          ${metaBottom ? `<p class="meta">${metaBottom}</p>` : ''}
-          ${talk.desc ? `<p class="desc">${talk.desc}</p>` : ''}
+        <div class="home-talk-title-band">
+          <h4 class="home-talk-title">${talk.title || ''}</h4>
         </div>
+        <div class="home-talk-bottom-space" aria-hidden="true"></div>
       `;
 
-      track.appendChild(li);
-
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-      dot.addEventListener('click', () => {
-        current = i;
-        update();
-      });
-      dotsWrap.appendChild(dot);
+      list.appendChild(li);
     });
 
     function update() {
-      track.style.transform = `translateX(-${current * 100}%)`;
-      Array.from(dotsWrap.children).forEach((dot, i) => {
-        dot.setAttribute('aria-current', String(i === current));
+      list.style.transform = `translateX(-${current * 100}%)`;
+      list.querySelectorAll('.home-talk-polaroid').forEach((item, index) => {
+        item.setAttribute('aria-hidden', String(index !== current));
       });
     }
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        current = (current - 1 + slides.length) % slides.length;
+        current = (current - 1 + talks.length) % talks.length;
         update();
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        current = (current + 1) % slides.length;
+        current = (current + 1) % talks.length;
         update();
       });
     }
 
-    if (slides.length <= 1) {
+    if (talks.length <= 1) {
       if (prevBtn) prevBtn.hidden = true;
       if (nextBtn) nextBtn.hidden = true;
-      dotsWrap.hidden = true;
     }
 
     update();
+    scheduleTalkTextFit(list);
   }
 
   function initTalksList() {
@@ -124,25 +103,79 @@ document.addEventListener('DOMContentLoaded', () => {
       li.className = 'talk-item';
 
       const thumb = talk.img
-        ? `<div class="talk-thumb"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></div>`
-        : '<div class="talk-thumb" aria-hidden="true"></div>';
+        ? `<figure class="talk-polaroid-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></figure>`
+        : '<figure class="talk-polaroid-photo talk-polaroid-photo--empty" aria-hidden="true"></figure>';
 
       const whenWhere = [talk.date, talk.location].filter(Boolean).join(' - ');
+      const venueDetails = [
+        (talk.event || talk.venue) ? [talk.event, talk.venue].filter(Boolean).join(' - ') : '',
+        whenWhere
+      ].filter(Boolean).join('<br>');
 
       li.innerHTML = `
         ${thumb}
         <div class="talk-content">
           <h3 class="title">${talk.title || ''}</h3>
-          ${(talk.event || talk.venue) ? `<p class="whenwhere">${[talk.event, talk.venue].filter(Boolean).join(' - ')}</p>` : ''}
-          ${whenWhere ? `<p class="whenwhere">${whenWhere}</p>` : ''}
-          ${talk.desc ? `<p class="talk-summary">${talk.desc}</p>` : ''}
         </div>
+        ${venueDetails ? `<div class="talk-venue-band"><p class="talk-venue">${venueDetails}</p></div>` : ''}
       `;
 
       list.appendChild(li);
     });
+
+    scheduleTalkTextFit(list);
   }
 
-  initHomeCarousel();
+  function fitElementText(element, options) {
+    const { max, min, step = 0.25 } = options;
+    const box = element.parentElement;
+    if (!box) return;
+
+    element.style.display = 'block';
+    element.style.fontSize = `${max}rem`;
+    element.style.webkitLineClamp = 'unset';
+
+    let size = max;
+    while (
+      size > min &&
+      (element.scrollHeight > box.clientHeight || element.scrollWidth > box.clientWidth)
+    ) {
+      size -= step;
+      element.style.fontSize = `${Math.max(size, min)}rem`;
+    }
+  }
+
+  function fitTalkCardText(list) {
+    const titles = list.querySelectorAll('.talk-content .title');
+    const venues = list.querySelectorAll('.talk-venue');
+    const homeTitles = list.querySelectorAll('.home-talk-title');
+
+    titles.forEach((title) => fitElementText(title, { max: 1.08, min: 0.82, step: 0.02 }));
+    venues.forEach((venue) => fitElementText(venue, { max: 0.72, min: 0.52, step: 0.02 }));
+    homeTitles.forEach((title) => fitElementText(title, { max: 1, min: 0.68, step: 0.02 }));
+  }
+
+  function scheduleTalkTextFit(list) {
+    window.requestAnimationFrame(() => fitTalkCardText(list));
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => fitTalkCardText(list));
+    }
+  }
+
+  let resizeTimer = 0;
+  window.addEventListener('resize', () => {
+    const lists = [
+      document.getElementById('talks-ul'),
+      document.getElementById('home-talks-list')
+    ].filter(Boolean);
+    if (!lists.length) return;
+
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => {
+      lists.forEach((list) => scheduleTalkTextFit(list));
+    }, 120);
+  });
+
+  initHomeTalksPreview();
   initTalksList();
 });
