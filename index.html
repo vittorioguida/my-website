@@ -21,13 +21,13 @@
 <header>
     <div id="site-name">
         <a href="index.html">
-            <span class="logo-text"><span class="logo-first">Vittorio</span> <span class="logo-last">Guida</span> <span class="logo-degree">Ph.D.</span></span>
+            <span class="logo-text"><span class="logo-first">VITTORIO</span> <span class="logo-last">GUIDA</span><span class="logo-comma">,</span> <span class="logo-degree">PH.D.</span></span>
         </a>
     </div>
     <div class="header-right">
       <nav>
           <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
               <li><a href="research.html">Research</a></li>
         <li><a href="talks.html">Talks</a></li>
       <li><a href="affiliations.html">Affiliations</a></li>
@@ -37,7 +37,7 @@
     </div>
 </header>
 
-<main>
+<main class="home-main">
     <section id="hero">
         <div id="image-container">
             <img src="images/Index/vittorio_guida.jpeg" alt="Vittorio Guida Profile Picture">
@@ -48,8 +48,8 @@
         </div>
 
         <div id="bio-text-container">
-            <h1>Vittorio Guida, Ph.D.</h1>
-            <p class="hero-role">Postdoctoral Researcher · University of Trento</p>
+            <h1>VITTORIO GUIDA, PH.D.</h1>
+            <p class="hero-role">Behavioral Scientist · University of Trento</p>
             <p class="hero-bio">I am a behavioral scientist working on decision-making, formal and computational modelling, and sustainability.</p>
             <div class="hero-interest-tags" aria-label="Research interests">
                 <span class="hero-interest-tag">Behavioral Strategy</span>
@@ -78,6 +78,15 @@
     </section>
 
     <section id="home-updates" aria-label="Latest talks and publications">
+        <section id="latest-publications" aria-labelledby="latest-publications-heading">
+            <div class="section-header">
+                <h3 id="latest-publications-heading">Latest Publications</h3>
+                <a class="view-all-link" href="research.html">View all</a>
+            </div>
+            <div id="latest-publications-dashboard">
+            </div>
+        </section>
+
         <section id="home-talks" aria-labelledby="home-talks-heading">
             <div class="section-header">
                 <h3 id="home-talks-heading">Latest Talks</h3>
@@ -93,15 +102,6 @@
                 <button class="home-talks-arrow home-talks-arrow--next" type="button" aria-label="Next talk">
                     <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                 </button>
-            </div>
-        </section>
-
-        <section id="latest-publications" aria-labelledby="latest-publications-heading">
-            <div class="section-header">
-                <h3 id="latest-publications-heading">Latest Publications</h3>
-                <a class="view-all-link" href="research.html">View all</a>
-            </div>
-            <div id="latest-publications-dashboard">
             </div>
         </section>
     </section>
