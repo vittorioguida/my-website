@@ -67,9 +67,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return el;
     }
 
-    const imageBlock = pub.image
-      ? `<div class="pub-image-wrapper"><img src="${pub.image}" alt="Cover of ${pub.title}"></div>`
-      : '<div class="pub-image-wrapper pub-image-wrapper--empty" aria-hidden="true"></div>';
+    let imageBlock;
+    if (pub.type === 'Working Paper') {
+      // Typographic mini title page — keeps the row visually uniform
+      // regardless of whether a figure/plot exists for the paper.
+      const coverYear = pub.year ? `<span class="pub-cover-year">${pub.year}</span>` : '';
+      imageBlock = `
+        <div class="pub-image-wrapper pub-cover-card" aria-hidden="true">
+          <span class="pub-cover-type">Working Paper</span>
+          <span class="pub-cover-title">${pub.title}</span>
+          ${coverYear}
+        </div>`;
+    } else if (pub.image) {
+      imageBlock = `<div class="pub-image-wrapper"><img src="${pub.image}" alt="Cover of ${pub.title}"></div>`;
+    } else {
+      imageBlock = '<div class="pub-image-wrapper pub-image-wrapper--empty" aria-hidden="true"></div>';
+    }
     const journal = pub.journal && pub.year
       ? `<p class="pub-journal-info">${pub.journal} (${pub.year})</p>`
       : pub.journal ? `<p class="pub-journal-info">${pub.journal}</p>`
