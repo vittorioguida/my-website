@@ -106,6 +106,24 @@ const publications = [
     },
 
     {
+        id: 'wp5',
+        type: 'Working Paper',
+        category: 'Working Paper',
+        title: 'The intergenerational burden game',
+        authors: 'Guida, V., Klaser, K., Ballicu, G.',
+        abstract: ''
+    },
+
+    {
+        id: 'wp6',
+        type: 'Working Paper',
+        category: 'Working Paper',
+        title: 'A DCE on perceived residual value of mobile phones',
+        authors: 'Guida, V., Compagnoni, M., Kazemekaityte, A., Klaser, K., Santini, E.',
+        abstract: ''
+    },
+
+    {
         id: 'wip1',
         type: 'Work in Progress',
         category: 'Work in Progress',
@@ -114,27 +132,11 @@ const publications = [
     },
 
     {
-        id: 'wip2',
-        type: 'Work in Progress',
-        category: 'Work in Progress',
-        title: 'The intergenerational burden game',
-        authors: 'with Klaudijo Klaser (University of Trento) and Gabriele Ballicu (University of Cagliari)'
-    },
-
-    {
         id: 'wip3',
         type: 'Work in Progress',
         category: 'Work in Progress',
         title: 'A study on collective risk dilemmas',
         authors: 'with Laura Marcon (Centro Nazionale Ricerche) and Giulia Andrighetto (Centro Nazionale Ricerche)'
-    },
-
-    {
-        id: 'wip4',
-        type: 'Work in Progress',
-        category: 'Work in Progress',
-        title: 'A DCE on perceived residual value of mobile phones',
-        authors: 'with Marco Compagnoni (JRC Ispra), Austeja Kazemekaityte (University of Trento), Klaudijo Klaser (University of Trento), and Erica Santini (University of Trento)'
     },
 
 ];

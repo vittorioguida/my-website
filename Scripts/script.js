@@ -67,7 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
       return el;
     }
 
-    const img = pub.image || 'images/placeholder_cover.jpg';
+    const imageBlock = pub.image
+      ? `<div class="pub-image-wrapper"><img src="${pub.image}" alt="Cover of ${pub.title}"></div>`
+      : '<div class="pub-image-wrapper pub-image-wrapper--empty" aria-hidden="true"></div>';
     const journal = pub.journal && pub.year
       ? `<p class="pub-journal-info">${pub.journal} (${pub.year})</p>`
       : pub.journal ? `<p class="pub-journal-info">${pub.journal}</p>`
@@ -92,16 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     el.innerHTML = `
       <div class="pub-header">
-        <div class="pub-image-wrapper">
-          <img src="${img}" alt="Cover of ${pub.title}">
-        </div>
+        ${imageBlock}
         <div class="pub-details">
           ${typeLabel}
           ${title}
           ${metaBlock}
         </div>
       </div>
-      ${!isDashboard ? `
+      ${!isDashboard && pub.abstract ? `
         <div class="pub-actions">
           <button class="pub-abstract-toggle" type="button" aria-expanded="false">Read abstract</button>
         </div>
@@ -134,6 +134,65 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     return el;
+  }
+
+  // Horizontal carousels on the research page. Uses native scroll +
+  // scroll-snap; arrows page by one viewport width.
+  function initResearchCarousel(section) {
+    const track = section.querySelector('.research-carousel-track');
+    const nav = section.querySelector('.research-carousel-nav');
+    if (!track || !nav || !track.children.length) return;
+
+    const prevBtn = nav.querySelector('.research-carousel-arrow--prev');
+    const nextBtn = nav.querySelector('.research-carousel-arrow--next');
+    const counter = nav.querySelector('.research-carousel-counter');
+
+    function trackGap() {
+      return parseFloat(getComputedStyle(track).columnGap) || 0;
+    }
+
+    function pageWidth() {
+      return track.clientWidth + trackGap();
+    }
+
+    function pageCount() {
+      return Math.max(1, Math.round((track.scrollWidth + trackGap()) / pageWidth()));
+    }
+
+    function currentPage() {
+      return Math.min(pageCount() - 1, Math.round(track.scrollLeft / pageWidth()));
+    }
+
+    function update() {
+      const pages = pageCount();
+      nav.hidden = pages <= 1;
+      if (pages <= 1) return;
+      const page = currentPage();
+      if (counter) counter.textContent = `${page + 1} / ${pages}`;
+      if (prevBtn) prevBtn.disabled = page === 0;
+      if (nextBtn) nextBtn.disabled = page >= pages - 1;
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function goTo(page) {
+      closeAllAbstracts();
+      track.scrollTo({ left: page * pageWidth(), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentPage() - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentPage() + 1));
+
+    let scrollTick = null;
+    track.addEventListener('scroll', () => {
+      if (scrollTick) return;
+      scrollTick = requestAnimationFrame(() => {
+        scrollTick = null;
+        update();
+      });
+    });
+    window.addEventListener('resize', update);
+    update();
   }
 
   // Render publications
@@ -175,12 +234,16 @@ document.addEventListener('DOMContentLoaded', () => {
         .forEach(p => containers.dashboard.appendChild(createPublicationElement(p, true)));
     }
 
+    document.querySelectorAll('.research-section').forEach(initResearchCarousel);
+
     const hash = window.location.hash;
     if (hash) {
       const target = document.querySelector(hash);
       if (target && target.classList.contains('publication-item')) {
         closeAllAbstracts(target);
         setAbstractState(target, true);
+        const track = target.closest('.research-carousel-track');
+        if (track) track.scrollLeft = target.offsetLeft - track.offsetLeft;
       }
     }
   }
