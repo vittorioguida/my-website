@@ -1385,6 +1385,10 @@ main > section:last-of-type { margin-bottom: 0; }
   transform: scale(1.08);
 }
 
+.affiliation-card-vilnius .pub-image-wrapper img {
+  transform: scale(1.28);
+}
+
 .affiliation-card .pub-details {
   display: flex;
   flex-direction: column;
@@ -1460,11 +1464,11 @@ main > section:last-of-type { margin-bottom: 0; }
 .affiliation-extra-image {
   margin-top: var(--sp-3);
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .affiliation-extra-image img {
-  width: 100%;
-  max-width: 368px;
+  width: 180px;
+  max-width: 42%;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   display: block;
