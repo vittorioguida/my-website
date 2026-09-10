@@ -593,7 +593,7 @@ main > section:last-of-type { margin-bottom: 0; }
 
 #hero h1 {
   font-family: 'Roboto Mono', var(--font-mono);
-  font-size: var(--text-2xl);
+  font-size: 2rem;
   line-height: 1.16;
   margin: 0 0 var(--sp-2);
   letter-spacing: var(--track-mono);
@@ -612,7 +612,7 @@ main > section:last-of-type { margin-bottom: 0; }
 
 .hero-bio {
   font-family: var(--font-serif);
-  font-size: 1.28rem;
+  font-size: 1.18rem;
   line-height: 1.5;
   color: var(--fg);
   margin: 0;
@@ -691,7 +691,7 @@ main > section:last-of-type { margin-bottom: 0; }
   gap: 0.4rem 0.6rem;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   letter-spacing: var(--track-mono);
   white-space: nowrap;
 }
@@ -699,7 +699,7 @@ main > section:last-of-type { margin-bottom: 0; }
 #social-links .hero-contact-line a,
 #social-links .hero-contact-line .social-email {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   color: var(--fg-muted);
   text-decoration: none;
   font-weight: 500;
