@@ -30,6 +30,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   TALKS_DATA.sort((a, b) => parseTalkDate(b.date) - parseTalkDate(a.date));
 
+  const MONTH_NAMES = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  // "2025-11-07" reads badly in a caption; show "November 2025".
+  // Values already written as "February 2026" are passed through.
+  function formatTalkDate(value) {
+    if (!value) return '';
+    const text = String(value).trim();
+    const iso = text.match(/^(\d{4})-(\d{2})(?:-(\d{2}))?$/);
+    if (iso) {
+      const month = MONTH_NAMES[Number(iso[2]) - 1];
+      return month ? `${month} ${iso[1]}` : iso[1];
+    }
+    return text;
+  }
+
+  // A talk is shown as a plate: the photograph, its title, then venue and date.
+  function platePhoto(talk) {
+    return talk.img
+      ? `<figure class="talk-plate-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}" loading="lazy"></figure>`
+      : '<figure class="talk-plate-photo talk-plate-photo--empty" aria-hidden="true"></figure>';
+  }
+
+  function plateMeta(talk) {
+    const where = [talk.event, talk.venue].filter(Boolean).join(' · ');
+    const when = [formatTalkDate(talk.date), talk.location].filter(Boolean).join(' · ');
+    if (!where && !when) return '';
+    return `<p class="talk-meta">${
+      where ? `<span class="talk-where">${where}</span>` : ''
+    }${
+      when ? `<span class="talk-when">${when}</span>` : ''
+    }</p>`;
+  }
+
   function initHomeTalksPreview() {
     const list = document.getElementById('home-talks-list');
     if (!list || !TALKS_DATA.length) return;
@@ -45,26 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     talks.forEach((talk) => {
       const li = document.createElement('li');
-      li.className = 'home-talk-polaroid';
-
-      const thumb = talk.img
-        ? `<figure class="home-talk-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></figure>`
-        : '<figure class="home-talk-photo home-talk-photo--empty" aria-hidden="true"></figure>';
-
+      li.className = 'home-talk-plate';
       li.innerHTML = `
-        ${thumb}
-        <div class="home-talk-title-band">
-          <h4 class="home-talk-title">${talk.title || ''}</h4>
-        </div>
-        <div class="home-talk-bottom-space" aria-hidden="true"></div>
+        ${platePhoto(talk)}
+        <h4 class="talk-plate-title">${talk.title || ''}</h4>
+        ${plateMeta(talk)}
       `;
-
       list.appendChild(li);
     });
 
     function update() {
       list.style.transform = `translateX(-${current * 100}%)`;
-      list.querySelectorAll('.home-talk-polaroid').forEach((item, index) => {
+      list.querySelectorAll('.home-talk-plate').forEach((item, index) => {
         item.setAttribute('aria-hidden', String(index !== current));
       });
     }
@@ -89,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     update();
-    scheduleTalkTextFit(list);
   }
 
   function initTalksList() {
@@ -101,80 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
     TALKS_DATA.forEach((talk) => {
       const li = document.createElement('li');
       li.className = 'talk-item';
-
-      const thumb = talk.img
-        ? `<figure class="talk-polaroid-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}"></figure>`
-        : '<figure class="talk-polaroid-photo talk-polaroid-photo--empty" aria-hidden="true"></figure>';
-
-      const whenWhere = [talk.date, talk.location].filter(Boolean).join(' - ');
-      const venueDetails = [
-        (talk.event || talk.venue) ? [talk.event, talk.venue].filter(Boolean).join(' - ') : '',
-        whenWhere
-      ].filter(Boolean).join('<br>');
-
       li.innerHTML = `
-        ${thumb}
+        ${platePhoto(talk)}
         <div class="talk-content">
           <h3 class="title">${talk.title || ''}</h3>
+          ${plateMeta(talk)}
         </div>
-        ${venueDetails ? `<div class="talk-venue-band"><p class="talk-venue">${venueDetails}</p></div>` : ''}
       `;
-
       list.appendChild(li);
     });
-
-    scheduleTalkTextFit(list);
   }
-
-  function fitElementText(element, options) {
-    const { max, min, step = 0.25 } = options;
-    const box = element.parentElement;
-    if (!box) return;
-
-    element.style.display = 'block';
-    element.style.fontSize = `${max}rem`;
-    element.style.webkitLineClamp = 'unset';
-
-    let size = max;
-    while (
-      size > min &&
-      (element.scrollHeight > box.clientHeight || element.scrollWidth > box.clientWidth)
-    ) {
-      size -= step;
-      element.style.fontSize = `${Math.max(size, min)}rem`;
-    }
-  }
-
-  function fitTalkCardText(list) {
-    const titles = list.querySelectorAll('.talk-content .title');
-    const venues = list.querySelectorAll('.talk-venue');
-    const homeTitles = list.querySelectorAll('.home-talk-title');
-
-    titles.forEach((title) => fitElementText(title, { max: 1.08, min: 0.82, step: 0.02 }));
-    venues.forEach((venue) => fitElementText(venue, { max: 0.72, min: 0.52, step: 0.02 }));
-    homeTitles.forEach((title) => fitElementText(title, { max: 1, min: 0.68, step: 0.02 }));
-  }
-
-  function scheduleTalkTextFit(list) {
-    window.requestAnimationFrame(() => fitTalkCardText(list));
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => fitTalkCardText(list));
-    }
-  }
-
-  let resizeTimer = 0;
-  window.addEventListener('resize', () => {
-    const lists = [
-      document.getElementById('talks-ul'),
-      document.getElementById('home-talks-list')
-    ].filter(Boolean);
-    if (!lists.length) return;
-
-    window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(() => {
-      lists.forEach((list) => scheduleTalkTextFit(list));
-    }, 120);
-  });
 
   initHomeTalksPreview();
   initTalksList();
