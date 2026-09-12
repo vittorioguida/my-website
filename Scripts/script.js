@@ -268,4 +268,26 @@ document.addEventListener('DOMContentLoaded', () => {
   yearNodes.forEach((node) => {
     node.textContent = String(year);
   });
+
+  // Scroll-position hairline under the header. Written as a custom property
+  // so the CSS stays declarative; rAF-throttled to one write per frame.
+  const scroller = document.scrollingElement || document.documentElement;
+  let scrollQueued = false;
+
+  function writeScrollProgress() {
+    scrollQueued = false;
+    const travel = scroller.scrollHeight - scroller.clientHeight;
+    const progress = travel > 0 ? Math.min(1, Math.max(0, scroller.scrollTop / travel)) : 0;
+    document.documentElement.style.setProperty('--scroll-progress', progress.toFixed(4));
+  }
+
+  function queueScrollProgress() {
+    if (scrollQueued) return;
+    scrollQueued = true;
+    requestAnimationFrame(writeScrollProgress);
+  }
+
+  writeScrollProgress();
+  window.addEventListener('scroll', queueScrollProgress, { passive: true });
+  window.addEventListener('resize', queueScrollProgress);
 });

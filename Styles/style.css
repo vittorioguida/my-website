@@ -60,13 +60,22 @@
   /* Layout */
   --measure:    70ch;        /* readable column for body copy */
   --content-w:  820px;        /* max main width */
-  --page-w:     820px;        /* per-page optical column — header, main and footer all align to it */
+  --page-w:     820px;        /* per-page optical column for the CONTENT only */
+  --shell-w:   1120px;        /* fixed chrome rail — header and footer align to this on
+                                every page, so the wordmark and nav never shift when
+                                you move between pages of different content widths */
+
+  /* Schematic grid: the one overt digital reference. A plotter-paper
+     lattice, held near the threshold of visibility. */
+  --grid-step:  26px;
+  --grid-ink:   rgba(26, 24, 20, 0.055);
 }
 
 /* Each page declares its own column; header + footer follow it, so the
    left edge of the wordmark, the content and the colophon always agree. */
 body:has(main.home-main)  { --page-w: 1040px; }
 body:has(main.talks-main) { --page-w: 1120px; }
+body:not(.light-theme) { --grid-ink: rgba(180, 205, 235, 0.05); }
 
 /* ── Light theme ─────────────────────────────────────────── */
 body.light-theme {
@@ -80,7 +89,7 @@ body.light-theme {
   --fg:            #1a1814;     /* near-black, warm */
   --fg-strong:     #0f0e0c;     /* headings */
   --fg-muted:      #5a5247;     /* secondary copy */
-  --fg-subtle:     #8a8071;     /* metadata */
+  --fg-subtle:     #6d6353;     /* tertiary metadata — dark enough for 12px mono labels (4.5:1) */
 
   /* Lines */
   --line:          rgba(26, 24, 20, 0.10);
@@ -122,7 +131,7 @@ body {
   --fg:            #e8eaed;     /* primary copy — softened off-white, easy on the eye on near-black */
   --fg-strong:     #f1f3f6;     /* headings + key links — slightly brighter, still not pure white */
   --fg-muted:      #8b95a1;     /* secondary text (authors, journal info, captions) — cool blue-grey */
-  --fg-subtle:     #5a6573;     /* tertiary metadata (eyebrows, dates, separators) — recedes cleanly */
+  --fg-subtle:     #7d8998;     /* tertiary metadata (eyebrows, dates, separators) — holds 4.5:1 at 12px */
 
   /* Lines: barely-there hairlines that read on every surface above. */
   --line:          rgba(255, 255, 255, 0.07);   /* default border — perceptible but never a "stripe" */
@@ -168,7 +177,15 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  /* Hairline lattice over the page colour — reads as technical paper,
+     not as decoration, because it never rises above the type. */
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to right, var(--grid-ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-ink) 1px, transparent 1px);
+  background-size: var(--grid-step) var(--grid-step);
+  background-position: center top;
+  background-attachment: fixed;
   color: var(--fg);
   font-family: var(--font-serif);
   font-size: var(--text-base);
@@ -326,11 +343,27 @@ header {
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   border-bottom: 1px solid var(--line);
   padding-block: var(--sp-3);
-  padding-inline: max(var(--sp-6), (100% - min(92%, var(--page-w))) / 2);
+  padding-inline: max(var(--sp-6), (100% - min(92%, var(--shell-w))) / 2);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: var(--sp-4);
+}
+
+/* Scroll-position hairline along the header's lower edge. Driven from a
+   scroll listener — CSS scroll timelines report as supported in engines
+   where they never actually activate, so the custom property is reliable. */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--scroll-progress, 0));
+  opacity: 0.75;
 }
 
 #site-name {
@@ -406,11 +439,11 @@ nav a {
   transition: color var(--dur-fast) var(--ease);
 }
 nav a:hover { color: var(--fg-strong); }
+/* The active item changes colour and gains a rule, but NOT its size or
+   weight — a heavier active label re-flows the whole nav on every page. */
 nav a[aria-current="page"],
 nav a.is-active {
   color: var(--accent);
-  font-size: calc(var(--text-sm) * 1.08);
-  font-weight: 600;
 }
 nav a[aria-current="page"]::after,
 nav a.is-active::after {
@@ -420,6 +453,20 @@ nav a.is-active::after {
   bottom: 3px;
   height: 2px;
   background: var(--accent);
+}
+/* Mono slash marker: a small command-line cue for the current section. */
+nav a[aria-current="page"],
+nav a.is-active { padding-left: calc(var(--sp-3) + 0.35em); }
+nav a[aria-current="page"]::before,
+nav a.is-active::before {
+  content: "/";
+  position: absolute;
+  left: calc(var(--sp-3) - 0.5em);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  opacity: 0.55;
+  font-weight: 400;
 }
 
 .nav-dropdown { position: relative; }
@@ -540,7 +587,7 @@ main > section:last-of-type { margin-bottom: 0; }
 
 .page-intro h1 {
   font-family: var(--font-serif);
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: 500;
   line-height: var(--leading-tight);
   letter-spacing: -0.01em;
@@ -549,7 +596,7 @@ main > section:last-of-type { margin-bottom: 0; }
 }
 
 .page-intro-text {
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   color: var(--fg-muted);
   line-height: var(--leading-body);
   max-width: var(--measure);
@@ -601,7 +648,7 @@ main > section:last-of-type { margin-bottom: 0; }
 
 #hero h1 {
   font-family: 'Roboto Mono', var(--font-mono);
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1.16;
   margin: 0 0 var(--sp-2);
   letter-spacing: var(--track-mono);
@@ -620,7 +667,7 @@ main > section:last-of-type { margin-bottom: 0; }
 
 .hero-bio {
   font-family: var(--font-serif);
-  font-size: 1.18rem;
+  font-size: 1.02rem;
   line-height: 1.5;
   color: var(--fg);
   margin: 0;
@@ -639,11 +686,16 @@ main > section:last-of-type { margin-bottom: 0; }
   flex-wrap: wrap;
   gap: var(--sp-2);
   margin: auto 0;
+  align-items: center;
 }
 
 .hero-interest-tag {
   display: inline-flex;
   align-items: center;
+  /* Chips must keep their label on one line and wrap as whole units —
+     shrinking them breaks the text out of the pill. */
+  flex: 0 0 auto;
+  white-space: nowrap;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: var(--track-mono);
@@ -711,6 +763,8 @@ main > section:last-of-type { margin-bottom: 0; }
   color: var(--fg-muted);
   text-decoration: none;
   font-weight: 500;
+  /* Labels stay whole; the line wraps between them, never inside one. */
+  white-space: nowrap;
 }
 #social-links .hero-contact-line a {
   border-bottom: 1px solid var(--line);
@@ -727,6 +781,7 @@ main > section:last-of-type { margin-bottom: 0; }
   font-size: var(--text-xs);
   padding: 0.45rem 0.9rem;
   align-self: center;
+  white-space: nowrap;
 }
 
 /* ============================================================
@@ -743,6 +798,19 @@ main > section:last-of-type { margin-bottom: 0; }
 }
 .section-header h2,
 .section-header h3 { margin: 0; }
+/* Section headings share the affiliations eyebrow language: mono,
+   uppercase, small, sitting on a hairline rule. */
+.section-header h2,
+.section-header h3,
+.research-section-head h3,
+#talks-list > h3 {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  color: var(--fg-subtle);
+}
 
 .view-all-link {
   font-family: var(--font-mono);
@@ -905,15 +973,11 @@ main > section:last-of-type { margin-bottom: 0; }
   min-width: 0;
 }
 
-#home-updates .section-header h3 {
-  font-size: var(--text-lg);
-  margin: 0;
-}
+#home-updates .section-header h3 { margin: 0; }
 
 #latest-publications h2,
 #selected-talks h2,
 #home-talks h2 {
-  font-size: var(--text-2xl);
   margin: 0;
   text-align: left;
 }
@@ -996,6 +1060,10 @@ main > section:last-of-type { margin-bottom: 0; }
   padding: 0.18em 0.55em;
   border-radius: var(--radius-xs);
   width: fit-content;
+  /* A two-word badge must not break inside its own pill. */
+  white-space: nowrap;
+  flex: 0 0 auto;
+  align-self: flex-start;
   border: 1px solid var(--line-strong);
   background: transparent;
   color: var(--fg-muted);
@@ -1252,7 +1320,12 @@ main > section:last-of-type { margin-bottom: 0; }
 }
 .affiliations-group + .affiliations-group { margin-top: var(--sp-8); }
 
-#talks-list h3 { margin-top: 0; margin-bottom: var(--sp-4); font-size: var(--text-xl); }
+#talks-list > h3 {
+  margin-top: 0;
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--line);
+}
 
 #talks-ul li.talk-item {
   display: flex;
@@ -1670,11 +1743,7 @@ main > section:last-of-type { margin-bottom: 0; }
   margin-bottom: var(--sp-4);
 }
 
-.research-section-head h3 {
-  margin: 0;
-  font-size: var(--text-xl);
-  font-weight: 500;
-}
+.research-section-head h3 { margin: 0; }
 
 .research-carousel-nav {
   display: inline-flex;
@@ -2066,7 +2135,7 @@ main > section:last-of-type { margin-bottom: 0; }
 footer {
   margin-top: var(--sp-8);
   padding-block: var(--sp-7) var(--sp-5);
-  padding-inline: max(var(--sp-6), (100% - min(92%, var(--page-w))) / 2);
+  padding-inline: max(var(--sp-6), (100% - min(92%, var(--shell-w))) / 2);
   background: var(--surface);
   border-top: 1px solid var(--line);
   color: var(--fg-muted);
@@ -2075,7 +2144,7 @@ footer {
 }
 
 .footer-contacts {
-  max-width: var(--page-w);
+  max-width: var(--shell-w);
   margin: 0 auto var(--sp-6);
   display: grid;
   gap: var(--sp-5) var(--sp-6);
@@ -2136,7 +2205,7 @@ footer {
 .footer-copy {
   padding-top: var(--sp-4);
   border-top: 1px solid var(--line);
-  max-width: var(--page-w);
+  max-width: var(--shell-w);
   margin: 0 auto;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
@@ -2187,6 +2256,67 @@ footer {
   letter-spacing: var(--track-mono);
 }
 
+/* Every mono run carries figures — dates, years, counts. Tabular
+   digits keep them in columns instead of drifting. */
+.talk-meta, .aff-meta, .pub-journal-info, .footer-copy, .cv-date,
+.affiliations-group-title, .seo-fallback .m, .hero-contact-line,
+.pub-status, .interest-work {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Crop marks: two hairline corner ticks on image plates, borrowed from
+   technical drawing. Present at rest, accented on hover. */
+.talk-plate-photo,
+.affiliation-card .pub-image-wrapper,
+.affiliation-mini .mini-plate {
+  position: relative;
+}
+.talk-plate-photo::before,
+.talk-plate-photo::after,
+.affiliation-card .pub-image-wrapper::before,
+.affiliation-card .pub-image-wrapper::after,
+.affiliation-mini .mini-plate::before,
+.affiliation-mini .mini-plate::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  z-index: 2;
+  border-color: var(--line-strong);
+  transition: border-color var(--dur) var(--ease);
+}
+.talk-plate-photo::before,
+.affiliation-card .pub-image-wrapper::before,
+.affiliation-mini .mini-plate::before {
+  top: 5px; left: 5px;
+  border-top: 1px solid; border-left: 1px solid;
+}
+.talk-plate-photo::after,
+.affiliation-card .pub-image-wrapper::after,
+.affiliation-mini .mini-plate::after {
+  bottom: 5px; right: 5px;
+  border-bottom: 1px solid; border-right: 1px solid;
+}
+#talks-ul li.talk-item:hover .talk-plate-photo::before,
+#talks-ul li.talk-item:hover .talk-plate-photo::after,
+.home-talk-plate:hover .talk-plate-photo::before,
+.home-talk-plate:hover .talk-plate-photo::after,
+.affiliation-card:hover .pub-image-wrapper::before,
+.affiliation-card:hover .pub-image-wrapper::after,
+.affiliation-mini:hover .mini-plate::before,
+.affiliation-mini:hover .mini-plate::after {
+  border-color: var(--accent);
+}
+
+/* On the white logo plates the ticks need dark ink to register. */
+.affiliation-card .pub-image-wrapper::before,
+.affiliation-card .pub-image-wrapper::after,
+.affiliation-mini .mini-plate::before,
+.affiliation-mini .mini-plate::after {
+  border-color: rgba(26, 24, 20, 0.22);
+}
+
 /* ============================================================
    Responsive
    ============================================================ */
@@ -2203,6 +2333,23 @@ footer {
 @media (max-width: 1000px) {
   #site-name .logo-comma,
   #site-name .logo-degree { display: none; }
+}
+
+/* Below the point where wordmark + nav + toggle fit on one line, the header
+   becomes two tidy rows rather than letting the nav break mid-list. */
+@media (max-width: 1060px) {
+  header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: var(--sp-2);
+  }
+  .header-right nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: start;
+  }
+  .header-right #theme-toggle { grid-column: 2; grid-row: 1; }
+  nav ul { flex-wrap: nowrap; gap: var(--sp-1); }
+  nav a { padding-inline: var(--sp-2); }
 }
 
 @media (max-width: 768px) {
@@ -2310,3 +2457,144 @@ footer {
   .section-header { flex-direction: column; align-items: flex-start; padding-bottom: var(--sp-2); }
   .cv-header { flex-direction: column; align-items: flex-start; }
 }
+
+
+/* ============================================================
+   Polish pass — proportion, rhythm, and the small repairs
+   ============================================================ */
+
+/* Section headers stay on one line. A label that wraps under its own
+   "View all" reads as a layout accident. */
+.section-header { flex-wrap: nowrap; }
+.section-header h2,
+.section-header h3,
+.view-all-link { white-space: nowrap; }
+
+/* Home: two columns only when both can breathe. Below that the talks
+   rail is narrower than its own captions. */
+@media (max-width: 1000px) {
+  #home-updates { grid-template-columns: 1fr; gap: var(--sp-7); }
+}
+
+/* Footer: three declared columns, not auto-fit — auto-fit was spilling a
+   fourth and stacking the profile links on top of each other. */
+.footer-contacts { grid-template-columns: 1.1fr 1.2fr 0.9fr; gap: var(--sp-5) var(--sp-7); }
+.footer-links { flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: var(--sp-2); }
+.footer-links a { white-space: nowrap; }
+@media (max-width: 760px) {
+  .footer-contacts { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 520px) {
+  .footer-contacts { grid-template-columns: 1fr; }
+}
+
+/* Publication rows: a hairline that lights up on the leading edge.
+   Cheaper than a shadow and it keeps the list flush. */
+.publication-item { position: relative; }
+.publication-item::before {
+  content: "";
+  position: absolute;
+  left: -1px; top: -1px; bottom: -1px;
+  width: 2px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+.publication-item:hover::before { opacity: 1; }
+
+/* Talk captions read as prose, not as a data dump. */
+.talk-meta { line-height: 1.55; }
+.talk-meta .talk-where { font-family: var(--font-serif); font-size: var(--text-sm); letter-spacing: 0; }
+
+/* Vertical rhythm: give the hero room off the header, and settle the
+   gap between the masthead block and the updates below it. */
+#hero { margin-bottom: var(--sp-7); padding: var(--sp-6); }
+#home-updates { margin-bottom: var(--sp-7); }
+.page-intro { margin-bottom: var(--sp-6); }
+
+/* Interest tags: quieter, so they sit under the bio instead of
+   competing with it. */
+.hero-interest-tags { gap: 0.35rem 0.4rem; }
+.hero-interest-tag { font-size: 0.7rem; padding: 0.2rem 0.55rem; }
+
+/* Carousel plate: the photograph is an accent, not the page. Cap it so a
+   single-column layout doesn't turn one talk into a billboard. */
+.home-talk-plate .talk-plate-photo { max-width: 420px; }
+.home-talk-plate .talk-plate-photo img { aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* Wide single-column: photograph and caption sit side by side rather than
+   leaving a half-width image over a full-width line of text. */
+@media (min-width: 700px) {
+  .home-talk-plate {
+    display: grid;
+    grid-template-columns: 380px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: var(--sp-5);
+    row-gap: var(--sp-2);
+    align-items: start;
+  }
+  .home-talk-plate .talk-plate-photo { grid-column: 1; grid-row: 1 / span 2; max-width: none; }
+  .home-talk-plate .talk-plate-title { grid-column: 2; grid-row: 1; margin-top: 0; }
+  .home-talk-plate .talk-meta { grid-column: 2; grid-row: 2; margin-top: var(--sp-3); }
+}
+@media (min-width: 1001px) {
+  /* Back in the narrow rail the plate stacks again. */
+  .home-talk-plate { display: flex; }
+  .home-talk-plate .talk-plate-photo { max-width: none; }
+}
+
+/* Every section label holds one line. */
+.research-section-head h3,
+#talks-list > h3,
+.affiliations-group-title { white-space: nowrap; }
+.research-section-head { flex-wrap: nowrap; gap: var(--sp-4); }
+
+/* Affiliation body aligns to the text column above it, not to the card
+   edge — the description reads as a continuation of the entry. */
+@media (min-width: 769px) {
+  .affiliation-card .affiliation-body { padding-left: calc(220px + var(--sp-5)); }
+  .affiliation-card-cnr .affiliation-body > a { margin-left: 0; }
+}
+
+/* A two-word button should never break across two lines. */
+.pub-abstract-toggle,
+.toggle-abstract-btn,
+.cta-button,
+.cv-download-btn { white-space: nowrap; }
+
+/* Compact affiliation entries carry a role line above the title. */
+.affiliation-mini .mini-body .aff-role {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  margin: 0 0 0.15rem;
+}
+
+/* ── Affiliations roster ───────────────────────────────────
+   One entry per row. The logo gets a real plate — these marks are
+   the content of the page, not decoration beside it. */
+.affiliations-compact { grid-template-columns: 1fr; gap: var(--sp-3); }
+.affiliation-mini { grid-template-columns: 272px minmax(0, 1fr); align-items: stretch; }
+/* Tight horizontal padding: wide wordmarks were being clamped by plate
+   width long before they reached the height cap, so a 4:1 mark rendered
+   at a third the height of a square one. */
+.affiliation-mini .mini-plate { min-height: 136px; padding: var(--sp-4) var(--sp-3); }
+.affiliation-mini .mini-plate img { max-height: 96px; max-width: 100%; }
+.affiliation-mini .mini-body { padding: var(--sp-4) var(--sp-5); gap: 0.25rem; }
+.affiliation-mini .mini-body h3 { font-size: var(--text-lg); letter-spacing: -0.005em; }
+.affiliation-mini .mini-body .aff-meta { font-size: var(--text-xs); }
+
+/* Section groups get air between them so the roster reads in blocks. */
+.affiliations-group + .affiliations-group { margin-top: var(--sp-7); }
+
+@media (max-width: 620px) {
+  .affiliation-mini { grid-template-columns: 1fr; }
+  .affiliation-mini .mini-plate { min-height: 104px; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+/* The VU file carries generous internal whitespace, so it reads small at
+   the shared cap. Scale it up to match the optical weight of the others. */
+.affiliation-mini-vilnius .mini-plate img { max-height: 124px; transform: scale(1.14); }
