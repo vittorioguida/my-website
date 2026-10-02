@@ -2622,7 +2622,7 @@ h3 { font-size: var(--text-md); }
   margin-left: 0.2em;
   background: var(--accent);
   vertical-align: baseline;
-  animation: caret-blink 1.1s steps(1) infinite;
+  animation: caret-blink 2.4s steps(1) infinite;
 }
 @keyframes caret-blink { 50% { opacity: 0; } }
 
