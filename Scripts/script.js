@@ -302,9 +302,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const FADE = 0.9; // shared opacity for lines, numbers, and dots
   let w = 0, h = 0, step = 26, minor = '', major = '', last = 0, lastColor = -1e9;
   let clusters = [], nextSpawn = 0;
+  let interval = 1000 / 30, cost = 0;
 
   function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     // Use the canvas's own box so the drawing matches CSS size when mobile URL bars resize the viewport.
     const nw = canvas.clientWidth || window.innerWidth;
     const nh = canvas.clientHeight || window.innerHeight;
@@ -469,8 +470,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function frame(t) {
     requestAnimationFrame(frame);
-    if (t - last < 33) return;
-    last = t;
+    if (document.hidden) { last = t; return; }
+    // Fixed cadence independent of display refresh rate (60/120/144 Hz all give ~30 fps).
+    const elapsed = t - last;
+    if (elapsed < interval - 2) return;
+    last = t - (elapsed % interval);
+    const t0 = performance.now();
     readColors(t);
     ctx.clearRect(0, 0, w, h);
     drawLines(t);
@@ -484,6 +489,9 @@ document.addEventListener('DOMContentLoaded', () => {
       nextSpawn = t + 600 + Math.random() * 1800;
     }
     drawClusters(t);
+    // Adaptive quality: if frames are costly (weak device), drop to a lower frame rate.
+    cost = cost * 0.9 + (performance.now() - t0) * 0.1;
+    if (cost > 12 && interval < 66) { interval = 66; cost = 0; }
   }
 
   resize();
