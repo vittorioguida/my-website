@@ -70,7 +70,7 @@
      lattice, held near the threshold of visibility. */
   --grid-step:  26px;
   --grid-ink:   rgba(26, 24, 20, 0.11);
-  --grid-major: rgba(26, 24, 20, 0.16);
+  --grid-major: rgba(26, 24, 20, 0.17);
 }
 
 /* Animated grid + number readouts, drawn by Scripts/script.js */
@@ -87,15 +87,15 @@
    left edge of the wordmark, the content and the colophon always agree. */
 body:has(main.home-main)  { --page-w: 1040px; }
 body:has(main.talks-main) { --page-w: 1120px; }
-body:not(.light-theme) { --grid-ink: rgba(180, 205, 235, 0.095); --grid-major: rgba(180, 205, 235, 0.14); }
+body:not(.light-theme) { --grid-ink: rgba(180, 205, 235, 0.13); --grid-major: rgba(180, 205, 235, 0.19); }
 
 /* ── Light theme ─────────────────────────────────────────── */
 body.light-theme {
-  /* Surfaces — warm paper, slightly toned down to avoid glare */
-  --bg:            #d3ccb9;     /* page — deeper warm cream */
-  --surface:       #dcd6c4;     /* cards/sections */
-  --surface-2:     #cac3ae;     /* recessed / subtle wells */
-  --surface-3:     #c1b9a3;     /* highlight strip */
+  /* Surfaces — opaque, softly tinted whites */
+  --bg:            #f4f6f8;     /* page */
+  --surface:       #fafbfc;     /* cards/sections */
+  --surface-2:     #edf1f5;     /* recessed / subtle wells */
+  --surface-3:     #e5eaf0;     /* highlight strip */
 
   /* Foregrounds */
   --fg:            #1a1814;     /* near-black, warm */
@@ -111,16 +111,16 @@ body.light-theme {
   --accent:        #2b4a7a;     /* deep ink-blue, reads as serious on warm paper */
   --accent-hover:  #1f3a62;
   --accent-soft:   rgba(43, 74, 122, 0.10);
-  --accent-ink:    #f3efe4;     /* foreground on accent fills */
+  --accent-ink:    #f4f6f8;     /* foreground on accent fills */
 
   /* Effects */
   --shadow-sm:     0 1px 0 rgba(26, 24, 20, 0.04);
   --shadow:        0 1px 2px rgba(26, 24, 20, 0.05), 0 1px 0 rgba(26, 24, 20, 0.03);
   --shadow-lg:     0 12px 32px -16px rgba(26, 24, 20, 0.18);
-  --header-bg:     rgba(211, 204, 185, 0.82);
+  --header-bg:     #f4f6f8;
 
-  --polaroid-bg:    #e9e4d5;
-  --polaroid-photo-bg: #d6cfbc;
+  --polaroid-bg:    #fafbfc;
+  --polaroid-photo-bg: #e9edf2;
   --polaroid-fg:    #14110d;
   --polaroid-muted: #63584b;
   --polaroid-line:  rgba(26, 24, 20, 0.12);

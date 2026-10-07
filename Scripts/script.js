@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const FADE = 0.75; // overall transparency of lines and numbers
+  const FADE = 0.9; // shared opacity for lines, numbers, and dots
   let w = 0, h = 0, step = 26, minor = '', major = '', last = 0, lastColor = -1e9;
   let clusters = [], nextSpawn = 0;
 
