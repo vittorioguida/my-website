@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // A talk is shown as a plate: the photograph, its title, then venue and date.
   function platePhoto(talk) {
     return talk.img
-      ? `<figure class="talk-plate-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}" loading="lazy"></figure>`
+      ? `<figure class="talk-plate-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}" loading="lazy"${talk.imgPos ? ` style="object-position: ${talk.imgPos}"` : ''}></figure>`
       : '<figure class="talk-plate-photo talk-plate-photo--empty" aria-hidden="true"></figure>';
   }
 

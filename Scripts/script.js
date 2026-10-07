@@ -290,4 +290,204 @@ document.addEventListener('DOMContentLoaded', () => {
   writeScrollProgress();
   window.addEventListener('scroll', queueScrollProgress, { passive: true });
   window.addEventListener('resize', queueScrollProgress);
+
+  // Animated background: softly undulating grid plus fading clusters of numbers.
+  const canvas = document.createElement('canvas');
+  canvas.id = 'bg-grid';
+  canvas.setAttribute('aria-hidden', 'true');
+  document.body.prepend(canvas);
+  const ctx = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const FADE = 0.75; // overall transparency of lines and numbers
+  let w = 0, h = 0, step = 26, minor = '', major = '', last = 0, lastColor = -1e9;
+  let clusters = [], nextSpawn = 0;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Use the canvas's own box so the drawing matches CSS size when mobile URL bars resize the viewport.
+    const nw = canvas.clientWidth || window.innerWidth;
+    const nh = canvas.clientHeight || window.innerHeight;
+    if (nw === w && nh === h && canvas.width === Math.round(nw * dpr)) return;
+    w = nw; h = nh;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  // Re-read theme colours periodically so the light/dark toggle is followed.
+  function readColors(t) {
+    if (t - lastColor < 400) return;
+    lastColor = t;
+    const cs = getComputedStyle(document.body);
+    minor = cs.getPropertyValue('--grid-ink').trim();
+    major = cs.getPropertyValue('--grid-major').trim();
+    step = parseFloat(cs.getPropertyValue('--grid-step')) || 26;
+  }
+
+  // A fraction of lines slide a few px along their normal, ease to a new spot, then rest.
+  const movers = new Map();
+  const MAX_SHIFT = 12;
+  function shiftOf(key, idx, t) {
+    if ((Math.imul(idx + 1000, 2654435761) >>> 0) % 100 >= 30) return 0;
+    let s = movers.get(key);
+    if (!s) {
+      s = { from: 0, to: 0, cur: 0, start: 0, dur: 1, next: t + Math.random() * 4000 };
+      movers.set(key, s);
+    }
+    if (t >= s.next) {
+      s.from = s.cur;
+      s.to = (Math.random() * 2 - 1) * MAX_SHIFT;
+      s.start = t;
+      s.dur = 1500 + Math.random() * 1500;
+      s.next = t + s.dur + 800 + Math.random() * 2500;
+    }
+    const p = Math.min(1, (t - s.start) / s.dur);
+    s.cur = s.from + (s.to - s.from) * p * p * (3 - 2 * p);
+    return s.cur;
+  }
+
+  function drawLines(t = 0) {
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = major;
+    const cx = Math.round(w / 2 / step) * step;
+    const n = Math.ceil(w / step) + 2;
+    // Opacity by line index: every 8th strongest, every 4th, every 2nd, then the rest.
+    const tierOf = (i) => {
+      const m = ((i % 8) + 8) % 8;
+      return m === 0 ? 0 : m === 4 ? 1 : m % 2 === 0 ? 2 : 3;
+    };
+    const tierAlpha = [1, 0.75, 0.5, 0.3];
+    for (let pass = 0; pass < 4; pass++) {
+      ctx.globalAlpha = FADE * tierAlpha[pass];
+      ctx.beginPath();
+      for (let i = -n; i <= n; i++) {
+        if (tierOf(i) !== pass) continue;
+        const x = cx + i * step;
+        if (x < -20 || x > w + 20) continue;
+        const sx = x + 0.5 + (reduce ? 0 : shiftOf('v' + i, i, t));
+        ctx.moveTo(sx, 0);
+        ctx.lineTo(sx, h);
+      }
+      for (let k = 0; k * step <= h + step; k++) {
+        if (tierOf(k) !== pass) continue;
+        const py = k * step + 0.5 + (reduce ? 0 : shiftOf('h' + k, k + 500, t));
+        ctx.moveTo(0, py);
+        ctx.lineTo(w, py);
+      }
+      ctx.stroke();
+    }
+  }
+
+  function spawn(t) {
+    const rows = 2 + Math.floor(Math.random() * 4);
+    const cols = 2 + Math.floor(Math.random() * (w < 600 ? 2 : 4));
+    const hex = Math.random() < 0.4;
+    const lines = [];
+    for (let r = 0; r < rows; r++) {
+      const cells = [];
+      for (let c = 0; c < cols; c++) {
+        cells.push(hex
+          ? Math.floor(Math.random() * 65536).toString(16).padStart(4, '0')
+          : (Math.random() * 1000).toFixed(Math.random() < 0.5 ? 0 : 2));
+      }
+      lines.push(cells.join('  '));
+    }
+    const size = 10 + Math.random() * 2;
+    const textW = lines[0].length * size * 0.62;
+    clusters.push({
+      x: 8 + Math.random() * Math.max(1, w - textW - 16), y: 30 + Math.random() * Math.max(1, h - 80),
+      born: t, life: 3000 + Math.random() * 2500, lines, size,
+    });
+  }
+
+  function drawClusters(t) {
+    ctx.fillStyle = major;
+    ctx.textBaseline = 'top';
+    clusters = clusters.filter((c) => t - c.born < c.life);
+    for (const c of clusters) {
+      const p = (t - c.born) / c.life;
+      ctx.globalAlpha = FADE * Math.sin(Math.PI * p);
+      ctx.font = `${c.size}px ui-monospace, Menlo, Consolas, monospace`;
+      // Rows reveal progressively, like a readout filling in.
+      const shown = Math.max(1, Math.ceil(Math.min(1, p * 3) * c.lines.length));
+      for (let i = 0; i < shown; i++) ctx.fillText(c.lines[i], c.x, c.y + i * (c.size + 4));
+    }
+  }
+
+  // Dots at cell centres, carried by long wave bands that sweep across the page.
+  let ripples = [], nextRipple = 0;
+  const RIPPLE_SPEED = 90; // px/s
+  const RIPPLE_WAVELEN = 110;
+
+  function spawnWave(t) {
+    const a = Math.random() * Math.PI * 2;
+    const ux = Math.cos(a), uy = Math.sin(a);
+    const reach = Math.hypot(w, h) / 2 + 200;
+    const lateral = (Math.random() - 0.5) * Math.min(w, h) * 0.8;
+    ripples.push({
+      x: w / 2 - ux * reach - uy * lateral,
+      y: h / 2 - uy * reach + ux * lateral,
+      ux, uy, born: t,
+      life: ((2 * reach + 300) / RIPPLE_SPEED) * 1000,
+      amp: 0.7 + Math.random() * 0.5,
+      width: 260 + Math.random() * 220,
+    });
+  }
+
+  function drawDots(t) {
+    ripples = ripples.filter((r) => t - r.born < r.life);
+    ctx.fillStyle = major;
+    const cx = Math.round(w / 2 / step) * step + step / 2;
+    const n = Math.ceil(w / step) + 2;
+    for (let k = 0; (k - 0.5) * step <= h + step; k++) {
+      const by = (k + 0.5) * step;
+      for (let i = -n; i <= n; i++) {
+        const bx = cx + i * step;
+        if (bx < -step || bx > w + step) continue;
+        let dx = 0, dy = 0, lift = 0;
+        for (const r of ripples) {
+          const rx = bx - r.x, ry = by - r.y;
+          const along = rx * r.ux + ry * r.uy;
+          const side = -rx * r.uy + ry * r.ux;
+          const sideEnv = Math.exp(-(side * side) / (2 * r.width * r.width));
+          if (sideEnv < 0.02) continue;
+          // Slightly curved wavefront, trailing packet of ~3 crests.
+          const off = along - ((t - r.born) / 1000) * RIPPLE_SPEED + side * side / 2400;
+          const env = Math.exp(-(off * off) / 26000) * sideEnv * r.amp;
+          if (env < 0.003) continue;
+          const v = env * Math.cos((off / RIPPLE_WAVELEN) * Math.PI * 2);
+          dx += r.ux * v * 8;
+          dy += r.uy * v * 8;
+          lift += Math.abs(v);
+        }
+        ctx.globalAlpha = Math.min(1, FADE * (0.35 + lift * 1.4));
+        const s = 0.9 + Math.min(0.9, lift * 1.2);
+        ctx.fillRect(bx + dx - s / 2, by + dy - s / 2, s, s);
+      }
+    }
+  }
+
+  function frame(t) {
+    requestAnimationFrame(frame);
+    if (t - last < 33) return;
+    last = t;
+    readColors(t);
+    ctx.clearRect(0, 0, w, h);
+    drawLines(t);
+    if (t > nextRipple && ripples.length < 3) {
+      spawnWave(t);
+      nextRipple = t + 2500 + Math.random() * 4500;
+    }
+    drawDots(t);
+    if (t > nextSpawn && clusters.length < (w < 600 ? 2 : 5)) {
+      spawn(t);
+      nextSpawn = t + 600 + Math.random() * 1800;
+    }
+    drawClusters(t);
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); if (reduce) drawLines(); });
+  readColors(0);
+  if (reduce) drawLines(); else requestAnimationFrame(frame);
 });

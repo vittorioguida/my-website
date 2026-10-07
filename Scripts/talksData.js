@@ -10,6 +10,7 @@ window.TALKS = [
         desc: "We held the final workshop of the PRIN project “Saving natural resources: an experimental-behavioral approach to intertemporal environmental decisions” at the School of Innovation.",
         long_desc: `During the event I had the pleasure of presenting the results produced by our research unit."`,
         img: "images/Talks/act42.jpeg",
+        imgPos: "50% 30%",
         featured: true
     },
 

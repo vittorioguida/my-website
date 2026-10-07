@@ -69,29 +69,39 @@
   /* Schematic grid: the one overt digital reference. A plotter-paper
      lattice, held near the threshold of visibility. */
   --grid-step:  26px;
-  --grid-ink:   rgba(26, 24, 20, 0.085);
-  --grid-major: rgba(26, 24, 20, 0.12);
+  --grid-ink:   rgba(26, 24, 20, 0.11);
+  --grid-major: rgba(26, 24, 20, 0.16);
+}
+
+/* Animated grid + number readouts, drawn by Scripts/script.js */
+#bg-grid {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Each page declares its own column; header + footer follow it, so the
    left edge of the wordmark, the content and the colophon always agree. */
 body:has(main.home-main)  { --page-w: 1040px; }
 body:has(main.talks-main) { --page-w: 1120px; }
-body:not(.light-theme) { --grid-ink: rgba(180, 205, 235, 0.075); --grid-major: rgba(180, 205, 235, 0.11); }
+body:not(.light-theme) { --grid-ink: rgba(180, 205, 235, 0.095); --grid-major: rgba(180, 205, 235, 0.14); }
 
 /* ── Light theme ─────────────────────────────────────────── */
 body.light-theme {
   /* Surfaces — warm paper, slightly toned down to avoid glare */
-  --bg:            #ece7db;     /* page — deeper warm cream */
-  --surface:       #f3efe4;     /* cards/sections */
-  --surface-2:     #e5dfd0;     /* recessed / subtle wells */
-  --surface-3:     #dcd5c3;     /* highlight strip */
+  --bg:            #d3ccb9;     /* page — deeper warm cream */
+  --surface:       #dcd6c4;     /* cards/sections */
+  --surface-2:     #cac3ae;     /* recessed / subtle wells */
+  --surface-3:     #c1b9a3;     /* highlight strip */
 
   /* Foregrounds */
   --fg:            #1a1814;     /* near-black, warm */
   --fg-strong:     #0f0e0c;     /* headings */
-  --fg-muted:      #5a5247;     /* secondary copy */
-  --fg-subtle:     #6d6353;     /* tertiary metadata — dark enough for 12px mono labels (4.5:1) */
+  --fg-muted:      #4f483e;     /* secondary copy */
+  --fg-subtle:     #5c5344;     /* tertiary metadata — dark enough for 12px mono labels (4.5:1) */
 
   /* Lines */
   --line:          rgba(26, 24, 20, 0.10);
@@ -107,10 +117,10 @@ body.light-theme {
   --shadow-sm:     0 1px 0 rgba(26, 24, 20, 0.04);
   --shadow:        0 1px 2px rgba(26, 24, 20, 0.05), 0 1px 0 rgba(26, 24, 20, 0.03);
   --shadow-lg:     0 12px 32px -16px rgba(26, 24, 20, 0.18);
-  --header-bg:     rgba(236, 231, 219, 0.82);
+  --header-bg:     rgba(211, 204, 185, 0.82);
 
-  --polaroid-bg:    #f7f3e8;
-  --polaroid-photo-bg: #e3dccb;
+  --polaroid-bg:    #e9e4d5;
+  --polaroid-photo-bg: #d6cfbc;
   --polaroid-fg:    #14110d;
   --polaroid-muted: #63584b;
   --polaroid-line:  rgba(26, 24, 20, 0.12);
@@ -182,14 +192,6 @@ body {
   /* Hairline lattice over the page colour — reads as technical paper,
      not as decoration, because it never rises above the type. */
   background-color: var(--bg);
-  background-image:
-    linear-gradient(to right, var(--grid-major) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px),
-    linear-gradient(to right, var(--grid-ink) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-ink) 1px, transparent 1px);
-  background-size: calc(var(--grid-step) * 4) calc(var(--grid-step) * 4), calc(var(--grid-step) * 4) calc(var(--grid-step) * 4), var(--grid-step) var(--grid-step), var(--grid-step) var(--grid-step);
-  background-position: center top;
-  background-attachment: fixed;
   color: var(--fg);
   font-family: var(--font-mono);
   font-size: var(--text-base);
@@ -628,7 +630,8 @@ main > section:last-of-type { margin-bottom: 0; }
 #image-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  width: fit-content;
   gap: var(--sp-3);
   margin-left: 0;
 }
@@ -2368,7 +2371,7 @@ footer {
     grid-column: 2;
   }
   #hero { grid-template-columns: 1fr; gap: var(--sp-5); padding: var(--sp-5); }
-  #image-container { align-items: center; }
+  #image-container { align-items: center; width: 100%; }
   #image-container img { width: min(100%, 240px); height: 290px; }
   #bio-text-container { min-height: 0; }
   #hero h1 {
