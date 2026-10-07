@@ -69,8 +69,9 @@
   /* Schematic grid: the one overt digital reference. A plotter-paper
      lattice, held near the threshold of visibility. */
   --grid-step:  26px;
-  --grid-ink:   rgba(26, 24, 20, 0.11);
-  --grid-major: rgba(26, 24, 20, 0.17);
+  --grid-ink:   rgba(70, 70, 70, 0.14);
+  --grid-major: rgba(70, 70, 70, 0.21);
+  --grid-text:  rgba(70, 70, 70, 0.21);
 }
 
 /* Animated grid + number readouts, drawn by Scripts/script.js */
@@ -87,40 +88,40 @@
    left edge of the wordmark, the content and the colophon always agree. */
 body:has(main.home-main)  { --page-w: 1040px; }
 body:has(main.talks-main) { --page-w: 1120px; }
-body:not(.light-theme) { --grid-ink: rgba(180, 205, 235, 0.13); --grid-major: rgba(180, 205, 235, 0.19); }
+body:not(.light-theme) { --grid-ink: rgba(130, 138, 148, 0.14); --grid-major: rgba(130, 138, 148, 0.21); --grid-text: rgba(150, 158, 168, 0.34); }
 
 /* ── Light theme ─────────────────────────────────────────── */
 body.light-theme {
   /* Surfaces — opaque, softly tinted whites */
-  --bg:            #f4f6f8;     /* page */
-  --surface:       #fafbfc;     /* cards/sections */
-  --surface-2:     #edf1f5;     /* recessed / subtle wells */
-  --surface-3:     #e5eaf0;     /* highlight strip */
+  --bg:            #e4e6e9;     /* page */
+  --surface:       #eceef0;     /* cards/sections */
+  --surface-2:     #dfe2e6;     /* recessed / subtle wells */
+  --surface-3:     #d7dbe0;     /* highlight strip */
 
   /* Foregrounds */
-  --fg:            #1a1814;     /* near-black, warm */
-  --fg-strong:     #0f0e0c;     /* headings */
-  --fg-muted:      #4f483e;     /* secondary copy */
-  --fg-subtle:     #5c5344;     /* tertiary metadata — dark enough for 12px mono labels (4.5:1) */
+  --fg:            #34322e;     /* near-black, warm */
+  --fg-strong:     #24221f;     /* headings */
+  --fg-muted:      #5d5850;     /* secondary copy */
+  --fg-subtle:     #67625a;     /* tertiary metadata — dark enough for 12px mono labels (4.5:1) */
 
   /* Lines */
-  --line:          rgba(26, 24, 20, 0.10);
-  --line-strong:   rgba(26, 24, 20, 0.22);
+  --line:          rgba(52, 50, 46, 0.09);
+  --line-strong:   rgba(52, 50, 46, 0.18);
 
   /* Single accent — ink blue; quiet, editorial, never saturated */
-  --accent:        #2b4a7a;     /* deep ink-blue, reads as serious on warm paper */
-  --accent-hover:  #1f3a62;
-  --accent-soft:   rgba(43, 74, 122, 0.10);
-  --accent-ink:    #f4f6f8;     /* foreground on accent fills */
+  --accent:        #46618a;     /* deep ink-blue, reads as serious on warm paper */
+  --accent-hover:  #364f75;
+  --accent-soft:   rgba(70, 97, 138, 0.10);
+  --accent-ink:    #eceef0;     /* foreground on accent fills */
 
   /* Effects */
   --shadow-sm:     0 1px 0 rgba(26, 24, 20, 0.04);
   --shadow:        0 1px 2px rgba(26, 24, 20, 0.05), 0 1px 0 rgba(26, 24, 20, 0.03);
   --shadow-lg:     0 12px 32px -16px rgba(26, 24, 20, 0.18);
-  --header-bg:     #f4f6f8;
+  --header-bg:     #e4e6e9;
 
-  --polaroid-bg:    #fafbfc;
-  --polaroid-photo-bg: #e9edf2;
+  --polaroid-bg:    #eceef0;
+  --polaroid-photo-bg: #dde1e6;
   --polaroid-fg:    #14110d;
   --polaroid-muted: #63584b;
   --polaroid-line:  rgba(26, 24, 20, 0.12);
@@ -140,19 +141,19 @@ body {
   --surface-3:     #1f242b;     /* highlight strip / hover states — used sparingly */
 
   /* Foregrounds: muted whites and cool greys. Never #fff. */
-  --fg:            #e8eaed;     /* primary copy — softened off-white, easy on the eye on near-black */
-  --fg-strong:     #f1f3f6;     /* headings + key links — slightly brighter, still not pure white */
-  --fg-muted:      #8b95a1;     /* secondary text (authors, journal info, captions) — cool blue-grey */
-  --fg-subtle:     #7d8998;     /* tertiary metadata (eyebrows, dates, separators) — holds 4.5:1 at 12px */
+  --fg:            #b0b4ba;     /* primary copy — softened off-white, easy on the eye on near-black */
+  --fg-strong:     #c2c5ca;     /* headings + key links — slightly brighter, still not pure white */
+  --fg-muted:      #7a8187;     /* secondary text (authors, journal info, captions) — cool blue-grey */
+  --fg-subtle:     #767d86;     /* tertiary metadata (eyebrows, dates, separators) — holds 4.5:1 at 12px */
 
   /* Lines: barely-there hairlines that read on every surface above. */
-  --line:          rgba(255, 255, 255, 0.07);   /* default border — perceptible but never a "stripe" */
-  --line-strong:   rgba(255, 255, 255, 0.14);   /* hover borders + emphasis — still quiet */
+  --line:          rgba(190, 195, 202, 0.07);   /* default border — perceptible but never a "stripe" */
+  --line-strong:   rgba(190, 195, 202, 0.13);   /* hover borders + emphasis — still quiet */
 
   /* Accent: cool blue lifted for contrast on the cooler ground.
      Same hue family as light — same accent, two calibrations. */
-  --accent:        #7aa7d9;     /* steel/sky blue — bright enough to read on near-black, never neon */
-  --accent-hover:  #95bce4;     /* used for nav/link hover */
+  --accent:        #7893b3;     /* steel/sky blue — bright enough to read on near-black, never neon */
+  --accent-hover:  #8ea5c2;     /* used for nav/link hover */
   --accent-soft:   rgba(122, 167, 217, 0.12);   /* selection + soft hover wash */
   --accent-ink:    #0d0f12;     /* foreground when text sits on an accent fill */
 
@@ -180,7 +181,7 @@ body {
 *::after { box-sizing: border-box; }
 
 html {
-  font-size: 15px;
+  font-size: 16.5px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-behavior: smooth;
@@ -2431,7 +2432,7 @@ footer {
 }
 
 @media (max-width: 480px) {
-  html { font-size: 16px; }
+  html { font-size: 17.6px; }
   header { padding: var(--sp-2) var(--sp-3); }
   footer { padding-inline: var(--sp-4); }
   nav ul { gap: var(--sp-1); }
