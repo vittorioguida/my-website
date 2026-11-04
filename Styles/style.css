@@ -679,7 +679,8 @@ main > section:last-of-type { margin-bottom: 0; }
   line-height: 1.5;
   color: var(--fg);
   margin: 0;
-  max-width: 58ch;
+  max-width: 64ch;
+  text-align: justify;
 }
 .hero-bio + .hero-bio { margin-top: var(--sp-3); }
 
