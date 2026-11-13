@@ -2658,3 +2658,180 @@ body { line-height: 1.7; letter-spacing: -0.005em; }
 .affiliation-mini .mini-body h3 { font-size: var(--text-base); }
 #talks-ul .talk-plate-photo { aspect-ratio: 16 / 9; }
 #talks-ul .talk-plate-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Home: compact profile and calmer information density ── */
+main.home-main {
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-6);
+}
+
+.home-main > section {
+  margin-bottom: var(--sp-6);
+}
+
+.home-main #hero {
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-6);
+  padding: var(--sp-5);
+  background:
+    linear-gradient(125deg, var(--accent-soft), transparent 42%),
+    var(--surface);
+}
+
+.home-main #image-container {
+  width: 100%;
+  gap: var(--sp-2);
+}
+
+.home-main #image-container img {
+  width: 156px;
+  height: 190px;
+  border-color: var(--line-strong);
+}
+
+.home-main #image-container .cv-download-btn {
+  margin-top: 0;
+  padding: 0.4rem 0.65rem;
+  letter-spacing: 0.08em;
+}
+
+.home-main #bio-text-container {
+  min-height: 0;
+}
+
+.home-main #hero h1 {
+  margin-bottom: var(--sp-1);
+  font-size: 1.3rem;
+}
+
+.home-main .hero-role {
+  margin-bottom: var(--sp-2);
+}
+
+.home-main .hero-bio {
+  max-width: 70ch;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.home-main .hero-interest-tags {
+  gap: 0.35rem;
+  margin: var(--sp-3) 0 0;
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+}
+
+.home-main .hero-interest-tag {
+  padding: 0.16rem 0.5rem;
+  font-size: 0.68rem;
+}
+
+.home-main #social-links {
+  margin: 0 0 var(--sp-3);
+  padding: var(--sp-2) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.home-main .hero-contact-line {
+  gap: 0.35rem 0.9rem;
+  font-size: 0.72rem;
+}
+
+.home-main #social-links .hero-contact-line a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  border-bottom: 0;
+  padding: 0;
+}
+
+.home-main .hero-contact-line i {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.home-main .hero-email {
+  margin: 0 0 var(--sp-2);
+  color: var(--fg-muted);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+#home-updates {
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-5);
+}
+
+#home-updates > section {
+  padding: 0;
+}
+
+#home-updates .section-header {
+  margin-bottom: var(--sp-3);
+  padding-bottom: var(--sp-2);
+}
+
+@media (max-width: 1000px) {
+  #home-updates {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-main #hero {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+    padding: var(--sp-4);
+  }
+
+  .home-main #image-container {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+  .home-main #image-container img {
+    width: 92px;
+    height: 112px;
+  }
+
+  .home-main #image-container .cv-download-btn {
+    align-self: flex-end;
+    margin-bottom: 0.1rem;
+  }
+
+  .home-main #hero h1 {
+    font-size: clamp(1.2rem, 5vw, 1.4rem);
+  }
+
+  .home-main .hero-role {
+    margin-bottom: var(--sp-2);
+  }
+
+  .home-main .hero-interest-tags {
+    margin-top: var(--sp-2);
+  }
+
+  .home-main #social-links {
+    margin-bottom: var(--sp-3);
+  }
+}
+
+@media (max-width: 480px) {
+  main.home-main {
+    margin-top: var(--sp-3);
+  }
+
+  .home-main #hero {
+    padding: var(--sp-3);
+  }
+
+  #home-updates {
+    gap: var(--sp-5);
+  }
+}
