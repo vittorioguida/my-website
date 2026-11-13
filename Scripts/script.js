@@ -26,186 +26,59 @@ document.addEventListener('DOMContentLoaded', () => {
   // Publications configuration
   const config = { numberOfLatestPublications: 3 };
 
-  function setAbstractState(item, open) {
-    const abstract = item.querySelector('.pub-abstract-content');
-    const toggle = item.querySelector('.pub-abstract-toggle');
-    if (!abstract || !toggle) return;
-    abstract.classList.toggle('is-open', open);
-    abstract.classList.toggle('is-collapsed', !open);
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.textContent = open ? 'Hide abstract' : 'Read abstract';
-    item.classList.toggle('is-highlighted', open);
-  }
+  function createResearchItem(pub, published = false, includeYear = false) {
+    const item = document.createElement('li');
+    if (pub.id) item.id = pub.id;
 
-  function closeAllAbstracts(except = null) {
-    document.querySelectorAll('.publication-item').forEach((item) => {
-      if (item === except) return;
-      setAbstractState(item, false);
-    });
-  }
-
-  // Create publication card element
-  function createPublicationElement(pub, isDashboard = false) {
-    const el = document.createElement('div');
-    el.classList.add('publication-item');
-    if (pub.id) {
-      el.id = pub.id;
-    }
-    if (!isDashboard) {
-      el.classList.add('publication-item--full');
-    }
-
-    if (pub.type === 'Work in Progress') {
-      const wipAuthors = pub.authors ? `<p class="pub-authors">${pub.authors}</p>` : '';
-      el.classList.add('publication-item--simple');
-      el.innerHTML = `
-        <div class="pub-details">
-          <h3>${pub.title}</h3>
-          ${wipAuthors}
-        </div>
-      `;
-      return el;
-    }
-
-    let imageBlock;
-    if (pub.type === 'Working Paper') {
-      // Typographic mini title page â€” keeps the row visually uniform
-      // regardless of whether a figure/plot exists for the paper.
-      const coverYear = pub.year ? `<span class="pub-cover-year">${pub.year}</span>` : '';
-      imageBlock = `
-        <div class="pub-image-wrapper pub-cover-card" aria-hidden="true">
-          <span class="pub-cover-type">Working Paper</span>
-          <span class="pub-cover-title">${pub.title}</span>
-          ${coverYear}
-        </div>`;
-    } else if (pub.image) {
-      imageBlock = `<div class="pub-image-wrapper"><img src="${pub.image}" alt="Cover of ${pub.title}"></div>`;
+    const title = pub.title.trim();
+    if (published && pub.link) {
+      const link = document.createElement('a');
+      link.href = pub.link;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = title;
+      if (pub.journal) {
+        const journal = document.createElement('em');
+        journal.className = 'research-journal';
+        journal.textContent = pub.journal;
+        link.append(', ', journal);
+      }
+      item.appendChild(link);
     } else {
-      imageBlock = '<div class="pub-image-wrapper pub-image-wrapper--empty" aria-hidden="true"></div>';
-    }
-    const journal = pub.journal && pub.year
-      ? `<p class="pub-journal-info">${pub.journal} (${pub.year})</p>`
-      : pub.journal ? `<p class="pub-journal-info">${pub.journal}</p>`
-      : pub.year ? `<p class="pub-journal-info">(${pub.year})</p>` : '';
-
-    const title = pub.type === 'Working Paper' || !pub.link
-      ? `<h3>${pub.title}</h3>`
-      : `<h3><a href="${pub.link}" target="_blank" rel="noopener noreferrer">${pub.title}</a></h3>`;
-
-    const typeClass = pub.type
-      ? pub.type.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-      : 'unknown';
-    const typeLabel = pub.type
-      ? `<span class="pub-type-label pub-type-${typeClass}">${pub.type}</span>`
-      : '';
-    const metaBlock = `
-      <div class="pub-meta">
-        <p class="pub-authors">${pub.authors}</p>
-        ${journal}
-      </div>
-    `;
-
-    el.innerHTML = `
-      <div class="pub-header">
-        ${imageBlock}
-        <div class="pub-details">
-          ${typeLabel}
-          ${title}
-          ${metaBlock}
-        </div>
-      </div>
-      ${!isDashboard && pub.abstract ? `
-        <div class="pub-actions">
-          <button class="pub-abstract-toggle" type="button" aria-expanded="false">Read abstract</button>
-        </div>
-        <div class="pub-abstract-content show-abstract">
-          <div class="pub-abstract-title">Abstract</div>
-          <p class="pub-abstract">${pub.abstract}</p>
-        </div>
-      ` : ''}
-    `;
-
-    const titleEl = el.querySelector('h3');
-    if (titleEl && titleEl.textContent.trim().length > 90) {
-      titleEl.classList.add('title-tight');
-    }
-
-    if (!isDashboard) {
-      const toggle = el.querySelector('.pub-abstract-toggle');
-      const abstract = el.querySelector('.pub-abstract-content');
-      if (toggle && abstract) {
-        abstract.classList.add('is-collapsed');
-        toggle.addEventListener('click', () => {
-          const isOpen = abstract.classList.contains('is-open');
-          if (isOpen) {
-            setAbstractState(el, false);
-          } else {
-            closeAllAbstracts(el);
-            setAbstractState(el, true);
-          }
-        });
+      item.appendChild(document.createTextNode(title));
+      if (published && pub.journal) {
+        const journal = document.createElement('em');
+        journal.className = 'research-journal';
+        journal.textContent = pub.journal;
+        item.append(', ', journal);
       }
     }
-    return el;
+
+    if (pub.authors || (includeYear && pub.year)) {
+      const authors = document.createElement('p');
+      authors.className = 'research-authors';
+      authors.textContent = [pub.authors, includeYear && pub.year ? `(${pub.year})` : ''].filter(Boolean).join(' ');
+      item.appendChild(authors);
+    }
+    return item;
   }
 
-  // Horizontal carousels on the research page. Uses native scroll +
-  // scroll-snap; arrows page by one viewport width.
-  function initResearchCarousel(section) {
-    const track = section.querySelector('.research-carousel-track');
-    const nav = section.querySelector('.research-carousel-nav');
-    if (!track || !nav || !track.children.length) return;
-
-    const prevBtn = nav.querySelector('.research-carousel-arrow--prev');
-    const nextBtn = nav.querySelector('.research-carousel-arrow--next');
-    const counter = nav.querySelector('.research-carousel-counter');
-
-    function trackGap() {
-      return parseFloat(getComputedStyle(track).columnGap) || 0;
-    }
-
-    function pageWidth() {
-      return track.clientWidth + trackGap();
-    }
-
-    function pageCount() {
-      return Math.max(1, Math.round((track.scrollWidth + trackGap()) / pageWidth()));
-    }
-
-    function currentPage() {
-      return Math.min(pageCount() - 1, Math.round(track.scrollLeft / pageWidth()));
-    }
-
-    function update() {
-      const pages = pageCount();
-      nav.hidden = pages <= 1;
-      if (pages <= 1) return;
-      const page = currentPage();
-      if (counter) counter.textContent = `${page + 1} / ${pages}`;
-      if (prevBtn) prevBtn.disabled = page === 0;
-      if (nextBtn) nextBtn.disabled = page >= pages - 1;
-    }
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    function goTo(page) {
-      closeAllAbstracts();
-      track.scrollTo({ left: page * pageWidth(), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-    }
-
-    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentPage() - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentPage() + 1));
-
-    let scrollTick = null;
-    track.addEventListener('scroll', () => {
-      if (scrollTick) return;
-      scrollTick = requestAnimationFrame(() => {
-        scrollTick = null;
-        update();
-      });
+  function renderPublishedByYear(container, items) {
+    let currentYear;
+    let yearList;
+    items.forEach(p => {
+      const year = p.year ? String(p.year) : 'Undated';
+      if (year !== currentYear) {
+        currentYear = year;
+        const heading = document.createElement('h3');
+        heading.className = 'research-year';
+        heading.textContent = year;
+        yearList = document.createElement('ul');
+        yearList.className = 'research-list';
+        container.append(heading, yearList);
+      }
+      yearList.appendChild(createResearchItem(p, true));
     });
-    window.addEventListener('resize', update);
-    update();
   }
 
   // Render publications
@@ -223,41 +96,32 @@ document.addEventListener('DOMContentLoaded', () => {
       return yearDiff !== 0 ? yearDiff : String(b.id || '').localeCompare(String(a.id || ''));
     });
 
-    // Render journal articles
+    const published = sorted.filter(p => p.type === 'Journal Article');
     if (containers.journal) {
-      sorted.filter(p => p.type === 'Journal Article')
-        .forEach(p => containers.journal.appendChild(createPublicationElement(p)));
+      renderPublishedByYear(containers.journal, published);
     }
 
-    // Render working papers
     if (containers.working) {
       sorted.filter(p => p.type === 'Working Paper')
-        .forEach(p => containers.working.appendChild(createPublicationElement(p)));
+        .forEach(p => containers.working.appendChild(createResearchItem(p)));
     }
 
     if (containers.progress) {
       publications.filter(p => p.type === 'Work in Progress')
-        .forEach(p => containers.progress.appendChild(createPublicationElement(p)));
+        .forEach(p => containers.progress.appendChild(createResearchItem(p)));
     }
 
-    // Render homepage dashboard â€” published journal articles only, no abstract/PDF.
     if (containers.dashboard) {
-      sorted.filter(p => p.type === 'Journal Article')
-        .slice(0, config.numberOfLatestPublications)
-        .forEach(p => containers.dashboard.appendChild(createPublicationElement(p, true)));
+      const list = document.createElement('ul');
+      list.className = 'research-list';
+      published.slice(0, config.numberOfLatestPublications)
+        .forEach(p => list.appendChild(createResearchItem(p, true, true)));
+      containers.dashboard.appendChild(list);
     }
 
-    document.querySelectorAll('.research-section').forEach(initResearchCarousel);
-
-    const hash = window.location.hash;
-    if (hash) {
-      const target = document.querySelector(hash);
-      if (target && target.classList.contains('publication-item')) {
-        closeAllAbstracts(target);
-        setAbstractState(target, true);
-        const track = target.closest('.research-carousel-track');
-        if (track) track.scrollLeft = target.offsetLeft - track.offsetLeft;
-      }
+    if (containers.journal && window.location.hash) {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (target) target.scrollIntoView();
     }
   }
 

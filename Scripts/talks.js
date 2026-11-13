@@ -48,16 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return text;
   }
 
-  // A talk is shown as a plate: the photograph, its title, then venue and date.
   function platePhoto(talk) {
     return talk.img
       ? `<figure class="talk-plate-photo"><img src="${talk.img}" alt="${talk.title || 'Talk image'}" loading="lazy"${talk.imgPos ? ` style="object-position: ${talk.imgPos}"` : ''}></figure>`
       : '<figure class="talk-plate-photo talk-plate-photo--empty" aria-hidden="true"></figure>';
   }
 
-  function plateMeta(talk) {
+  function plateMeta(talk, includeDate = true) {
     const where = [talk.event, talk.venue].filter(Boolean).join(' · ');
-    const when = [formatTalkDate(talk.date), talk.location].filter(Boolean).join(' · ');
+    const when = [includeDate ? formatTalkDate(talk.date) : '', talk.location].filter(Boolean).join(' · ');
     if (!where && !when) return '';
     return `<p class="talk-meta">${
       where ? `<span class="talk-where">${where}</span>` : ''
@@ -83,9 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const li = document.createElement('li');
       li.className = 'home-talk-plate';
       li.innerHTML = `
-        ${platePhoto(talk)}
-        <h4 class="talk-plate-title">${talk.title || ''}</h4>
-        ${plateMeta(talk)}
+        <div class="home-talk-visual">
+          ${platePhoto(talk)}
+          <h4 class="talk-plate-title">${talk.title || ''}</h4>
+        </div>
       `;
       list.appendChild(li);
     });
@@ -129,14 +129,50 @@ document.addEventListener('DOMContentLoaded', () => {
       const li = document.createElement('li');
       li.className = 'talk-item';
       li.innerHTML = `
-        ${platePhoto(talk)}
-        <div class="talk-content">
-          <h3 class="title">${talk.title || ''}</h3>
-          ${plateMeta(talk)}
+        <div class="talk-timeline-date">${talk.date ? formatTalkDate(talk.date) : 'Date unknown'}</div>
+        <div class="talk-timeline-card">
+          <div class="talk-timeline-visual">
+            ${platePhoto(talk)}
+            <h3 class="talk-plate-title">${talk.title || ''}</h3>
+          </div>
+          <div class="talk-content">
+            ${plateMeta(talk, false)}
+          </div>
         </div>
       `;
       list.appendChild(li);
     });
+
+    const viewport = document.getElementById('talks-timeline-viewport');
+    const controls = document.querySelector('.talks-timeline-controls');
+    const prev = controls.querySelector('.talks-timeline-prev');
+    const next = controls.querySelector('.talks-timeline-next');
+
+    function updateControls() {
+      const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+      controls.hidden = maxScroll <= 1;
+      prev.disabled = viewport.scrollLeft <= 1;
+      next.disabled = viewport.scrollLeft >= maxScroll - 1;
+    }
+
+    function move(direction) {
+      const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
+      const step = list.firstElementChild.getBoundingClientRect().width + gap;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      viewport.scrollBy({ left: direction * step, behavior: reducedMotion ? 'instant' : 'smooth' });
+    }
+
+    prev.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    viewport.addEventListener('scroll', updateControls, { passive: true });
+    viewport.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(event.key === 'ArrowRight' ? 1 : -1);
+      }
+    });
+    window.addEventListener('resize', updateControls);
+    updateControls();
   }
 
   initHomeTalksPreview();

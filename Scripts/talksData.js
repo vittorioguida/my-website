@@ -76,7 +76,7 @@ window.TALKS = [
         featured: false
     },
     {
-        title: "Governance e Sostenibilità Ambientale: un laboratorio sperimentale per le organizzazioni trentine",
+        title: "Governance e Sostenibilità Ambientale",
         event: "Presentazione Risultati Progetto",
         venue: "Palazzo Roccabruna",
         date: "2024-11-15",

@@ -1,20 +1,15 @@
-# Talks Polaroid Layout
+# Talks Timeline Layout
 
 The talks page is rendered from `Scripts/talksData.js` by `Scripts/talks.js`.
 
 The talks-list card contract is:
 
 - `talks.html` uses `<main class="talks-main">` so this page can be wider than the default editorial content width.
-- `#talks-ul` is a CSS grid with at most three columns on desktop, two columns below `980px`, and one column below `768px`.
-- Each `li.talk-item` is a polaroid-style card: centered image first, then title, then venue/date details.
-- Cards keep a fixed `0.78` aspect ratio. The title band, photo, and venue band are reserved with explicit grid rows so text cannot resize the photo area.
-- Full talks-page photos are centered inside the card so left and right frame spacing match.
-- A compact fixed grid row gap separates the photo from the title band, while the venue band has extra top padding so venue text does not crowd the photo.
-- Title and venue text are measured against their reserved bands after render and reduced until they fit. The same fit pass runs after font loading and window resize.
-- The homepage renders the talks polaroids in the right column of the updates section: photo plus title only, with no venue or description.
-- Homepage mini-polaroids use a compact title band and run the same measured title-fitting pass so titles adapt to the available space.
-- Homepage mini-polaroid titles use Roboto Mono and reserve a fixed white band below the title.
-- Homepage mini-polaroids keep the horizontal photo frame wider than the vertical top and caption spacing.
+- Talks are sorted newest first and rendered as an ordered list on a horizontal timeline, with a marker and date above each card.
+- The timeline scrolls horizontally using buttons, keyboard arrows, touch, or its scrollbar. It shows three cards on wide screens, two on medium screens, and one on narrow screens.
+- Each card shows the date, photo, title, venue, and location. Its title overlays the bottom of the photo with a blurred backdrop, matching the separate homepage carousel preview; the homepage navigation arrows also overlay the image.
+- Venue and location text beneath each photo uses the smaller monospace text size.
+- The homepage updates grid uses equal-height rows so the publications and talks panels stay the same height as their content changes, including in the stacked mobile layout.
 - Descriptions from `desc` and `long_desc` are intentionally not rendered on the talks page or homepage talks preview.
 
 Review these notes after changing `index.html`, `Scripts/talks.js`, or the talks/home updates blocks in `Styles/style.css`.
