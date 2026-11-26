@@ -2611,22 +2611,31 @@ main.home-main {
 }
 
 .home-main .hero-contact-line {
-  gap: 0.35rem 0.9rem;
+  gap: 0.45rem;
   font-size: 0.72rem;
 }
 
 .home-main #social-links .hero-contact-line a {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
   font-size: 0.72rem;
-  border-bottom: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   padding: 0;
+  background: var(--surface);
+}
+
+.home-main #social-links .hero-contact-line a:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .home-main .hero-contact-line i {
   color: var(--accent);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .home-main .hero-email {
@@ -2813,6 +2822,184 @@ main.home-main {
   #home-updates {
     gap: var(--sp-5);
   }
+}
+
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+
+  header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-4);
+  }
+
+  #site-name {
+    min-width: 0;
+    font-size: 0.68rem;
+  }
+
+  .header-right nav {
+    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    width: 100%;
+  }
+
+  nav li { min-width: 0; }
+
+  nav a {
+    display: block;
+    padding: 0.4rem 0.15rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  nav a[aria-current="page"],
+  nav a.is-active { padding-left: 0.15rem; }
+
+  nav a[aria-current="page"]::before,
+  nav a.is-active::before { display: none; }
+
+  nav a[aria-current="page"]::after,
+  nav a.is-active::after {
+    left: 20%;
+    right: 20%;
+    bottom: 1px;
+  }
+
+  .header-right #theme-toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    justify-content: center;
+    font-size: 0;
+  }
+
+  .header-right #theme-toggle .theme-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0;
+  }
+
+  main,
+  .home-main {
+    width: calc(100% - 2rem);
+  }
+
+  footer {
+    padding-inline: var(--sp-4);
+  }
+
+  .home-main #hero {
+    gap: var(--sp-3);
+    padding: var(--sp-4);
+  }
+
+  .home-main #image-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-content: start;
+    align-items: end;
+    gap: var(--sp-3);
+  }
+
+  .home-main #image-container img {
+    width: 88px;
+    height: 106px;
+  }
+
+  .home-main #image-container .cv-download-btn {
+    width: fit-content;
+    min-height: 2.35rem;
+    justify-self: start;
+    align-self: end;
+    margin: 0;
+    font-size: 0.65rem;
+  }
+
+  .home-main #hero h1 {
+    margin-bottom: 0.35rem;
+    font-size: clamp(1.1rem, 5.7vw, 1.3rem);
+  }
+
+  .home-main .hero-role {
+    margin-bottom: var(--sp-2);
+    font-size: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .home-main .hero-email {
+    font-size: 0.66rem;
+  }
+
+  .home-main #social-links {
+    margin-bottom: var(--sp-3);
+    padding: var(--sp-2) 0;
+  }
+
+  .home-main #social-links .hero-contact-line {
+    gap: 0.55rem;
+  }
+
+  .home-main #social-links .hero-contact-line a {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  .home-main .hero-contact-line i { font-size: 1.05rem; }
+
+  .home-main .hero-bio {
+    font-size: 0.76rem;
+    line-height: 1.65;
+  }
+
+  .home-main .hero-interest-tags {
+    gap: 0.35rem;
+    margin-top: var(--sp-3);
+    padding-top: var(--sp-3);
+  }
+
+  .home-main .hero-interest-tag {
+    max-width: 100%;
+    padding: 0.2rem 0.48rem;
+    font-size: 0.58rem;
+    white-space: normal;
+  }
+
+  #home-updates #latest-publications,
+  #home-updates #home-talks {
+    padding: var(--sp-3);
+  }
+
+  #home-updates .section-header {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--sp-2);
+  }
+
+  #home-updates .section-header h3 {
+    min-width: 0;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  #home-updates .view-all-link {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+
+  #latest-publications-dashboard {
+    font-size: 0.76rem;
+  }
+
+  #home-talks .home-talks-carousel { min-height: 210px; }
 }
 
 /* Page introductions and research categories share the home hero's panel. */
